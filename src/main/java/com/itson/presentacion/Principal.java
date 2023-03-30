@@ -4,12 +4,15 @@
  */
 package com.itson.presentacion;
 
+import com.itson.dao.PersonasDAO;
+
 /**
  *
- * @author chaly
+ * @author 
  */
 public class Principal extends javax.swing.JFrame {
 
+    PersonasDAO personaDAO = new PersonasDAO();
     /**
      * Creates new form Principal
      */
@@ -158,6 +161,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnInsertarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertarClientesActionPerformed
         // TODO add your handling code here:
+        personaDAO.insertar();
     }//GEN-LAST:event_btnInsertarClientesActionPerformed
 
     private void btnReporteTramite1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteTramite1ActionPerformed
