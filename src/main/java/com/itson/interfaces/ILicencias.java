@@ -4,15 +4,13 @@
  */
 package com.itson.interfaces;
 
-import com.itson.dominio.Persona;
+import com.itson.dominio.Licencia;
 
 /**
  *
  * @author alexa
  */
-public interface IPersonasDAO {
+public interface ILicencias {
     
-    public void insertar();
-    
-    public Persona consultar(String rfc);
+    public Licencia consultar(String rfc);
 }

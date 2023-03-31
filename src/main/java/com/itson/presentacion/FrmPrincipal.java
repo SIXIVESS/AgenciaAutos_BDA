@@ -5,18 +5,20 @@
 package com.itson.presentacion;
 
 import com.itson.dao.PersonasDAO;
+import com.itson.dominio.Persona;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author 
  */
-public class Principal extends javax.swing.JFrame {
+public class FrmPrincipal extends javax.swing.JFrame {
 
     PersonasDAO personaDAO = new PersonasDAO();
     /**
      * Creates new form Principal
      */
-    public Principal() {
+    public FrmPrincipal() {
         initComponents();
     }
 
@@ -45,6 +47,11 @@ public class Principal extends javax.swing.JFrame {
         btnLicencia.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         btnLicencia.setForeground(new java.awt.Color(255, 255, 255));
         btnLicencia.setText("LICENCIA");
+        btnLicencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLicenciaActionPerformed(evt);
+            }
+        });
 
         btnPlacas.setBackground(new java.awt.Color(255, 143, 143));
         btnPlacas.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
@@ -153,6 +160,15 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnPlacasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlacasActionPerformed
         // TODO add your handling code here:
+        String rfc = JOptionPane.showInputDialog(null, "Introduce un RFC");
+        Persona personaConsulta = personaDAO.consultar(rfc);
+        if (personaConsulta.getRfc().equalsIgnoreCase(rfc)) {
+            FrmPlaca frm = new FrmPlaca();
+            frm.setVisible(true);
+        } else {
+            JOptionPane.showInputDialog(null, "Persona inexistente", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        }                                
     }//GEN-LAST:event_btnPlacasActionPerformed
 
     private void btnConsultaTramiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaTramiteActionPerformed
@@ -167,6 +183,19 @@ public class Principal extends javax.swing.JFrame {
     private void btnReporteTramite1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteTramite1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnReporteTramite1ActionPerformed
+
+    private void btnLicenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLicenciaActionPerformed
+        // TODO add your handling code here:
+        String rfc = JOptionPane.showInputDialog(null, "Introduce un RFC");
+        Persona personaConsulta = personaDAO.consultar(rfc);
+        if (personaConsulta.getRfc().equalsIgnoreCase(rfc)) {
+            FrmLicencia frm = new FrmLicencia();
+            frm.setVisible(true);
+        } else {
+            JOptionPane.showInputDialog(null, "Persona inexistente", "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnLicenciaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -185,20 +214,21 @@ public class Principal extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Principal().setVisible(true);
+                new FrmPrincipal().setVisible(true);
             }
         });
     }

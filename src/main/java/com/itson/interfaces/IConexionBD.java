@@ -4,15 +4,13 @@
  */
 package com.itson.interfaces;
 
-import com.itson.dominio.Persona;
+import java.sql.SQLException;
+import javax.persistence.EntityManager;
 
 /**
  *
  * @author alexa
  */
-public interface IPersonasDAO {
-    
-    public void insertar();
-    
-    public Persona consultar(String rfc);
+public interface IConexionBD {
+    EntityManager crearConexion() throws SQLException;
 }

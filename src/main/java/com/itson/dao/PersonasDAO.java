@@ -11,6 +11,9 @@ import java.util.GregorianCalendar;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 /**
  *
@@ -57,7 +60,7 @@ public class PersonasDAO implements IPersonasDAO{
                 "Mariana", "Esquer", "Andrade",
                 new GregorianCalendar(2003, 11, 29),
                 new Telefono("6442040238"));
-        Persona persona9 = new Persona("SOEA031129H0",
+        Persona persona9 = new Persona("ESCJ361229J8",
                 "José David", "Esquer", "Castro",
                 new GregorianCalendar(1936, 12, 29),
                 new Telefono("6474264278"));
@@ -78,6 +81,24 @@ public class PersonasDAO implements IPersonasDAO{
         em.persist(persona10);
 
         em.getTransaction().commit();
+    }
+
+    @Override
+    public Persona consultar(String rfc) {
+        EntityManagerFactory managerFactory
+                = Persistence.createEntityManagerFactory("org.itson.pruebasjpa");
+        EntityManager em = managerFactory.createEntityManager();
+        // Experto que sabe hacer consultas
+        CriteriaBuilder builder = em.getCriteriaBuilder();
+        // Consulta que se esta construyendo
+        CriteriaQuery<Persona> criteria = builder.createQuery(Persona.class);
+        Root<Persona> root = criteria.from(Persona.class);
+        
+        Persona persona = (Persona) criteria.select(root)
+                .where(builder.equal(root.get("rfc"), rfc));
+        em.getTransaction().begin();
+        
+        return persona;
     }
     
 }

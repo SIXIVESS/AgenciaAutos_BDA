@@ -3,6 +3,7 @@
 package com.itson.pruebas;
 
 import com.itson.dao.PersonasDAO;
+import com.itson.dominio.Licencia;
 import com.itson.dominio.Pago;
 import com.itson.dominio.Persona;
 import com.itson.dominio.Placa;
@@ -13,9 +14,14 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 /**
  *
@@ -28,8 +34,16 @@ public class Pruebas {
                 = Persistence.createEntityManagerFactory("org.itson.agenciafiscal");
         EntityManager em = managerFactory.createEntityManager();
         
+        PersonasDAO p = new PersonasDAO();
         
-        em.getTransaction().begin();
+        
+        
+//        TypedQuery<Persona> query = em.createQuery(criteria);
+
+//        List<Persona> personas = query.getResultList();
+//        for (Persona v : personas) {
+//            System.out.println(v.getNombres());
+//        }
 //        DateFormat dateFormat = new SimpleDateFormat("DD, MM, yyyy");
 //        
 //        Persona persona1 = new Persona("SOEA031129H0",
