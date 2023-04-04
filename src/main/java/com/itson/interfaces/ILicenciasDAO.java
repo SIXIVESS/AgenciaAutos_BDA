@@ -10,7 +10,7 @@ import com.itson.dominio.Licencia;
  *
  * @author alexa
  */
-public interface ILicencias {
+public interface ILicenciasDAO {
     
-    public Licencia consultar(String rfc);
+    public Licencia consultar(Integer idPersona);
 }

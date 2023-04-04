@@ -6,6 +6,7 @@ package com.itson.dominio;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import static java.util.Calendar.getInstance;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
@@ -59,7 +60,7 @@ public class Tramite implements Serializable {
     public Tramite() {}
 
     public Tramite(Calendar fecha_emision, float costo, TipoTramite tipo, Persona persona, Pago pago) {
-        this.fecha_emision = fecha_emision;
+        this.fecha_emision = getInstance();
         this.costo = costo;
         this.tipo = tipo;
         this.persona = persona;

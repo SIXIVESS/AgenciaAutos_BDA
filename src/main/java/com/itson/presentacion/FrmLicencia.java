@@ -4,12 +4,18 @@
  */
 package com.itson.presentacion;
 
+import com.itson.dominio.Licencia;
+import javax.swing.JOptionPane;
+import validador.Validadores;
+
 /**
  *
  * @author chaly
  */
 public class FrmLicencia extends javax.swing.JFrame {
 
+    private Validadores val = new Validadores();
+    
     /**
      * Creates new form Licencia
      */
@@ -17,6 +23,7 @@ public class FrmLicencia extends javax.swing.JFrame {
         initComponents();
     }
 
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,55 +34,72 @@ public class FrmLicencia extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
+        lblDatosLicencia = new javax.swing.JLabel();
+        lblRfc = new javax.swing.JLabel();
+        lblNombres = new javax.swing.JLabel();
+        lblApPaterno = new javax.swing.JLabel();
+        lblApMaterno = new javax.swing.JLabel();
+        lblFechaNacimiento = new javax.swing.JLabel();
+        lblTelefono = new javax.swing.JLabel();
+        lblDiscapacitado = new javax.swing.JLabel();
+        cbxSi = new javax.swing.JCheckBox();
+        cbxNo = new javax.swing.JCheckBox();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
+        lblVigencia = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        jCheckBox4 = new javax.swing.JCheckBox();
-        jCheckBox5 = new javax.swing.JCheckBox();
+        cbxUnAño = new javax.swing.JCheckBox();
+        cbxDosAños = new javax.swing.JCheckBox();
+        cbxTresAños = new javax.swing.JCheckBox();
+        txtRfc = new javax.swing.JTextField();
+        txtApPaterno = new javax.swing.JTextField();
+        txtApMaterno = new javax.swing.JTextField();
+        txtTelefono = new javax.swing.JTextField();
+        txtNombres = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Datos de la licencia");
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setText("RFC");
+        lblDatosLicencia.setText("Datos de la licencia");
+        jPanel1.add(lblDatosLicencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 413, 148, -1));
 
-        jLabel3.setText("NOMBRES");
+        lblRfc.setText("RFC");
+        jPanel1.add(lblRfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 98, 148, -1));
 
-        jLabel4.setText("APELLIDO PATERNO");
+        lblNombres.setText("NOMBRES");
+        jPanel1.add(lblNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 141, 148, -1));
 
-        jLabel5.setText("APELLIDO MATERNO");
+        lblApPaterno.setText("APELLIDO PATERNO");
+        jPanel1.add(lblApPaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 188, 148, -1));
 
-        jLabel6.setText("FECHA DE NACIMIENTO");
+        lblApMaterno.setText("APELLIDO MATERNO");
+        jPanel1.add(lblApMaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 236, 148, -1));
 
-        jLabel7.setText("TELÉFONO");
+        lblFechaNacimiento.setText("FECHA DE NACIMIENTO");
+        jPanel1.add(lblFechaNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 279, 171, -1));
 
-        jLabel8.setText("DISCAPACITADO");
+        lblTelefono.setText("TELÉFONO");
+        jPanel1.add(lblTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 331, 148, -1));
 
-        jCheckBox1.setText("SÍ");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+        lblDiscapacitado.setText("DISCAPACITADO");
+        jPanel1.add(lblDiscapacitado, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 541, 148, -1));
+
+        cbxSi.setText("SÍ");
+        cbxSi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
+                cbxSiActionPerformed(evt);
             }
         });
+        jPanel1.add(cbxSi, new org.netbeans.lib.awtextra.AbsoluteConstraints(197, 538, 85, -1));
 
-        jCheckBox2.setText("NO");
-        jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
+        cbxNo.setText("NO");
+        cbxNo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox2ActionPerformed(evt);
+                cbxNoActionPerformed(evt);
             }
         });
+        jPanel1.add(cbxNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(325, 538, 85, -1));
 
         jButton1.setText("SIGUIENTE");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -83,6 +107,7 @@ public class FrmLicencia extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 607, -1, -1));
 
         jButton2.setText("CANCELAR");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -90,101 +115,28 @@ public class FrmLicencia extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(401, 607, -1, -1));
 
-        jLabel9.setText("VIGENCIA");
+        lblVigencia.setText("VIGENCIA");
+        jPanel1.add(lblVigencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 487, 148, -1));
 
         jLabel10.setText("Datos del solicitante");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 62, 148, -1));
 
-        jCheckBox3.setText("1 AÑO");
-        jCheckBox3.setToolTipText("");
+        cbxUnAño.setText("1 AÑO");
+        cbxUnAño.setToolTipText("");
+        jPanel1.add(cbxUnAño, new org.netbeans.lib.awtextra.AbsoluteConstraints(197, 484, 85, -1));
 
-        jCheckBox4.setText("2 AÑOS");
+        cbxDosAños.setText("2 AÑOS");
+        jPanel1.add(cbxDosAños, new org.netbeans.lib.awtextra.AbsoluteConstraints(325, 484, 85, -1));
 
-        jCheckBox5.setText("3 AÑOS");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addGap(27, 27, 27))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(219, 219, 219))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCheckBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(43, 43, 43)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCheckBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCheckBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(48, 48, 48)
-                .addComponent(jCheckBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(123, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(53, 53, 53)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(465, Short.MAX_VALUE)))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(98, 98, 98)
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4)
-                .addGap(27, 27, 27)
-                .addComponent(jLabel5)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel6)
-                .addGap(31, 31, 31)
-                .addComponent(jLabel7)
-                .addGap(61, 61, 61)
-                .addComponent(jLabel1)
-                .addGap(50, 50, 50)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jCheckBox3)
-                    .addComponent(jCheckBox4)
-                    .addComponent(jCheckBox5))
-                .addGap(27, 27, 27)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(jCheckBox1)
-                    .addComponent(jCheckBox2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addGap(34, 34, 34))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(62, 62, 62)
-                    .addComponent(jLabel10)
-                    .addContainerGap(537, Short.MAX_VALUE)))
-        );
+        cbxTresAños.setText("3 AÑOS");
+        jPanel1.add(cbxTresAños, new org.netbeans.lib.awtextra.AbsoluteConstraints(458, 484, 85, -1));
+        jPanel1.add(txtRfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(235, 94, 184, -1));
+        jPanel1.add(txtApPaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 180, 184, -1));
+        jPanel1.add(txtApMaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 230, 184, -1));
+        jPanel1.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 330, 184, -1));
+        jPanel1.add(txtNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 184, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -200,13 +152,13 @@ public class FrmLicencia extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+    private void cbxSiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxSiActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+    }//GEN-LAST:event_cbxSiActionPerformed
 
-    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
+    private void cbxNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxNoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox2ActionPerformed
+    }//GEN-LAST:event_cbxNoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -218,23 +170,28 @@ public class FrmLicencia extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox cbxDosAños;
+    private javax.swing.JCheckBox cbxNo;
+    private javax.swing.JCheckBox cbxSi;
+    private javax.swing.JCheckBox cbxTresAños;
+    private javax.swing.JCheckBox cbxUnAño;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox4;
-    private javax.swing.JCheckBox jCheckBox5;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblApMaterno;
+    private javax.swing.JLabel lblApPaterno;
+    private javax.swing.JLabel lblDatosLicencia;
+    private javax.swing.JLabel lblDiscapacitado;
+    private javax.swing.JLabel lblFechaNacimiento;
+    private javax.swing.JLabel lblNombres;
+    private javax.swing.JLabel lblRfc;
+    private javax.swing.JLabel lblTelefono;
+    private javax.swing.JLabel lblVigencia;
+    private javax.swing.JTextField txtApMaterno;
+    private javax.swing.JTextField txtApPaterno;
+    private javax.swing.JTextField txtNombres;
+    private javax.swing.JTextField txtRfc;
+    private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 }

@@ -42,7 +42,7 @@ public class Persona implements Serializable {
     @Column(name = "ap_paterno", nullable = false)
     private String ap_paterno;
     
-    @Column(name = "ap_materno", nullable = false)
+    @Column(name = "ap_materno", nullable = true)
     private String ap_materno;
     
     @Column(name = "fecha_nacimiento", nullable = false)
@@ -76,6 +76,10 @@ public class Persona implements Serializable {
         this.fecha_nacimiento = fecha_nacimiento;
         this.telefono = telefono;
         this.tramites = tramites;
+    }
+
+    public Persona(String rfc) {
+        this.rfc = rfc;
     }
 
     
