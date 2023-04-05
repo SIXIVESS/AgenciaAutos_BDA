@@ -1,21 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package com.itson.presentacion;
 
-import com.itson.dominio.Licencia;
-import javax.swing.JOptionPane;
-import validador.Validadores;
 
 /**
  *
- * @author chaly
+ * @author 
  */
 public class FrmLicencia extends javax.swing.JFrame {
 
-    private Validadores val = new Validadores();
-    
+
     /**
      * Creates new form Licencia
      */

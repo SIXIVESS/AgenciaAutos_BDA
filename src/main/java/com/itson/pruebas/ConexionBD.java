@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.itson.pruebas;
 
 import com.itson.interfaces.IConexionBD;
@@ -12,7 +9,7 @@ import javax.persistence.Persistence;
 
 /**
  *
- * @author alexa
+ * @author 
  */
 public class ConexionBD implements IConexionBD {
 

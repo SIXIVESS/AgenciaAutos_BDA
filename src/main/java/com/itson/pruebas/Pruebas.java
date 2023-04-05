@@ -3,24 +3,15 @@
 package com.itson.pruebas;
 
 import com.itson.dao.*;
-import com.itson.dominio.*;
+
 import com.itson.interfaces.*;
 import com.itson.presentacion.FrmPrincipal;
-import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.List;
-import java.util.logging.Level;
+
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
+
 
 /**
  *

@@ -1,10 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package com.itson.presentacion;
 
-import com.itson.dao.*;
 import com.itson.dominio.*;
 import com.itson.interfaces.*;
 import javax.swing.JOptionPane;
