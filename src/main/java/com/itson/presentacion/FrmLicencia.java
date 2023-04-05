@@ -1,6 +1,13 @@
 
 package com.itson.presentacion;
 
+import com.itson.dominio.*;
+import com.itson.interfaces.*;
+import excepciones.PersistenciaException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -8,15 +15,82 @@ package com.itson.presentacion;
  */
 public class FrmLicencia extends javax.swing.JFrame {
 
+    Persona persona = null;
+    Licencia licencia = null;
+    TipoLicencia tipoLicencia;
+    
+    private final IPersonasDAO personaDAO;
+    private final ILicenciasDAO licenciaDAO;
+    private static final Logger LOG = Logger.getLogger(FrmLicencia.class.getName());
 
     /**
      * Creates new form Licencia
      */
-    public FrmLicencia() {
+    public FrmLicencia(Persona persona, IPersonasDAO personaDAO, ILicenciasDAO licenciaDAO) {
         initComponents();
+        this.personaDAO = personaDAO;
+        this.licenciaDAO = licenciaDAO;
+        this.persona = persona;
+        
+        this.txtRfc.setText(persona.getRfc());
+        this.txtNombres.setText(persona.getNombres());
+        this.txtApPaterno.setText(persona.getAp_paterno());
+        this.txtApMaterno.setText(persona.getAp_materno());
+        this.txtTelefono.setText(persona.getTelefono().getNumero());
     }
 
-   
+    private void guardar() {
+        Licencia licencia = new Licencia();
+        licencia.setPersona(persona);
+        if (this.chbxUnAño.isSelected() && this.chbxNo.isSelected()) {
+            licencia.setVigencia(1);
+            licencia.setCosto(600);
+            licencia.setTipo_licencia(TipoLicencia.NORMAL);
+        } else if (this.chbxUnAño.isSelected() && this.chbxSi.isSelected()) {
+            licencia.setVigencia(1);
+            licencia.setCosto(200);
+            licencia.setTipo_licencia(TipoLicencia.DISCAPACITADO);
+        } else if (this.chbxDosAños.isSelected() && this.chbxNo.isSelected()) {
+            licencia.setVigencia(2);
+            licencia.setCosto(900);
+            licencia.setTipo_licencia(TipoLicencia.NORMAL);
+        } else if (this.chbxDosAños.isSelected() && this.chbxSi.isSelected()) {
+            licencia.setVigencia(2);
+            licencia.setCosto(500);
+            licencia.setTipo_licencia(TipoLicencia.DISCAPACITADO);
+        } else if (this.chbxTresAños.isSelected() && this.chbxNo.isSelected()) {
+            licencia.setVigencia(3);
+            licencia.setCosto(1100);
+            licencia.setTipo_licencia(TipoLicencia.NORMAL);
+        } else if (this.chbxTresAños.isSelected() && this.chbxSi.isSelected()) {
+            licencia.setVigencia(3);
+            licencia.setCosto(700);
+            licencia.setTipo_licencia(TipoLicencia.DISCAPACITADO);
+        }
+        licenciaDAO.insertar(licencia);
+        JOptionPane.showMessageDialog(this, "Se agrego la licencia: ", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    private void vigencia() {
+        if (this.chbxUnAño.isSelected()) {
+            licencia.setVigencia(1);
+        } else if (this.chbxDosAños.isSelected()) {
+            licencia.setVigencia(2);
+        } else if (this.chbxTresAños.isSelected()) {
+            licencia.setVigencia(3);
+        }
+    }
+    
+    private void tipoLicencia(){
+        if (this.chbxNo.isSelected()) {
+            licencia.setTipo_licencia(TipoLicencia.NORMAL);
+        } else if (this.chbxSi.isSelected()) {
+            licencia.setTipo_licencia(TipoLicencia.DISCAPACITADO);
+        }
+    }
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -35,15 +109,15 @@ public class FrmLicencia extends javax.swing.JFrame {
         lblFechaNacimiento = new javax.swing.JLabel();
         lblTelefono = new javax.swing.JLabel();
         lblDiscapacitado = new javax.swing.JLabel();
-        cbxSi = new javax.swing.JCheckBox();
-        cbxNo = new javax.swing.JCheckBox();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        chbxSi = new javax.swing.JCheckBox();
+        chbxNo = new javax.swing.JCheckBox();
+        btnSiguiente = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
         lblVigencia = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        cbxUnAño = new javax.swing.JCheckBox();
-        cbxDosAños = new javax.swing.JCheckBox();
-        cbxTresAños = new javax.swing.JCheckBox();
+        chbxUnAño = new javax.swing.JCheckBox();
+        chbxDosAños = new javax.swing.JCheckBox();
+        chbxTresAños = new javax.swing.JCheckBox();
         txtRfc = new javax.swing.JTextField();
         txtApPaterno = new javax.swing.JTextField();
         txtApMaterno = new javax.swing.JTextField();
@@ -78,37 +152,37 @@ public class FrmLicencia extends javax.swing.JFrame {
         lblDiscapacitado.setText("DISCAPACITADO");
         jPanel1.add(lblDiscapacitado, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 541, 148, -1));
 
-        cbxSi.setText("SÍ");
-        cbxSi.addActionListener(new java.awt.event.ActionListener() {
+        chbxSi.setText("SÍ");
+        chbxSi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxSiActionPerformed(evt);
+                chbxSiActionPerformed(evt);
             }
         });
-        jPanel1.add(cbxSi, new org.netbeans.lib.awtextra.AbsoluteConstraints(197, 538, 85, -1));
+        jPanel1.add(chbxSi, new org.netbeans.lib.awtextra.AbsoluteConstraints(197, 538, 85, -1));
 
-        cbxNo.setText("NO");
-        cbxNo.addActionListener(new java.awt.event.ActionListener() {
+        chbxNo.setText("NO");
+        chbxNo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxNoActionPerformed(evt);
+                chbxNoActionPerformed(evt);
             }
         });
-        jPanel1.add(cbxNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(325, 538, 85, -1));
+        jPanel1.add(chbxNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(325, 538, 85, -1));
 
-        jButton1.setText("SIGUIENTE");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnSiguiente.setText("SIGUIENTE");
+        btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnSiguienteActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 607, -1, -1));
+        jPanel1.add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 607, -1, -1));
 
-        jButton2.setText("CANCELAR");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelar.setText("CANCELAR");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnCancelarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(401, 607, -1, -1));
+        jPanel1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(401, 607, -1, -1));
 
         lblVigencia.setText("VIGENCIA");
         jPanel1.add(lblVigencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 487, 148, -1));
@@ -116,15 +190,15 @@ public class FrmLicencia extends javax.swing.JFrame {
         jLabel10.setText("Datos del solicitante");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 62, 148, -1));
 
-        cbxUnAño.setText("1 AÑO");
-        cbxUnAño.setToolTipText("");
-        jPanel1.add(cbxUnAño, new org.netbeans.lib.awtextra.AbsoluteConstraints(197, 484, 85, -1));
+        chbxUnAño.setText("1 AÑO");
+        chbxUnAño.setToolTipText("");
+        jPanel1.add(chbxUnAño, new org.netbeans.lib.awtextra.AbsoluteConstraints(197, 484, 85, -1));
 
-        cbxDosAños.setText("2 AÑOS");
-        jPanel1.add(cbxDosAños, new org.netbeans.lib.awtextra.AbsoluteConstraints(325, 484, 85, -1));
+        chbxDosAños.setText("2 AÑOS");
+        jPanel1.add(chbxDosAños, new org.netbeans.lib.awtextra.AbsoluteConstraints(325, 484, 85, -1));
 
-        cbxTresAños.setText("3 AÑOS");
-        jPanel1.add(cbxTresAños, new org.netbeans.lib.awtextra.AbsoluteConstraints(458, 484, 85, -1));
+        chbxTresAños.setText("3 AÑOS");
+        jPanel1.add(chbxTresAños, new org.netbeans.lib.awtextra.AbsoluteConstraints(458, 484, 85, -1));
         jPanel1.add(txtRfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(235, 94, 184, -1));
         jPanel1.add(txtApPaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 180, 184, -1));
         jPanel1.add(txtApMaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 230, 184, -1));
@@ -135,41 +209,46 @@ public class FrmLicencia extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 660, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cbxSiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxSiActionPerformed
+    private void chbxSiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chbxSiActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cbxSiActionPerformed
+    }//GEN-LAST:event_chbxSiActionPerformed
 
-    private void cbxNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxNoActionPerformed
+    private void chbxNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chbxNoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cbxNoActionPerformed
+    }//GEN-LAST:event_chbxNoActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        this.guardar();
+    }//GEN-LAST:event_btnSiguienteActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox cbxDosAños;
-    private javax.swing.JCheckBox cbxNo;
-    private javax.swing.JCheckBox cbxSi;
-    private javax.swing.JCheckBox cbxTresAños;
-    private javax.swing.JCheckBox cbxUnAño;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnSiguiente;
+    private javax.swing.JCheckBox chbxDosAños;
+    private javax.swing.JCheckBox chbxNo;
+    private javax.swing.JCheckBox chbxSi;
+    private javax.swing.JCheckBox chbxTresAños;
+    private javax.swing.JCheckBox chbxUnAño;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblApMaterno;

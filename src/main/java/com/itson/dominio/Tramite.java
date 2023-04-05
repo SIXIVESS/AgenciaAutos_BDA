@@ -46,12 +46,12 @@ public class Tramite implements Serializable {
     @Column(name = "tipo", nullable = false)
     private TipoTramite tipo;
     
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "idPersona", nullable = false) // Llave foránea
     private Persona persona;
     
     @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "idPago", nullable = false) // Llave foránea
+    @JoinColumn(name = "idPago", nullable = true) // Llave foránea
     private Pago pago;
 
     public Tramite() {}
@@ -63,6 +63,14 @@ public class Tramite implements Serializable {
         this.persona = persona;
         this.pago = pago;
     }
+
+    public Tramite(Calendar fecha_emision, float costo, TipoTramite tipo, Persona persona) {
+        this.fecha_emision = getInstance();
+        this.costo = costo;
+        this.tipo = tipo;
+        this.persona = persona;
+    }
+    
     
     public Long getId() {
         return id;

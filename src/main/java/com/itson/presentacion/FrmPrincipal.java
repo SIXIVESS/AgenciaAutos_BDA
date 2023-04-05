@@ -3,6 +3,7 @@ package com.itson.presentacion;
 
 import com.itson.dominio.*;
 import com.itson.interfaces.*;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -157,6 +158,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPlacasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlacasActionPerformed
@@ -190,14 +192,20 @@ public class FrmPrincipal extends javax.swing.JFrame {
 //        FrmLicencia frm = new FrmLicencia();
 //        frm.setVisible(true);
         String rfc = JOptionPane.showInputDialog(null, "Introduce un RFC");
-        Persona personaConsulta = personaDAO.consultar(rfc);
-        if (personaConsulta.getRfc().equalsIgnoreCase(rfc)) {
-            FrmLicencia frm = new FrmLicencia();
-            frm.setVisible(true);
-        } else {
-            JOptionPane.showInputDialog(null, "Persona inexistente", "Error", 
-                    JOptionPane.ERROR_MESSAGE);
+//        Persona persona = new Persona(rfc);
+        List<Persona> personas = personaDAO.consultarLista(rfc);
+        
+        for (Persona p : personas) {
+            this.persona = p;
+            if (personas.contains(p)) {
+                FrmLicencia frm = new FrmLicencia(p, personaDAO, licenciaDAO);
+                frm.setVisible(true);
+            } else {
+                JOptionPane.showInputDialog(null, "Persona inexistente", "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
         }
+
     }//GEN-LAST:event_btnLicenciaActionPerformed
 
 

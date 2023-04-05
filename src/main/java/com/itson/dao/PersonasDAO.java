@@ -113,7 +113,6 @@ public class PersonasDAO implements IPersonasDAO{
                     .where(builder.equal(root.get("rfc"), rfc));
             em.getTransaction().begin();
 
-            
             return persona;
         } catch (SQLException ex) {
             LOG.log(Level.SEVERE, ex.getMessage());
