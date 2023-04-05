@@ -1,4 +1,3 @@
-
 package com.itson.dao;
 
 import com.itson.dominio.Persona;
@@ -20,7 +19,7 @@ import javax.persistence.criteria.Root;
  *
  * @author
  */
-public class PersonasDAO implements IPersonasDAO{
+public class PersonasDAO implements IPersonasDAO {
 
     private static final Logger LOG = Logger.getLogger(PersonasDAO.class.getName());
     private final IConexionBD generadorConexiones;
@@ -77,6 +76,47 @@ public class PersonasDAO implements IPersonasDAO{
                     "Alonso", "Soto", "Ayala",
                     new GregorianCalendar(1947, 9, 3),
                     new Telefono("6471261845"));
+//----------------------------------------------------------------------------------------------------------------------
+            Persona persona11 = new Persona("SAQJ030314H8",
+                    "Jorge Luis", "Sanchez", "Quezada",
+                    new GregorianCalendar(2003, 3, 14),
+                    new Telefono("6441171436"));
+            Persona persona12 = new Persona("MAGM020226D3",
+                    "Misael", "Márquez", "Gaxiola",
+                    new GregorianCalendar(2002, 2, 26),
+                    new Telefono("6442590977"));
+            Persona persona13 = new Persona("LOLM030525E2",
+                    "Marcos Anselmo", "López", "Lugardo",
+                    new GregorianCalendar(2003, 5, 25),
+                    new Telefono("3324253380"));
+            Persona persona14 = new Persona("GAMG020813G4",
+                    "Gael", "Gaxiola", "Maldonado",
+                    new GregorianCalendar(2002, 8, 13),
+                    new Telefono("6441953838"));
+            Persona persona15 = new Persona("PEAR030224A7",
+                    "Rosalía", "Pérez", "Acuña",
+                    new GregorianCalendar(2003, 2, 24),
+                    new Telefono("6442331575"));
+            Persona persona16 = new Persona("LUSF020730F3",
+                    "Fernando ", "Luque", "Steward",
+                    new GregorianCalendar(2002, 7, 30),
+                    new Telefono("6442463614"));
+            Persona persona17 = new Persona("PEIM020810J1",
+                    "Marlon", "Pereo", "Iriqui",
+                    new GregorianCalendar(2002, 8, 10),
+                    new Telefono("6442490437"));
+            Persona persona18 = new Persona("DUPJ020921R3",
+                    "Jose Roberto", "Duran", "Padilla",
+                    new GregorianCalendar(2002, 9, 21),
+                    new Telefono("6441182216"));
+            Persona persona19 = new Persona("ROPI030901D4",
+                    "Ingrid", "Rosas", "Palacios",
+                    new GregorianCalendar(2003, 9, 1),
+                    new Telefono("2291748899"));
+            Persona persona20 = new Persona("NAHA031007H8",
+                    "Adriana Guadalupe", "Naal", "Huchin",
+                    new GregorianCalendar(2003, 10, 7),
+                    new Telefono("9961018583"));
 
             em.persist(persona1);
             em.persist(persona2);
@@ -88,6 +128,16 @@ public class PersonasDAO implements IPersonasDAO{
             em.persist(persona8);
             em.persist(persona9);
             em.persist(persona10);
+            em.persist(persona11);
+            em.persist(persona12);
+            em.persist(persona13);
+            em.persist(persona14);
+            em.persist(persona15);
+            em.persist(persona16);
+            em.persist(persona17);
+            em.persist(persona18);
+            em.persist(persona19);
+            em.persist(persona20);
 
             em.getTransaction().commit();
         } catch (SQLException ex) {
