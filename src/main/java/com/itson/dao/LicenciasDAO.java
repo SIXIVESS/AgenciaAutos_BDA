@@ -2,7 +2,11 @@
 package com.itson.dao;
 
 import com.itson.dominio.Licencia;
-import com.itson.dominio.Tramite;
+import com.itson.dominio.Pago;
+import com.itson.dominio.Persona;
+import com.itson.dominio.TipoLicencia;
+import com.itson.dominio.TipoTramite;
+import static com.itson.dominio.Tramite_.persona;
 import com.itson.interfaces.IConexionBD;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -11,6 +15,7 @@ import javax.persistence.criteria.Root;
 import com.itson.interfaces.ILicenciasDAO;
 import java.sql.SQLException;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,6 +30,23 @@ public class LicenciasDAO implements ILicenciasDAO{
     
     public LicenciasDAO(IConexionBD generadorConexiones) {
         this.generadorConexiones = generadorConexiones;
+    }
+    
+    public void insertar(){
+        try{
+            EntityManager em=this.generadorConexiones.crearConexion();
+            em.getTransaction().begin();
+            
+            Licencia licencia1 =new Licencia(2, 
+                    new GregorianCalendar(2020, 9, 15), 
+                    900, TipoTramite.LICENCIA, 
+                    new Persona(), new Pago(), 
+                    TipoLicencia.NORMAL);
+            
+            em.getTransaction().commit();
+        }catch(SQLException ex){
+            LOG.log(Level.SEVERE,ex.getMessage());
+        }
     }
 
     

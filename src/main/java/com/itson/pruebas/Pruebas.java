@@ -10,10 +10,7 @@ import com.itson.dominio.TipoTramite;
 
 import com.itson.interfaces.*;
 import com.itson.presentacion.FrmPrincipal;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+
 
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
