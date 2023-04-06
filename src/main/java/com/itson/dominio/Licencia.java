@@ -15,10 +15,10 @@ import javax.persistence.Entity;
 @DiscriminatorValue(value = "Licencia")
 public class Licencia extends Tramite implements Serializable {
 
-    @Column(name = "vigencia", nullable = false)
+    @Column(name = "vigencia", nullable = true)
     private int vigencia;
     
-    @Column(name = "tipo_licencia", nullable = false)
+    @Column(name = "tipo_licencia", nullable = true)
     private TipoLicencia tipo_licencia;
 
     public Licencia() {}

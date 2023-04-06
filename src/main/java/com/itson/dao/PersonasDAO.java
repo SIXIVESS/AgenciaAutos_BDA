@@ -113,7 +113,6 @@ public class PersonasDAO implements IPersonasDAO {
                     "Ingrid", "Rosas", "Palacios",
                     new GregorianCalendar(2003, 9, 1),
                     new Telefono("2291748899"));
-           
             Persona persona20 = new Persona("NAHA031007H8",
                     "Adriana Guadalupe", "Naal", "Huchin",
                     new GregorianCalendar(2003, 10, 7),

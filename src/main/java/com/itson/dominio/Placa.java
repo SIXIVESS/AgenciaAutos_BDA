@@ -17,21 +17,21 @@ import javax.persistence.TemporalType;
 @DiscriminatorValue(value = "Placa")
 public class Placa extends Tramite implements Serializable {
 
-    @Column(name = "num_alfanumerico", nullable = false)
+    @Column(name = "num_alfanumerico", nullable = true)
     private String num_alfanumerico;
     
-    @Column(name = "fecha_recepcion", nullable = false)
+    @Column(name = "fecha_recepcion", nullable = true)
     @Temporal(TemporalType.DATE)
     private Calendar fecha_recepcion;
 
     public Placa() {}
 
-    public Placa(String num_alfanumerico, Calendar fecha_recepcion, Calendar fecha_emision, float costo, TipoTramite tipo, Persona persona, Pago pago) {
+    public Placa(String num_alfanumerico, Calendar fecha_emision, float costo, TipoTramite tipo, Persona persona, Pago pago) {
         super(fecha_emision, costo, tipo, persona, pago);
         this.num_alfanumerico = num_alfanumerico;
-        this.fecha_recepcion = fecha_recepcion;
+        this.fecha_recepcion = null;
     }
-    
+
     public String getNum_alfanumerico() {
         return num_alfanumerico;
     }
@@ -47,5 +47,4 @@ public class Placa extends Tramite implements Serializable {
     public void setFecha_recepcion(Calendar fecha_recepcion) {
         this.fecha_recepcion = fecha_recepcion;
     }
-
 }

@@ -41,7 +41,6 @@ public class FrmLicencia extends javax.swing.JFrame {
 
     private void guardar() {
         Licencia licencia = new Licencia();
-        licencia.setPersona(persona);
         if (this.chbxUnAño.isSelected() && this.chbxNo.isSelected()) {
             licencia.setVigencia(1);
             licencia.setCosto(600);
@@ -67,29 +66,9 @@ public class FrmLicencia extends javax.swing.JFrame {
             licencia.setCosto(700);
             licencia.setTipo_licencia(TipoLicencia.DISCAPACITADO);
         }
-        licenciaDAO.insertar(licencia);
+        licenciaDAO.insertar(persona, licencia);
         JOptionPane.showMessageDialog(this, "Se agrego la licencia: ", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
     }
-
-    private void vigencia() {
-        if (this.chbxUnAño.isSelected()) {
-            licencia.setVigencia(1);
-        } else if (this.chbxDosAños.isSelected()) {
-            licencia.setVigencia(2);
-        } else if (this.chbxTresAños.isSelected()) {
-            licencia.setVigencia(3);
-        }
-    }
-    
-    private void tipoLicencia(){
-        if (this.chbxNo.isSelected()) {
-            licencia.setTipo_licencia(TipoLicencia.NORMAL);
-        } else if (this.chbxSi.isSelected()) {
-            licencia.setTipo_licencia(TipoLicencia.DISCAPACITADO);
-        }
-    }
-    
-    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -199,10 +178,20 @@ public class FrmLicencia extends javax.swing.JFrame {
 
         chbxTresAños.setText("3 AÑOS");
         jPanel1.add(chbxTresAños, new org.netbeans.lib.awtextra.AbsoluteConstraints(458, 484, 85, -1));
+
+        txtRfc.setEditable(false);
         jPanel1.add(txtRfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(235, 94, 184, -1));
+
+        txtApPaterno.setEditable(false);
         jPanel1.add(txtApPaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 180, 184, -1));
+
+        txtApMaterno.setEditable(false);
         jPanel1.add(txtApMaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 230, 184, -1));
+
+        txtTelefono.setEditable(false);
         jPanel1.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 330, 184, -1));
+
+        txtNombres.setEditable(false);
         jPanel1.add(txtNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 184, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

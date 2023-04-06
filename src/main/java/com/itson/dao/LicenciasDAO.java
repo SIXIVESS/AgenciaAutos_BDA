@@ -4,7 +4,6 @@ package com.itson.dao;
 import com.itson.dominio.Licencia;
 import com.itson.dominio.Pago;
 import com.itson.dominio.Persona;
-import com.itson.dominio.TipoLicencia;
 import com.itson.dominio.TipoTramite;
 import static com.itson.dominio.Tramite_.persona;
 import com.itson.interfaces.IConexionBD;
@@ -21,35 +20,40 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author 
+ * @author
  */
-public class LicenciasDAO implements ILicenciasDAO{
-    
+public class LicenciasDAO implements ILicenciasDAO {
+
     private static final Logger LOG = Logger.getLogger(LicenciasDAO.class.getName());
     private final IConexionBD generadorConexiones;
-    
+
     public LicenciasDAO(IConexionBD generadorConexiones) {
         this.generadorConexiones = generadorConexiones;
     }
-    
-    public void insertar(){
-        try{
-            EntityManager em=this.generadorConexiones.crearConexion();
+
+    @Override
+    public Licencia insertar(Persona persona, Licencia licencia) {
+        try {
+            EntityManager em = this.generadorConexiones.crearConexion();
             em.getTransaction().begin();
-            
-            Licencia licencia1 =new Licencia(2, 
-                    new GregorianCalendar(2020, 9, 15), 
-                    900, TipoTramite.LICENCIA, 
-                    new Persona(), new Pago(), 
-                    TipoLicencia.NORMAL);
-            
+            licencia.setPersona(persona);
+            licencia.setTipo(TipoTramite.LICENCIA);
+            licencia.setFecha_emision(Calendar.getInstance());
+            licencia.setTipo_licencia(licencia.getTipo_licencia());
+            licencia.setCosto(licencia.getCosto());
+            licencia.setPersona(licencia.getPersona());
+            licencia.setTipo_licencia(licencia.getTipo_licencia());
+            licencia.setVigencia(licencia.getVigencia());
+
+            em.persist(licencia);
+
             em.getTransaction().commit();
-        }catch(SQLException ex){
-            LOG.log(Level.SEVERE,ex.getMessage());
+        } catch (SQLException ex) {
+            LOG.log(Level.SEVERE, ex.getMessage());
         }
+        return null;
     }
 
-    
     @Override
     public Licencia consultar(Integer idPersona) {
         try {
@@ -67,25 +71,6 @@ public class LicenciasDAO implements ILicenciasDAO{
             return licencia;
         } catch (SQLException ex) {
             LOG.log(Level.SEVERE, ex.getMessage());
-        }
-        return null;
-    }
-
-    @Override
-    public Licencia insertar(Licencia licencia) {
-        try {
-            EntityManager em = this.generadorConexiones.crearConexion();
-            em.getTransaction().begin();
-            licencia.setFecha_emision(Calendar.getInstance());
-            licencia.setCosto(licencia.getCosto());
-            licencia.setPersona(licencia.getPersona());
-            licencia.setTipo_licencia(licencia.getTipo_licencia());
-            licencia.setVigencia(licencia.getVigencia());
-            
-            em.persist(licencia);
-            em.getTransaction().commit();
-        } catch (SQLException ex) {
-            return licencia;
         }
         return null;
     }

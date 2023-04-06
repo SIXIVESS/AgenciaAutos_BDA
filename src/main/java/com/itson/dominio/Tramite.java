@@ -36,7 +36,7 @@ public class Tramite implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(name = "fecha_emision", nullable = false)
+    @Column(name = "fecha_emision", nullable = true)
     @Temporal(TemporalType.DATE)
     private Calendar fecha_emision;
     
