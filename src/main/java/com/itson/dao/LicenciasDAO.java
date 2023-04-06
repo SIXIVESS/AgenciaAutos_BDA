@@ -1,9 +1,9 @@
-
 package com.itson.dao;
 
 import com.itson.dominio.Licencia;
 import com.itson.dominio.Pago;
 import com.itson.dominio.Persona;
+import com.itson.dominio.TipoLicencia;
 import com.itson.dominio.TipoTramite;
 import static com.itson.dominio.Tramite_.persona;
 import com.itson.interfaces.IConexionBD;

@@ -4,7 +4,6 @@ package com.itson.dominio;
 import java.io.Serializable;
 import java.util.Calendar;
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 /**
@@ -12,7 +11,6 @@ import javax.persistence.Entity;
  * @author 
  */
 @Entity
-@DiscriminatorValue(value = "Licencia")
 public class Licencia extends Tramite implements Serializable {
 
     @Column(name = "vigencia", nullable = true)

@@ -4,7 +4,6 @@ package com.itson.dominio;
 import java.io.Serializable;
 import java.util.Calendar;
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -14,7 +13,6 @@ import javax.persistence.TemporalType;
  * @author 
  */
 @Entity
-@DiscriminatorValue(value = "Placa")
 public class Placa extends Tramite implements Serializable {
 
     @Column(name = "num_alfanumerico", nullable = true)
