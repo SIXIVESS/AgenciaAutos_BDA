@@ -8,14 +8,9 @@ import com.itson.dominio.Pago;
 import com.itson.dominio.Persona;
 import com.itson.dominio.TipoLicencia;
 import com.itson.dominio.TipoTramite;
-import static com.itson.dominio.Tramite_.persona;
-
 import com.itson.interfaces.*;
 import com.itson.presentacion.FrmPrincipal;
 import java.util.GregorianCalendar;
-
-
-
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
