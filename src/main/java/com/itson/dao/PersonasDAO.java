@@ -14,6 +14,7 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -140,6 +141,7 @@ public class PersonasDAO implements IPersonasDAO {
             em.persist(persona20);
 
             em.getTransaction().commit();
+            JOptionPane.showMessageDialog(null, "Se han insertado 20 personas con éxito");
         } catch (SQLException ex) {
             LOG.log(Level.SEVERE, ex.getMessage());
         }
