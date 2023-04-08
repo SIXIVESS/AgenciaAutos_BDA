@@ -1,9 +1,9 @@
 
 package com.itson.presentacion;
 
+import com.itson.dao.PersonasDAO;
 import com.itson.dominio.*;
 import com.itson.interfaces.*;
-import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,17 +12,19 @@ import javax.swing.JOptionPane;
  */
 public class FrmPrincipal extends javax.swing.JFrame {
 
-    Persona persona = null;
-    private final IPersonasDAO personaDAO;
-    private final ILicenciasDAO licenciaDAO;
+//    Persona persona = null;
+//    private final IPersonasDAO personaDAO;
+//    private final ILicenciasDAO licenciaDAO;
     /**
      * Creates new form Principal
      */
-    public FrmPrincipal(IPersonasDAO personaDAO, ILicenciasDAO licenciaDAO) {
+    public FrmPrincipal() {
         initComponents();
-        this.personaDAO = personaDAO;
-        this.licenciaDAO = licenciaDAO;
+//        this.personaDAO = personaDAO;
+//        this.licenciaDAO = licenciaDAO;
     }
+    
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -107,7 +109,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnLicencia)
                     .addComponent(btnPlacas))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
                 .addComponent(btnConsultaTramite)
                 .addGap(105, 105, 105))
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -116,7 +118,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                         .addGap(257, 257, 257)
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(177, 177, 177)
+                        .addGap(216, 216, 216)
                         .addComponent(btnInsertarClientes)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,9 +138,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
                     .addComponent(btnConsultaTramite))
                 .addGap(45, 45, 45)
                 .addComponent(btnPlacas)
-                .addGap(52, 52, 52)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
                 .addComponent(btnInsertarClientes)
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addGap(19, 19, 19))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                     .addContainerGap(278, Short.MAX_VALUE)
@@ -162,16 +164,16 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPlacasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlacasActionPerformed
-        // TODO add your handling code here:
-        String rfc = JOptionPane.showInputDialog(null, "Introduce un RFC");
-        Persona personaConsulta = personaDAO.consultar(rfc);
-        if (personaConsulta.getRfc().equalsIgnoreCase(rfc)) {
-            FrmPlaca frm = new FrmPlaca();
-            frm.setVisible(true);
-        } else {
-            JOptionPane.showInputDialog(null, "Persona inexistente", "Error",
-                    JOptionPane.ERROR_MESSAGE);
-        }                                
+//        // TODO add your handling code here:
+//        String rfc = JOptionPane.showInputDialog(null, "Introduce un RFC");
+//        Persona personaConsulta = personaDAO.consultar(rfc);
+//        if (personaConsulta.getRfc().equalsIgnoreCase(rfc)) {
+//            FrmPlaca frm = new FrmPlaca();
+//            frm.setVisible(true);
+//        } else {
+//            JOptionPane.showInputDialog(null, "Persona inexistente", "Error",
+//                    JOptionPane.ERROR_MESSAGE);
+//        }                                
     }//GEN-LAST:event_btnPlacasActionPerformed
 
     private void btnConsultaTramiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaTramiteActionPerformed
@@ -180,7 +182,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void btnInsertarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertarClientesActionPerformed
         // TODO add your handling code here:
-        personaDAO.insertar();
+        IPersonasDAO personaDAO = new PersonasDAO();
+       personaDAO.insertar();
+       
     }//GEN-LAST:event_btnInsertarClientesActionPerformed
 
     private void btnReporteTramite1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteTramite1ActionPerformed
@@ -191,20 +195,22 @@ public class FrmPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
 //        FrmLicencia frm = new FrmLicencia();
 //        frm.setVisible(true);
-        String rfc = JOptionPane.showInputDialog(null, "Introduce un RFC");
-//        Persona persona = new Persona(rfc);
-        List<Persona> personas = personaDAO.consultarLista(rfc);
-        
-        for (Persona p : personas) {
-            this.persona = p;
-            if (personas.contains(p)) {
-                FrmLicencia frm = new FrmLicencia(p, personaDAO, licenciaDAO);
-                frm.setVisible(true);
-            } else {
-                JOptionPane.showInputDialog(null, "Persona inexistente", "Error",
-                        JOptionPane.ERROR_MESSAGE);
-            }
-        }
+//        String rfc = JOptionPane.showInputDialog(null, "Introduce un RFC");
+////        Persona persona = new Persona(rfc);
+//        List<Persona> personas = personaDAO.consultarLista(rfc);
+//        
+//        for (Persona p : personas) {
+//            this.persona = p;
+//            if (personas.contains(p)) {
+//                FrmLicencia frm = new FrmLicencia(p, personaDAO, licenciaDAO);
+//                frm.setVisible(true);
+//            } else {
+//                JOptionPane.showInputDialog(null, "Persona inexistente", "Error",
+//                        JOptionPane.ERROR_MESSAGE);
+//            }
+//        }
+FrmLicencia licenciaForm =new FrmLicencia();
+licenciaForm.setVisible(true);
 
     }//GEN-LAST:event_btnLicenciaActionPerformed
 

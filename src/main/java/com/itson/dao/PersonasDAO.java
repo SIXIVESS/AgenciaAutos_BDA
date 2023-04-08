@@ -29,6 +29,10 @@ public class PersonasDAO implements IPersonasDAO {
         this.generadorConexiones = generadorConexiones;
     }
 
+    public PersonasDAO() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     @Override
     public void insertar() {
 //        EntityManagerFactory managerFactory
