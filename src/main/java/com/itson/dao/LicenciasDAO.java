@@ -17,6 +17,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -48,10 +49,19 @@ public class LicenciasDAO implements ILicenciasDAO {
             em.persist(licencia);
 
             em.getTransaction().commit();
+            JOptionPane.showMessageDialog(null, "Se agregó la licencia correctamente");
         } catch (SQLException ex) {
             LOG.log(Level.SEVERE, ex.getMessage());
         }
         return null;
+    }
+
+    public void actualizar(Long id) {
+        EntityManager em = this.generadorConexiones.crearConexion();
+
+        Licencia licencia = em.find(Licencia.class, id);
+        if (licencia =null)
+
     }
 
     @Override
