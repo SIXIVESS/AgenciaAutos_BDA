@@ -1,11 +1,8 @@
 package com.itson.dao;
 
 import com.itson.dominio.Licencia;
-import com.itson.dominio.Pago;
 import com.itson.dominio.Persona;
-import com.itson.dominio.TipoLicencia;
 import com.itson.dominio.TipoTramite;
-import static com.itson.dominio.Tramite_.persona;
 import com.itson.interfaces.IConexionBD;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -14,7 +11,6 @@ import javax.persistence.criteria.Root;
 import com.itson.interfaces.ILicenciasDAO;
 import java.sql.SQLException;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -57,11 +53,22 @@ public class LicenciasDAO implements ILicenciasDAO {
     }
 
     public void actualizar(Long id) {
-        EntityManager em = this.generadorConexiones.crearConexion();
+        try {
+            EntityManager em = this.generadorConexiones.crearConexion();
+            //Busca la licencia en la clase
+            Licencia licencia = em.find(Licencia.class, id);
+            //Si la licencia no es nulla y tiene un estado, se le actualiza
+            if (licencia != null && licencia.isEstado()) {
+                em.getTransaction().begin();
+                licencia.setEstado(false);
+                em.merge(licencia);
+                em.getTransaction().commit();
+                JOptionPane.showMessageDialog(null, "Se actualizó la licencia");
 
-        Licencia licencia = em.find(Licencia.class, id);
-        if (licencia =null)
-
+            }
+        } catch (SQLException ex) {
+            LOG.log(Level.SEVERE, ex.getMessage());
+        }
     }
 
     @Override
