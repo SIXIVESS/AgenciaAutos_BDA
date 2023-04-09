@@ -175,6 +175,11 @@ public class FrmLicencia extends javax.swing.JFrame {
 
         chbxUnAño.setText("1 AÑO");
         chbxUnAño.setToolTipText("");
+        chbxUnAño.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chbxUnAñoActionPerformed(evt);
+            }
+        });
         jPanel1.add(chbxUnAño, new org.netbeans.lib.awtextra.AbsoluteConstraints(197, 484, 85, -1));
 
         chbxDosAños.setText("2 AÑOS");
@@ -232,6 +237,10 @@ public class FrmLicencia extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void chbxUnAñoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chbxUnAñoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chbxUnAñoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
