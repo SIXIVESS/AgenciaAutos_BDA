@@ -118,7 +118,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                         .addGap(257, 257, 257)
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(216, 216, 216)
+                        .addGap(239, 239, 239)
                         .addComponent(btnInsertarClientes)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,9 +138,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
                     .addComponent(btnConsultaTramite))
                 .addGap(45, 45, 45)
                 .addComponent(btnPlacas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
                 .addComponent(btnInsertarClientes)
-                .addGap(19, 19, 19))
+                .addGap(55, 55, 55))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                     .addContainerGap(278, Short.MAX_VALUE)
@@ -209,8 +209,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
 //                        JOptionPane.ERROR_MESSAGE);
 //            }
 //        }
-FrmLicencia licenciaForm =new FrmLicencia();
-licenciaForm.setVisible(true);
+//FrmLicencia licenciaForm =new FrmLicencia();
+//licenciaForm.setVisible(true);
 
     }//GEN-LAST:event_btnLicenciaActionPerformed
 

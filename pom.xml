@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.mycompany</groupId>
-    <artifactId>ProyectoAgencia_233505_236348</artifactId>
+    <groupId>com.itson</groupId>
+    <artifactId>AgenciaFiscal_233505_236348</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+        <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <exec.mainClass>com.itson.pruebas.Pruebas</exec.mainClass>
+    </properties>
     <repositories>
         <repository>
             <id>unknown-jars-temp-repo</id>
@@ -13,6 +18,7 @@
             <url>file:${project.basedir}/lib</url>
         </repository>
     </repositories>
+
     <dependencies>
         <dependency>
             <groupId>mysql</groupId>
@@ -66,21 +72,15 @@
             <version>SNAPSHOT</version>
         </dependency>
         <dependency>
-    <groupId>org.codehaus.mojo</groupId>
-    <artifactId>exec-maven-plugin</artifactId>
-    <version>3.0.0</version>
-</dependency>
-<dependency>
-    <groupId>jakarta.persistence</groupId>
-    <artifactId>jakarta.persistence-api</artifactId>
-    <version>2.2.3</version>
-</dependency>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.persistence</groupId>
+            <artifactId>jakarta.persistence-api</artifactId>
+            <version>2.2.3</version>
+        </dependency>
 
     </dependencies>
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <exec.mainClass>com.itson.proyectoagencia_233505_236348.ProyectoAgencia_233505_236348</exec.mainClass>
-    </properties>
 </project>

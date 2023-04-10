@@ -9,26 +9,26 @@ import com.itson.interfaces.IConexionBD;
  * @author
  */
 public class FrmConsulta extends javax.swing.JPanel {
-    private final IConexionBD conexion;
-    private final LicenciasDAO licencia;
-    private final PersonasDAO persona;
-    
+//    private final IConexionBD conexion;
+//    private final LicenciasDAO licencia;
+//    private final PersonasDAO persona;
+//    
 
     /**
      * Creates new form FrmConsulta
      */
-    public FrmConsulta(IConexionBD conexion,Persona persona) {
-        this.conexion=conexion;
-        this.licencia=new LicenciasDAO(conexion);
-        this.persona=new PersonasDAO(conexion);
-        initComponents();
-                this.cargarTablaTramites();
-
-    }
-    
-    public void cargarTablaTramites(){
-        
-    }
+//    public FrmConsulta(IConexionBD conexion,Persona persona) {
+//        this.conexion=conexion;
+//        this.licencia=new LicenciasDAO(conexion);
+//        this.persona=new PersonasDAO(conexion);
+//        initComponents();
+//                this.cargarTablaTramites();
+//
+//    }
+//    
+//    public void cargarTablaTramites(){
+//        
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
