@@ -1,9 +1,10 @@
 
 package com.itson.presentacion;
 
-import com.itson.dao.PersonasDAO;
+import com.itson.dao.*;
 import com.itson.dominio.*;
 import com.itson.interfaces.*;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -193,10 +194,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void btnLicenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLicenciaActionPerformed
         // TODO add your handling code here:
-//        FrmLicencia frm = new FrmLicencia();
-//        frm.setVisible(true);
-//        String rfc = JOptionPane.showInputDialog(null, "Introduce un RFC");
-////        Persona persona = new Persona(rfc);
+          FrmLicencia frm = new FrmLicencia();
+        frm.setVisible(true);
+        String rfc = JOptionPane.showInputDialog(null, "Introduce un RFC");
+        IPersonasDAO personaDAO=new PersonasDAO();
+ 
+        Persona persona =  (Persona) personaDAO.consultarLista(rfc);
 //        List<Persona> personas = personaDAO.consultarLista(rfc);
 //        
 //        for (Persona p : personas) {
@@ -208,10 +211,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
 //                JOptionPane.showInputDialog(null, "Persona inexistente", "Error",
 //                        JOptionPane.ERROR_MESSAGE);
 //            }
-//        }
-//FrmLicencia licenciaForm =new FrmLicencia();
-//licenciaForm.setVisible(true);
-
+        
+        
     }//GEN-LAST:event_btnLicenciaActionPerformed
 
 
@@ -225,3 +226,4 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
+

@@ -2,13 +2,9 @@ package com.itson.dao;
 
 import com.itson.dominio.Persona;
 import com.itson.dominio.Telefono;
-import com.itson.interfaces.IConexionBD;
 import com.itson.interfaces.IPersonasDAO;
-import java.sql.SQLException;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -38,16 +34,13 @@ public class PersonasDAO implements IPersonasDAO {
 //
 //    }
 
-    public PersonasDAO() {
-    }
-
+  
     @Override
     public void insertar() {
 //        EntityManagerFactory managerFactory
 //                = Persistence.createEntityManagerFactory("org.itson.agenciafiscal");
         try {
             em.getTransaction().begin();
-
             Persona persona1 = new Persona("SOEA031129H0", "Alexa María", "Soto", "Esquer", new GregorianCalendar(2003, 11, 29), new Telefono("6471220381"));
             Persona persona2 = new Persona("ROMJ030820A1", "José Ángel", "Romero", "Montiel", new GregorianCalendar(2003, 8, 20), new Telefono("6471055623"));
             Persona persona3 = new Persona("RAEM030303L8", "Magda Paola", "Rámirez", "Escalante", new GregorianCalendar(2003, 3, 3), new Telefono("6688293570"));

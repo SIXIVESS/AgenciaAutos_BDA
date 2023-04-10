@@ -1,6 +1,7 @@
 
 package com.itson.dominio;
 
+import com.itson.utils.TipoTramite;
 import java.io.Serializable;
 import java.util.Calendar;
 import static java.util.Calendar.getInstance;
@@ -50,26 +51,41 @@ public class Tramite implements Serializable {
     @JoinColumn(name = "idPersona", nullable = false) // Llave foránea
     private Persona persona;
     
-    @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "idPago", nullable = true) // Llave foránea
-    private Pago pago;
+//    @OneToOne(cascade = CascadeType.PERSIST)
+//    @JoinColumn(name = "idPago", nullable = true) // Llave foránea
+//    private Pago pago;
 
     public Tramite() {}
 
-    public Tramite(Calendar fecha_emision, float costo, TipoTramite tipo, Persona persona, Pago pago) {
-        this.fecha_emision = getInstance();
+    public Tramite(Long id, Calendar fecha_emision, float costo, Persona persona) {
+        this.id = id;
+        this.fecha_emision = fecha_emision;
         this.costo = costo;
-        this.tipo = tipo;
         this.persona = persona;
-        this.pago = pago;
     }
 
-    public Tramite(Calendar fecha_emision, float costo, TipoTramite tipo, Persona persona) {
-        this.fecha_emision = getInstance();
+    public Tramite(Calendar fecha_emision, float costo, Persona persona) {
+        this.fecha_emision = fecha_emision;
         this.costo = costo;
-        this.tipo = tipo;
         this.persona = persona;
     }
+    
+    
+
+//    public Tramite(Calendar fecha_emision, float costo, TipoTramite tipo, Persona persona, Pago pago) {
+//        this.fecha_emision = getInstance();
+//        this.costo = costo;
+//        this.tipo = tipo;
+//        this.persona = persona;
+//        this.pago = pago;
+//    }
+//
+//    public Tramite(Calendar fecha_emision, float costo, TipoTramite tipo, Persona persona) {
+//        this.fecha_emision = getInstance();
+//        this.costo = costo;
+//        this.tipo = tipo;
+//        this.persona = persona;
+//    }
     
     
     public Long getId() {
@@ -112,13 +128,13 @@ public class Tramite implements Serializable {
         this.persona = persona;
     }
 
-    public Pago getPago() {
-        return pago;
-    }
-
-    public void setPago(Pago pago) {
-        this.pago = pago;
-    }
+//    public Pago getPago() {
+//        return pago;
+//    }
+//
+//    public void setPago(Pago pago) {
+//        this.pago = pago;
+//    }
 
     @Override
     public int hashCode() {

@@ -1,6 +1,6 @@
-
 package com.itson.dominio;
 
+import com.itson.utils.TipoTramite;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Objects;
@@ -9,63 +9,48 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
- * @author 
+ * @author
  */
 @Entity
+@Table(name = "Licencia")
 public class Licencia extends Tramite implements Serializable {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
-    @Column(name = "estado", nullable=true)
+
+    @Column(name = "estado", nullable = true)
     private boolean estado;
 
     @Column(name = "vigencia", nullable = true)
     private int vigencia;
+
+    @Column(name = "Discapacidad", nullable = true)
+    private boolean discapacidad;
+
+    public Licencia() {
+    }
+
     
-    @Column(name = "tipo_licencia", nullable = true)
-    private TipoLicencia tipo_licencia;
+    public Licencia(boolean estado, int vigencia, boolean discapacidad, Calendar fecha_emision, float costo, Persona persona) {
+        super(fecha_emision, costo, persona);
+        this.estado = estado;
+        this.vigencia = vigencia;
+        this.discapacidad = discapacidad;
+    }
 
-    public Licencia() {}
-
-    public Licencia(Long id, boolean estado, int vigencia, TipoLicencia tipo_licencia, Calendar fecha_emision, float costo, TipoTramite tipo, Persona persona) {
-        super(fecha_emision, costo, tipo, persona);
+    public Licencia(Long id, boolean estado, int vigencia, boolean discapacidad, Calendar fecha_emision, float costo, Persona persona) {
+        super(id, fecha_emision, costo, persona);
         this.id = id;
         this.estado = estado;
         this.vigencia = vigencia;
-        this.tipo_licencia = tipo_licencia;
+        this.discapacidad = discapacidad;
     }
-
-    public Licencia(boolean estado, int vigencia, TipoLicencia tipo_licencia, Calendar fecha_emision, float costo, TipoTramite tipo, Persona persona) {
-        super(fecha_emision, costo, tipo, persona);
-        this.estado = estado;
-        this.vigencia = vigencia;
-        this.tipo_licencia = tipo_licencia;
-    }
-
     
-//    public Licencia(int vigencia, Calendar fecha_emision, float costo,
-//            TipoTramite tipo_tramite, Persona persona, Pago pago, TipoLicencia tipo_licencia) {
-//        super(fecha_emision, costo, tipo_tramite, persona, pago);
-//        this.vigencia = vigencia;
-//        this.tipo_licencia = tipo_licencia;
-//    }
-//
-//    public Licencia(int vigencia, TipoLicencia tipo_licencia) {
-//        this.vigencia = vigencia;
-//        this.tipo_licencia = tipo_licencia;
-//    }
-//
-//    public Licencia(int vigencia, TipoLicencia tipo_licencia, Calendar fecha_emision, float costo, TipoTramite tipo, Persona persona) {
-//        super(fecha_emision, costo, tipo, persona);
-//        this.vigencia = vigencia;
-//        this.tipo_licencia = tipo_licencia;
-//    }
-
     
     public int getVigencia() {
         return vigencia;
@@ -73,14 +58,6 @@ public class Licencia extends Tramite implements Serializable {
 
     public void setVigencia(int vigencia) {
         this.vigencia = vigencia;
-    }
-
-    public TipoLicencia getTipo_licencia() {
-        return tipo_licencia;
-    }
-
-    public void setTipo_licencia(TipoLicencia tipo_licencia) {
-        this.tipo_licencia = tipo_licencia;
     }
 
     public boolean isEstado() {
@@ -91,14 +68,21 @@ public class Licencia extends Tramite implements Serializable {
         this.estado = estado;
     }
 
+    public boolean isDiscapacidad() {
+        return discapacidad;
+    }
+
+    public void setDiscapacidad(boolean discapacidad) {
+        this.discapacidad = discapacidad;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 23 * hash + Objects.hashCode(this.id);
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
-    
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -117,16 +101,15 @@ public class Licencia extends Tramite implements Serializable {
         if (this.vigencia != other.vigencia) {
             return false;
         }
-        if (!Objects.equals(this.id, other.id)) {
+        if (this.discapacidad != other.discapacidad) {
             return false;
         }
-        return this.tipo_licencia == other.tipo_licencia;
+        return Objects.equals(this.id, other.id);
     }
 
     @Override
     public String toString() {
-        return "Licencia{" + "id=" + id + ", estado=" + estado + ", vigencia=" + vigencia + ", tipo_licencia=" + tipo_licencia + '}';
+        return "Licencia{" + "id=" + id + ", estado=" + estado + ", vigencia=" + vigencia + ", discapacidad=" + discapacidad + '}';
     }
-    
-    
+
 }

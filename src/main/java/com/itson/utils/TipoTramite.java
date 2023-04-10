@@ -1,5 +1,5 @@
 
-package com.itson.dominio;
+package com.itson.utils;
 
 /**
  *

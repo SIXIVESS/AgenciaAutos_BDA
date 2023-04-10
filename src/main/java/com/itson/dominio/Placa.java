@@ -1,6 +1,7 @@
 
 package com.itson.dominio;
 
+import com.itson.utils.TipoTramite;
 import java.io.Serializable;
 import java.util.Calendar;
 import javax.persistence.Column;
@@ -23,12 +24,12 @@ public class Placa extends Tramite implements Serializable {
     private Calendar fecha_recepcion;
 
     public Placa() {}
-
-    public Placa(String num_alfanumerico, Calendar fecha_emision, float costo, TipoTramite tipo, Persona persona, Pago pago) {
-        super(fecha_emision, costo, tipo, persona, pago);
-        this.num_alfanumerico = num_alfanumerico;
-        this.fecha_recepcion = null;
-    }
+//
+//    public Placa(String num_alfanumerico, Calendar fecha_emision, float costo, TipoTramite tipo, Persona persona, Pago pago) {
+//        super(fecha_emision, costo, tipo, persona, pago);
+//        this.num_alfanumerico = num_alfanumerico;
+//        this.fecha_recepcion = null;
+//    }
 
     public String getNum_alfanumerico() {
         return num_alfanumerico;

@@ -2,7 +2,7 @@ package com.itson.dao;
 
 import com.itson.dominio.Licencia;
 import com.itson.dominio.Persona;
-import com.itson.dominio.TipoTramite;
+import com.itson.utils.TipoTramite;
 import com.itson.interfaces.IConexionBD;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -13,6 +13,9 @@ import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.PersistenceException;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,18 +23,22 @@ import javax.swing.JOptionPane;
  * @author
  */
 public class LicenciasDAO implements ILicenciasDAO {
+//
+//    private static final Logger LOG = Logger.getLogger(LicenciasDAO.class.getName());
+//    private final IConexionBD generadorConexiones;
+//
+//    public LicenciasDAO(IConexionBD generadorConexiones) {
+//        this.generadorConexiones = generadorConexiones;
+//    }
+//    
 
-    private static final Logger LOG = Logger.getLogger(LicenciasDAO.class.getName());
-    private final IConexionBD generadorConexiones;
-
-    public LicenciasDAO(IConexionBD generadorConexiones) {
-        this.generadorConexiones = generadorConexiones;
-    }
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("org.itson.agenciafiscal");
+    EntityManager em = emf.createEntityManager();
 
     @Override
     public Licencia insertar(Persona persona, Licencia licencia) {
         try {
-            EntityManager em = this.generadorConexiones.crearConexion();
+//            EntityManager em = this.generadorConexiones.crearConexion();
             em.getTransaction().begin();
             licencia.setPersona(persona);
             licencia.setTipo(TipoTramite.LICENCIA);
@@ -45,16 +52,16 @@ public class LicenciasDAO implements ILicenciasDAO {
             em.persist(licencia);
 
             em.getTransaction().commit();
-            JOptionPane.showMessageDialog(null, "Se agregó la licencia correctamente");
-        } catch (SQLException ex) {
-            LOG.log(Level.SEVERE, ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Se han insertado 20 personas con éxito");
+        } catch (PersistenceException ex) {
+            em.getTransaction().rollback();
+
         }
         return null;
     }
 
     public void actualizar(Long id) {
         try {
-            EntityManager em = this.generadorConexiones.crearConexion();
             //Busca la licencia en la clase
             Licencia licencia = em.find(Licencia.class, id);
             //Si la licencia no es nulla y tiene un estado, se le actualiza
@@ -66,15 +73,17 @@ public class LicenciasDAO implements ILicenciasDAO {
                 JOptionPane.showMessageDialog(null, "Se actualizó la licencia");
 
             }
-        } catch (SQLException ex) {
-            LOG.log(Level.SEVERE, ex.getMessage());
+            em.getTransaction().commit();
+            JOptionPane.showMessageDialog(null, "Se han insertado 20 personas con éxito");
+        } catch (PersistenceException ex) {
+            em.getTransaction().rollback();
+
         }
     }
 
     @Override
     public Licencia consultar(Integer idPersona) {
         try {
-            EntityManager em = this.generadorConexiones.crearConexion();
             // Experto que sabe hacer consultas
             CriteriaBuilder builder = em.getCriteriaBuilder();
             // Consulta que se esta construyendo
@@ -86,9 +95,10 @@ public class LicenciasDAO implements ILicenciasDAO {
             em.getTransaction().begin();
 
             return licencia;
-        } catch (SQLException ex) {
-            LOG.log(Level.SEVERE, ex.getMessage());
+        } catch (PersistenceException ex) {
+            em.getTransaction().rollback();
         }
         return null;
+
     }
 }

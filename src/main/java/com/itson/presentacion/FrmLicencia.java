@@ -1,77 +1,72 @@
-
 package com.itson.presentacion;
 
+import com.itson.dao.LicenciasDAO;
+import com.itson.utils.TipoVigencia;
 import com.itson.dominio.*;
 import com.itson.interfaces.*;
 import excepciones.PersistenciaException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.sql.SQLException;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
-
 
 /**
  *
- * @author 
+ * @author
  */
 public class FrmLicencia extends javax.swing.JFrame {
+//
+//    Persona persona = null;
+//    Licencia licencia = null;
+//    TipoLicencia tipoLicencia;
 
-    Persona persona = null;
-    Licencia licencia = null;
-    TipoLicencia tipoLicencia;
-    
-    private final IPersonasDAO personaDAO;
-    private final ILicenciasDAO licenciaDAO;
-    private static final Logger LOG = Logger.getLogger(FrmLicencia.class.getName());
+    TipoVigencia numVigencia = new TipoVigencia();
+    int vig = 0;
+    boolean discapacitado;
 
     /**
      * Creates new form Licencia
      */
-    public FrmLicencia(Persona persona, IPersonasDAO personaDAO, ILicenciasDAO licenciaDAO) {
+    public FrmLicencia() {
         initComponents();
-        this.personaDAO = personaDAO;
-        this.licenciaDAO = licenciaDAO;
-        this.persona = persona;
-        
-        this.txtRfc.setText(persona.getRfc());
-        this.txtNombres.setText(persona.getNombres());
-        this.txtApPaterno.setText(persona.getAp_paterno());
-        this.txtApMaterno.setText(persona.getAp_materno());
-        this.txtTelefono.setText(persona.getTelefono().getNumero());
+        //Busca la lista anotada en el array de vigencias
+        String[] vigencias = numVigencia.obtenerVigencias();
+        //Construye el combo box
+        DefaultComboBoxModel creador = new DefaultComboBoxModel(vigencias);
+        //Se le enlaza las opciones de vigencias a la combo box
+        cbxVigencia.setModel(creador);
+
     }
 
-   
-
-    private void guardar() {
-        Licencia licencia = new Licencia();
-        if (this.chbxUnAño.isSelected() && this.chbxNo.isSelected()) {
-            licencia.setVigencia(1);
-            licencia.setCosto(600);
-            licencia.setTipo_licencia(TipoLicencia.NORMAL);
-        } else if (this.chbxUnAño.isSelected() && this.chbxSi.isSelected()) {
-            licencia.setVigencia(1);
-            licencia.setCosto(200);
-            licencia.setTipo_licencia(TipoLicencia.DISCAPACITADO);
-        } else if (this.chbxDosAños.isSelected() && this.chbxNo.isSelected()) {
-            licencia.setVigencia(2);
-            licencia.setCosto(900);
-            licencia.setTipo_licencia(TipoLicencia.NORMAL);
-        } else if (this.chbxDosAños.isSelected() && this.chbxSi.isSelected()) {
-            licencia.setVigencia(2);
-            licencia.setCosto(500);
-            licencia.setTipo_licencia(TipoLicencia.DISCAPACITADO);
-        } else if (this.chbxTresAños.isSelected() && this.chbxNo.isSelected()) {
-            licencia.setVigencia(3);
-            licencia.setCosto(1100);
-            licencia.setTipo_licencia(TipoLicencia.NORMAL);
-        } else if (this.chbxTresAños.isSelected() && this.chbxSi.isSelected()) {
-            licencia.setVigencia(3);
-            licencia.setCosto(700);
-            licencia.setTipo_licencia(TipoLicencia.DISCAPACITADO);
-        }
-        licenciaDAO.insertar(persona, licencia);
-        JOptionPane.showMessageDialog(this, "Se agrego la licencia: ", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
-    }
-    
+//    private void guardar() {
+//        Licencia licencia = new Licencia();
+//        if (this.chbxUnAño.isSelected() && this.chbxNo.isSelected()) {
+//            licencia.setVigencia(1);
+//            licencia.setCosto(600);
+//            licencia.setTipo_licencia(TipoLicencia.NORMAL);
+//        } else if (this.chbxUnAño.isSelected() && this.chbxSi.isSelected()) {
+//            licencia.setVigencia(1);
+//            licencia.setCosto(200);
+//            licencia.setTipo_licencia(TipoLicencia.DISCAPACITADO);
+//        } else if (this.chbxDosAños.isSelected() && this.chbxNo.isSelected()) {
+//            licencia.setVigencia(2);
+//            licencia.setCosto(900);
+//            licencia.setTipo_licencia(TipoLicencia.NORMAL);
+//        } else if (this.chbxDosAños.isSelected() && this.chbxSi.isSelected()) {
+//            licencia.setVigencia(2);
+//            licencia.setCosto(500);
+//            licencia.setTipo_licencia(TipoLicencia.DISCAPACITADO);
+//        } else if (this.chbxTresAños.isSelected() && this.chbxNo.isSelected()) {
+//            licencia.setVigencia(3);
+//            licencia.setCosto(1100);
+//            licencia.setTipo_licencia(TipoLicencia.NORMAL);
+//        } else if (this.chbxTresAños.isSelected() && this.chbxSi.isSelected()) {
+//            licencia.setVigencia(3);
+//            licencia.setCosto(700);
+//            licencia.setTipo_licencia(TipoLicencia.DISCAPACITADO);
+//        }
+//        licenciaDAO.insertar(persona, licencia);
+//        JOptionPane.showMessageDialog(this, "Se agrego la licencia: ", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+//    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -91,26 +86,26 @@ public class FrmLicencia extends javax.swing.JFrame {
         lblTelefono = new javax.swing.JLabel();
         lblDiscapacitado = new javax.swing.JLabel();
         chbxSi = new javax.swing.JCheckBox();
-        chbxNo = new javax.swing.JCheckBox();
         btnSiguiente = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         lblVigencia = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        chbxUnAño = new javax.swing.JCheckBox();
-        chbxDosAños = new javax.swing.JCheckBox();
-        chbxTresAños = new javax.swing.JCheckBox();
         txtRfc = new javax.swing.JTextField();
         txtApPaterno = new javax.swing.JTextField();
-        txtApMaterno = new javax.swing.JTextField();
-        txtTelefono = new javax.swing.JTextField();
+        txtFechaNac = new javax.swing.JTextField();
+        txtCosto = new javax.swing.JTextField();
         txtNombres = new javax.swing.JTextField();
+        cbxVigencia = new javax.swing.JComboBox<>();
+        txtApMaterno = new javax.swing.JTextField();
+        lblDiscapacitado1 = new javax.swing.JLabel();
+        txtTelefono1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblDatosLicencia.setText("Datos de la licencia");
-        jPanel1.add(lblDatosLicencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 413, 148, -1));
+        jPanel1.add(lblDatosLicencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 410, 148, -1));
 
         lblRfc.setText("RFC");
         jPanel1.add(lblRfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 98, 148, -1));
@@ -128,10 +123,10 @@ public class FrmLicencia extends javax.swing.JFrame {
         jPanel1.add(lblFechaNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 279, 171, -1));
 
         lblTelefono.setText("TELÉFONO");
-        jPanel1.add(lblTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 331, 148, -1));
+        jPanel1.add(lblTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 148, -1));
 
-        lblDiscapacitado.setText("DISCAPACITADO");
-        jPanel1.add(lblDiscapacitado, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 541, 148, -1));
+        lblDiscapacitado.setText("COSTO:");
+        jPanel1.add(lblDiscapacitado, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 580, 148, -1));
 
         chbxSi.setText("SÍ");
         chbxSi.addActionListener(new java.awt.event.ActionListener() {
@@ -139,23 +134,16 @@ public class FrmLicencia extends javax.swing.JFrame {
                 chbxSiActionPerformed(evt);
             }
         });
-        jPanel1.add(chbxSi, new org.netbeans.lib.awtextra.AbsoluteConstraints(197, 538, 85, -1));
+        jPanel1.add(chbxSi, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 540, 85, -1));
 
-        chbxNo.setText("NO");
-        chbxNo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chbxNoActionPerformed(evt);
-            }
-        });
-        jPanel1.add(chbxNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(325, 538, 85, -1));
-
-        btnSiguiente.setText("SIGUIENTE");
+        btnSiguiente.setText("GUARDAR");
+        btnSiguiente.setActionCommand("GUARDAR");
         btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSiguienteActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 607, -1, -1));
+        jPanel1.add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 610, -1, -1));
 
         btnCancelar.setText("CANCELAR");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -163,7 +151,7 @@ public class FrmLicencia extends javax.swing.JFrame {
                 btnCancelarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(401, 607, -1, -1));
+        jPanel1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 610, -1, -1));
 
         lblVigencia.setText("VIGENCIA");
         jPanel1.add(lblVigencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 487, 148, -1));
@@ -171,35 +159,37 @@ public class FrmLicencia extends javax.swing.JFrame {
         jLabel10.setText("Datos del solicitante");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 62, 148, -1));
 
-        chbxUnAño.setText("1 AÑO");
-        chbxUnAño.setToolTipText("");
-        chbxUnAño.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chbxUnAñoActionPerformed(evt);
-            }
-        });
-        jPanel1.add(chbxUnAño, new org.netbeans.lib.awtextra.AbsoluteConstraints(197, 484, 85, -1));
-
-        chbxDosAños.setText("2 AÑOS");
-        jPanel1.add(chbxDosAños, new org.netbeans.lib.awtextra.AbsoluteConstraints(325, 484, 85, -1));
-
-        chbxTresAños.setText("3 AÑOS");
-        jPanel1.add(chbxTresAños, new org.netbeans.lib.awtextra.AbsoluteConstraints(458, 484, 85, -1));
-
         txtRfc.setEditable(false);
         jPanel1.add(txtRfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(235, 94, 184, -1));
 
         txtApPaterno.setEditable(false);
         jPanel1.add(txtApPaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 180, 184, -1));
 
-        txtApMaterno.setEditable(false);
-        jPanel1.add(txtApMaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 230, 184, -1));
+        txtFechaNac.setEditable(false);
+        jPanel1.add(txtFechaNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 270, 184, -1));
 
-        txtTelefono.setEditable(false);
-        jPanel1.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 330, 184, -1));
+        txtCosto.setEditable(false);
+        jPanel1.add(txtCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 580, 184, -1));
 
         txtNombres.setEditable(false);
         jPanel1.add(txtNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 184, -1));
+
+        cbxVigencia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Un año", "Dos años", "Tres años" }));
+        cbxVigencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxVigenciaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cbxVigencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 480, 220, -1));
+
+        txtApMaterno.setEditable(false);
+        jPanel1.add(txtApMaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 230, 184, -1));
+
+        lblDiscapacitado1.setText("DISCAPACITADO");
+        jPanel1.add(lblDiscapacitado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 541, 148, -1));
+
+        txtTelefono1.setEditable(false);
+        jPanel1.add(txtTelefono1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 320, 184, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -222,39 +212,70 @@ public class FrmLicencia extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_chbxSiActionPerformed
 
-    private void chbxNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chbxNoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_chbxNoActionPerformed
-
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
         // TODO add your handling code here:
-        this.guardar();
+        ILicenciasDAO licenciaDAO = new LicenciasDAO();
+
+        String rfc = txtRfc.getText();
+        String nombre = txtNombres.getText();
+        String apellidoPaterno = txtApPaterno.getText();
+        String apellidoMaterno = txtFechaNac.getText();
+        String fechaNac = txtFechaNac.getText();
+        String telefono = txtCosto.getText();
+
+        //Conversor de texto a float
+        float costo = Float.parseFloat(txtCosto.getText());
+
+//Opciones del combo box
+        if (cbxVigencia.getSelectedItem().toString().equals("Un año")) {
+            int vig = 1;
+        } else if (cbxVigencia.getSelectedItem().toString().equals("Dos años")) {
+            int vig = 2;
+        } else if (cbxVigencia.getSelectedItem().toString().equals("Tres años")) {
+            int vig = 3;
+        }
+
+        //Opcición de discapacidad
+        if (chbxSi.isSelected() == false) {
+            discapacitado = false;
+        } else if (chbxSi.isSelected() == true) {
+            discapacitado = true;
+        }
+        try {
+            licenciaDAO.insertar(rfc, nombre, apellidoPaterno, apellidoMaterno, fechaNac, telefono, costo,
+                    vig, discapacitado);
+        } catch (PersistenciaException e) {
+            JOptionPane.showMessageDialog(null, "Error");
+        }
+
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
+        FrmPrincipal frmPrincial = new FrmPrincipal();
+        frmPrincial.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void chbxUnAñoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chbxUnAñoActionPerformed
+    private void cbxVigenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxVigenciaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_chbxUnAñoActionPerformed
+        //Regresa la opción seleccionada
+        String opcion = cbxVigencia.getSelectedItem().toString();
+    }//GEN-LAST:event_cbxVigenciaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnSiguiente;
-    private javax.swing.JCheckBox chbxDosAños;
-    private javax.swing.JCheckBox chbxNo;
+    private javax.swing.JComboBox<String> cbxVigencia;
     private javax.swing.JCheckBox chbxSi;
-    private javax.swing.JCheckBox chbxTresAños;
-    private javax.swing.JCheckBox chbxUnAño;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblApMaterno;
     private javax.swing.JLabel lblApPaterno;
     private javax.swing.JLabel lblDatosLicencia;
     private javax.swing.JLabel lblDiscapacitado;
+    private javax.swing.JLabel lblDiscapacitado1;
     private javax.swing.JLabel lblFechaNacimiento;
     private javax.swing.JLabel lblNombres;
     private javax.swing.JLabel lblRfc;
@@ -262,8 +283,10 @@ public class FrmLicencia extends javax.swing.JFrame {
     private javax.swing.JLabel lblVigencia;
     private javax.swing.JTextField txtApMaterno;
     private javax.swing.JTextField txtApPaterno;
+    private javax.swing.JTextField txtCosto;
+    private javax.swing.JTextField txtFechaNac;
     private javax.swing.JTextField txtNombres;
     private javax.swing.JTextField txtRfc;
-    private javax.swing.JTextField txtTelefono;
+    private javax.swing.JTextField txtTelefono1;
     // End of variables declaration//GEN-END:variables
 }
