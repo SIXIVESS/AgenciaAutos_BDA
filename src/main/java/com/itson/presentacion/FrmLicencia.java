@@ -1,6 +1,7 @@
 package com.itson.presentacion;
 
 import com.itson.dao.LicenciasDAO;
+import com.itson.dao.PersonasDAO;
 import com.itson.utils.TipoVigencia;
 import com.itson.dominio.*;
 import com.itson.interfaces.*;
@@ -19,9 +20,7 @@ public class FrmLicencia extends javax.swing.JFrame {
 //    Licencia licencia = null;
 //    TipoLicencia tipoLicencia;
 
-    TipoVigencia numVigencia = new TipoVigencia();
-    int vig = 0;
-    boolean discapacitado;
+    TipoVigencia numVig = new TipoVigencia();
 
     /**
      * Creates new form Licencia
@@ -29,7 +28,7 @@ public class FrmLicencia extends javax.swing.JFrame {
     public FrmLicencia() {
         initComponents();
         //Busca la lista anotada en el array de vigencias
-        String[] vigencias = numVigencia.obtenerVigencias();
+        String[] vigencias = numVig.obtenerVigencias();
         //Construye el combo box
         DefaultComboBoxModel creador = new DefaultComboBoxModel(vigencias);
         //Se le enlaza las opciones de vigencias a la combo box
@@ -98,7 +97,8 @@ public class FrmLicencia extends javax.swing.JFrame {
         cbxVigencia = new javax.swing.JComboBox<>();
         txtApMaterno = new javax.swing.JTextField();
         lblDiscapacitado1 = new javax.swing.JLabel();
-        txtTelefono1 = new javax.swing.JTextField();
+        txtTelefono = new javax.swing.JTextField();
+        btnBuscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -137,7 +137,6 @@ public class FrmLicencia extends javax.swing.JFrame {
         jPanel1.add(chbxSi, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 540, 85, -1));
 
         btnSiguiente.setText("GUARDAR");
-        btnSiguiente.setActionCommand("GUARDAR");
         btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSiguienteActionPerformed(evt);
@@ -158,20 +157,17 @@ public class FrmLicencia extends javax.swing.JFrame {
 
         jLabel10.setText("Datos del solicitante");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 62, 148, -1));
-
-        txtRfc.setEditable(false);
-        jPanel1.add(txtRfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(235, 94, 184, -1));
-
-        txtApPaterno.setEditable(false);
+        jPanel1.add(txtRfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(235, 94, 120, -1));
         jPanel1.add(txtApPaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 180, 184, -1));
-
-        txtFechaNac.setEditable(false);
         jPanel1.add(txtFechaNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 270, 184, -1));
 
         txtCosto.setEditable(false);
+        txtCosto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCostoActionPerformed(evt);
+            }
+        });
         jPanel1.add(txtCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 580, 184, -1));
-
-        txtNombres.setEditable(false);
         jPanel1.add(txtNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 184, -1));
 
         cbxVigencia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Un año", "Dos años", "Tres años" }));
@@ -181,15 +177,25 @@ public class FrmLicencia extends javax.swing.JFrame {
             }
         });
         jPanel1.add(cbxVigencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 480, 220, -1));
-
-        txtApMaterno.setEditable(false);
         jPanel1.add(txtApMaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 230, 184, -1));
 
         lblDiscapacitado1.setText("DISCAPACITADO");
         jPanel1.add(lblDiscapacitado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 541, 148, -1));
 
-        txtTelefono1.setEditable(false);
-        jPanel1.add(txtTelefono1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 320, 184, -1));
+        txtTelefono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTelefonoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 320, 184, -1));
+
+        btnBuscar.setText("BUSCAR");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 90, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -219,20 +225,22 @@ public class FrmLicencia extends javax.swing.JFrame {
         String rfc = txtRfc.getText();
         String nombre = txtNombres.getText();
         String apellidoPaterno = txtApPaterno.getText();
-        String apellidoMaterno = txtFechaNac.getText();
+        String apellidoMaterno = txtApMaterno.getText();
         String fechaNac = txtFechaNac.getText();
-        String telefono = txtCosto.getText();
+        String telefono = txtTelefono.getText();
 
         //Conversor de texto a float
         float costo = Float.parseFloat(txtCosto.getText());
+        int vig = 0;
+        boolean discapacitado = false;
 
 //Opciones del combo box
         if (cbxVigencia.getSelectedItem().toString().equals("Un año")) {
-            int vig = 1;
+            vig = 1;
         } else if (cbxVigencia.getSelectedItem().toString().equals("Dos años")) {
-            int vig = 2;
+            vig = 2;
         } else if (cbxVigencia.getSelectedItem().toString().equals("Tres años")) {
-            int vig = 3;
+            vig = 3;
         }
 
         //Opcición de discapacidad
@@ -241,6 +249,7 @@ public class FrmLicencia extends javax.swing.JFrame {
         } else if (chbxSi.isSelected() == true) {
             discapacitado = true;
         }
+
         try {
             licenciaDAO.insertar(rfc, nombre, apellidoPaterno, apellidoMaterno, fechaNac, telefono, costo,
                     vig, discapacitado);
@@ -261,10 +270,46 @@ public class FrmLicencia extends javax.swing.JFrame {
         // TODO add your handling code here:
         //Regresa la opción seleccionada
         String opcion = cbxVigencia.getSelectedItem().toString();
+        //Saca el costo dependiendo de las elecciones
+        if (chbxSi.isSelected() == false) {
+            int costo = numVig.guardar(false, opcion);
+            txtCosto.setText(String.valueOf(costo));
+            
+        } else if (chbxSi.isSelected() == true) {
+            int costo = numVig.guardar(true, opcion);
+            txtCosto.setText(String.valueOf(costo));
+        }
+
     }//GEN-LAST:event_cbxVigenciaActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // TODO add your handling code here:
+        String rfc = txtRfc.getText();
+        IPersonasDAO personaDAO = new PersonasDAO();
+
+        Persona persona = personaDAO.consultar(rfc);
+
+//Se llenan los campos de texto de manera automática
+        txtNombres.setText(persona.getNombres());
+        txtApPaterno.setText(persona.getAp_paterno());
+        txtApMaterno.setText(persona.getAp_materno());
+        //Convierte la fecha en String
+        txtFechaNac.setText(persona.getFecha_nacimiento().toString());
+        txtTelefono.setText(persona.getTelefono());
+
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void txtCostoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCostoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCostoActionPerformed
+
+    private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTelefonoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnSiguiente;
     private javax.swing.JComboBox<String> cbxVigencia;
@@ -287,6 +332,6 @@ public class FrmLicencia extends javax.swing.JFrame {
     private javax.swing.JTextField txtFechaNac;
     private javax.swing.JTextField txtNombres;
     private javax.swing.JTextField txtRfc;
-    private javax.swing.JTextField txtTelefono1;
+    private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 }

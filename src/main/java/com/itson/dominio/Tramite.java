@@ -1,10 +1,10 @@
-
 package com.itson.dominio;
 
 import com.itson.utils.TipoTramite;
 import java.io.Serializable;
 import java.util.Calendar;
 import static java.util.Calendar.getInstance;
+import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
@@ -24,53 +24,50 @@ import javax.persistence.TemporalType;
 
 /**
  *
- * @author 
+ * @author
  */
 @Entity
 @Table(name = "Tramites")
-@DiscriminatorColumn(name = "tipo", discriminatorType = DiscriminatorType.STRING)
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+//@DiscriminatorColumn(name = "tipo", discriminatorType = DiscriminatorType.STRING)
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Tramite implements Serializable {
 
     @Id
     @Column(name = "folio")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @Column(name = "fecha_emision", nullable = true)
-    @Temporal(TemporalType.DATE)
-    private Calendar fecha_emision;
-    
+    private Date fecha_emision;
+
     @Column(name = "costo", nullable = false)
     private float costo;
-    
-    @Column(name = "tipo", nullable = false)
-    private TipoTramite tipo;
-    
+
+//    @Column(name = "tipo", nullable = false)
+//    private TipoTramite tipo;
+
     @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "idPersona", nullable = false) // Llave foránea
+    @JoinColumn(name = "rfc_personas", referencedColumnName="RFC",nullable = false) // Llave foránea
     private Persona persona;
-    
+
 //    @OneToOne(cascade = CascadeType.PERSIST)
 //    @JoinColumn(name = "idPago", nullable = true) // Llave foránea
 //    private Pago pago;
+    public Tramite() {
+    }
 
-    public Tramite() {}
-
-    public Tramite(Long id, Calendar fecha_emision, float costo, Persona persona) {
+    public Tramite(Long id, Date fecha_emision, float costo, Persona persona) {
         this.id = id;
         this.fecha_emision = fecha_emision;
         this.costo = costo;
         this.persona = persona;
     }
 
-    public Tramite(Calendar fecha_emision, float costo, Persona persona) {
+    public Tramite(Date fecha_emision, float costo, Persona persona) {
         this.fecha_emision = fecha_emision;
         this.costo = costo;
         this.persona = persona;
     }
-    
-    
 
 //    public Tramite(Calendar fecha_emision, float costo, TipoTramite tipo, Persona persona, Pago pago) {
 //        this.fecha_emision = getInstance();
@@ -86,8 +83,6 @@ public class Tramite implements Serializable {
 //        this.tipo = tipo;
 //        this.persona = persona;
 //    }
-    
-    
     public Long getId() {
         return id;
     }
@@ -96,11 +91,11 @@ public class Tramite implements Serializable {
         this.id = id;
     }
 
-    public Calendar getFecha_emision() {
+    public Date getFecha_emision() {
         return fecha_emision;
     }
 
-    public void setFecha_emision(Calendar fecha_emision) {
+    public void setFecha_emision(Date fecha_emision) {
         this.fecha_emision = fecha_emision;
     }
 
@@ -112,13 +107,13 @@ public class Tramite implements Serializable {
         this.costo = costo;
     }
 
-    public TipoTramite getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(TipoTramite tipo) {
-        this.tipo = tipo;
-    }
+//    public TipoTramite getTipo() {
+//        return tipo;
+//    }
+//
+//    public void setTipo(TipoTramite tipo) {
+//        this.tipo = tipo;
+//    }
 
     public Persona getPersona() {
         return persona;
@@ -135,7 +130,6 @@ public class Tramite implements Serializable {
 //    public void setPago(Pago pago) {
 //        this.pago = pago;
 //    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -160,5 +154,5 @@ public class Tramite implements Serializable {
     public String toString() {
         return "com.itson.dominio.Tramite[ id=" + id + " ]";
     }
-    
+
 }

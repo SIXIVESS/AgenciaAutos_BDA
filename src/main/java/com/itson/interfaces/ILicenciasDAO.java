@@ -12,12 +12,9 @@ import excepciones.PersistenciaException;
  */
 public interface ILicenciasDAO {
     
-    public void insertar(String rfc, String nombre,  String apellidoPaterno, String apellidoMaterno, String fechaNac,  String telefono, double costo, int vigencia,
-
-    /**
-     *
-     */
-    boolean discapacidad) throws PersistenciaException;
+    public void insertar(String rfc, String nombre,  String apellidoPaterno, String apellidoMaterno, 
+            String fechaNac,  String telefono, double costo, int vigencia, boolean discapacidad) 
+            throws PersistenciaException;
 
     public Licencia consultar(Integer idPersona);
     

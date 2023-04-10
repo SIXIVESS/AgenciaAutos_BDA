@@ -4,6 +4,7 @@ package com.itson.presentacion;
 import com.itson.dao.*;
 import com.itson.dominio.*;
 import com.itson.interfaces.*;
+import com.itson.utils.Busqueda;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -13,7 +14,9 @@ import javax.swing.JOptionPane;
  */
 public class FrmPrincipal extends javax.swing.JFrame {
 
-//    Persona persona = null;
+    private Busqueda params;
+
+    Persona persona = null;
 //    private final IPersonasDAO personaDAO;
 //    private final ILicenciasDAO licenciaDAO;
     /**
@@ -196,16 +199,15 @@ public class FrmPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
           FrmLicencia frm = new FrmLicencia();
         frm.setVisible(true);
-        String rfc = JOptionPane.showInputDialog(null, "Introduce un RFC");
-        IPersonasDAO personaDAO=new PersonasDAO();
- 
-        Persona persona =  (Persona) personaDAO.consultarLista(rfc);
-//        List<Persona> personas = personaDAO.consultarLista(rfc);
+        dispose();
+//        String rfc = JOptionPane.showInputDialog(null, "Introduce un RFC");
+//        IPersonasDAO personaDAO=new PersonasDAO();
+////        Persona persona =   personaDAO.consultar(rfc);
 //        
-//        for (Persona p : personas) {
-//            this.persona = p;
-//            if (personas.contains(p)) {
-//                FrmLicencia frm = new FrmLicencia(p, personaDAO, licenciaDAO);
+//        List<Persona> personas = personaDAO.consultarLista(rfc);
+//        for (Persona p : personas) 
+//          this.persona = p;
+//            if (personas.contains(rfc)) {
 //                frm.setVisible(true);
 //            } else {
 //                JOptionPane.showInputDialog(null, "Persona inexistente", "Error",

@@ -3,6 +3,7 @@ package com.itson.dominio;
 import com.itson.utils.TipoTramite;
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,27 +24,27 @@ public class Licencia extends Tramite implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "estado", nullable = true)
+    @Column(name = "estado", nullable = false)
     private boolean estado;
 
-    @Column(name = "vigencia", nullable = true)
+    @Column(name = "vigencia", nullable = false)
     private int vigencia;
 
-    @Column(name = "Discapacidad", nullable = true)
+    @Column(name = "Discapacidad", nullable = false)
     private boolean discapacidad;
 
     public Licencia() {
     }
 
     
-    public Licencia(boolean estado, int vigencia, boolean discapacidad, Calendar fecha_emision, float costo, Persona persona) {
+    public Licencia(boolean estado, int vigencia, boolean discapacidad, Date fecha_emision, float costo, Persona persona) {
         super(fecha_emision, costo, persona);
         this.estado = estado;
         this.vigencia = vigencia;
         this.discapacidad = discapacidad;
     }
 
-    public Licencia(Long id, boolean estado, int vigencia, boolean discapacidad, Calendar fecha_emision, float costo, Persona persona) {
+    public Licencia(Long id, boolean estado, int vigencia, boolean discapacidad, Date fecha_emision, float costo, Persona persona) {
         super(id, fecha_emision, costo, persona);
         this.id = id;
         this.estado = estado;

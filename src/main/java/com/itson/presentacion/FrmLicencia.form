@@ -138,7 +138,6 @@
         <Component class="javax.swing.JButton" name="btnSiguiente">
           <Properties>
             <Property name="text" type="java.lang.String" value="GUARDAR"/>
-            <Property name="actionCommand" type="java.lang.String" value="GUARDAR"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSiguienteActionPerformed"/>
@@ -183,19 +182,13 @@
           </Constraints>
         </Component>
         <Component class="javax.swing.JTextField" name="txtRfc">
-          <Properties>
-            <Property name="editable" type="boolean" value="false"/>
-          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="235" y="94" width="184" height="-1"/>
+              <AbsoluteConstraints x="235" y="94" width="120" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
         <Component class="javax.swing.JTextField" name="txtApPaterno">
-          <Properties>
-            <Property name="editable" type="boolean" value="false"/>
-          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="240" y="180" width="184" height="-1"/>
@@ -203,9 +196,6 @@
           </Constraints>
         </Component>
         <Component class="javax.swing.JTextField" name="txtFechaNac">
-          <Properties>
-            <Property name="editable" type="boolean" value="false"/>
-          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="230" y="270" width="184" height="-1"/>
@@ -216,6 +206,9 @@
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCostoActionPerformed"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="160" y="580" width="184" height="-1"/>
@@ -223,9 +216,6 @@
           </Constraints>
         </Component>
         <Component class="javax.swing.JTextField" name="txtNombres">
-          <Properties>
-            <Property name="editable" type="boolean" value="false"/>
-          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="240" y="140" width="184" height="-1"/>
@@ -255,9 +245,6 @@
           </Constraints>
         </Component>
         <Component class="javax.swing.JTextField" name="txtApMaterno">
-          <Properties>
-            <Property name="editable" type="boolean" value="false"/>
-          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="240" y="230" width="184" height="-1"/>
@@ -274,13 +261,26 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtTelefono1">
-          <Properties>
-            <Property name="editable" type="boolean" value="false"/>
-          </Properties>
+        <Component class="javax.swing.JTextField" name="txtTelefono">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTelefonoActionPerformed"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="230" y="320" width="184" height="-1"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnBuscar">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="BUSCAR"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarActionPerformed"/>
+          </Events>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="370" y="90" width="-1" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
