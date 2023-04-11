@@ -2,17 +2,19 @@ package com.itson.utils;
 
 /**
  *
- * @author 
+ * @author
  */
 public class Busqueda {
+
+    //Con esto va a buscar por nombre y fecha
     private String nombre;
-    private String rfc;
 
+    private Integer fechaNac;
 
-public Busqueda (String rfc, String nombre){
-this.rfc=rfc;
-this.nombre=nombre;
-}
+    public Busqueda(String nombre, Integer fechaNac) {
+        this.nombre = nombre;
+        this.fechaNac = fechaNac;
+    }
 
     public String getNombre() {
         return nombre;
@@ -22,13 +24,11 @@ this.nombre=nombre;
         this.nombre = nombre;
     }
 
-    public String getRfc() {
-        return rfc;
+    public Integer getFechaNac() {
+        return fechaNac;
     }
 
-    public void setRfc(String rfc) {
-        this.rfc = rfc;
+    public void setFechaNac(Integer fechaNac) {
+        this.fechaNac = fechaNac;
     }
-
-
 }

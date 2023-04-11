@@ -182,6 +182,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void btnConsultaTramiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaTramiteActionPerformed
         // TODO add your handling code here:
+        FrmConsulta frmConsulta= new FrmConsulta();
+         frmConsulta.setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnConsultaTramiteActionPerformed
 
     private void btnInsertarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertarClientesActionPerformed

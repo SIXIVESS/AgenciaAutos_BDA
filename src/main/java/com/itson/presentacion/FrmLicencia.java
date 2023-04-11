@@ -160,7 +160,11 @@ public class FrmLicencia extends javax.swing.JFrame {
         jLabel10.setText("Datos del solicitante");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 62, 148, -1));
         jPanel1.add(txtRfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(235, 94, 120, -1));
+
+        txtApPaterno.setEditable(false);
         jPanel1.add(txtApPaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 180, 184, -1));
+
+        txtFechaNac.setEditable(false);
         jPanel1.add(txtFechaNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 270, 184, -1));
 
         txtCosto.setEditable(false);
@@ -170,6 +174,8 @@ public class FrmLicencia extends javax.swing.JFrame {
             }
         });
         jPanel1.add(txtCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 580, 184, -1));
+
+        txtNombres.setEditable(false);
         jPanel1.add(txtNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 184, -1));
 
         cbxVigencia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Un año", "Dos años", "Tres años" }));
@@ -179,11 +185,14 @@ public class FrmLicencia extends javax.swing.JFrame {
             }
         });
         jPanel1.add(cbxVigencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 480, 220, -1));
+
+        txtApMaterno.setEditable(false);
         jPanel1.add(txtApMaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 230, 184, -1));
 
         lblDiscapacitado1.setText("DISCAPACITADO");
         jPanel1.add(lblDiscapacitado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 541, 148, -1));
 
+        txtTelefono.setEditable(false);
         txtTelefono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTelefonoActionPerformed(evt);
