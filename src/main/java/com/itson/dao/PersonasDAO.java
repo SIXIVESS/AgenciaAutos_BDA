@@ -92,33 +92,18 @@ public class PersonasDAO implements IPersonasDAO {
             JOptionPane.showMessageDialog(null, "Se han insertado 20 personas con éxito");
         } catch (PersistenceException ex) {
             em.getTransaction().rollback();
-
         }
 
     }
 
     @Override
     public Persona consultar(String rfc) {
-//        EntityManagerFactory managerFactory
-//                = Persistence.createEntityManagerFactory("org.itson.pruebasjpa");
-//        EntityManager em = managerFactory.createEntityManager();
         try {
-//            // Experto que sabe hacer consultas
-//            CriteriaBuilder builder = em.getCriteriaBuilder();
-//            // Consulta que se esta construyendo
-//            CriteriaQuery<Persona> criteria = builder.createQuery(Persona.class);
-//            Root<Persona> root = criteria.from(Persona.class);
-//
-//            Persona persona = (Persona) criteria.select(root)
-//                    .where(builder.equal(root.get("rfc"), rfc));
-//            em.getTransaction().begin();
-
-//Busca el rfc en la clase persona
+            //Busca el rfc en la clase persona
             return em.find(Persona.class, rfc);
         } catch (PersistenceException ex) {
             return null;
         }
-         
     }
 
     @Override

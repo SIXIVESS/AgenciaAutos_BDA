@@ -20,6 +20,7 @@ import java.util.logging.Logger;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
+import javax.persistence.TypedQuery;
 import javax.swing.JOptionPane;
 
 /**
@@ -46,19 +47,19 @@ public class LicenciasDAO implements ILicenciasDAO {
     String formatoFecha = fecha.format(actual);
 
     @Override
-    public void insertar(String rfc, String nombre, String apellidoPaterno, String apellidoMaterno, String fechaNac, String telefono, float costo, int vigencia, boolean discapacidad) throws PersistenciaException {
+    public void insertar(String rfc, String nombre, String apellidoPaterno, 
+            String apellidoMaterno, String fechaNac, String telefono, float costo, 
+            int vigencia, boolean discapacidad) throws PersistenciaException {
+        
         try {
             Date fechaDos = fecha.parse(formatoFecha);
             em.getTransaction().begin();
 
             Persona per = new Persona(rfc, nombre, apellidoPaterno, apellidoMaterno, LocalDate.parse(fechaNac), telefono);
-
             Licencia lic = new Licencia(true, vigencia, discapacidad, fechaDos, costo, per);
 
             em.persist(lic);
-
             em.getTransaction().commit();
-
             JOptionPane.showMessageDialog(null, "Se ha insertado la licencia");
 
         } catch (ParseException ex) {
@@ -66,30 +67,6 @@ public class LicenciasDAO implements ILicenciasDAO {
 
         }
     }
-//    @Override
-//    public Licencia insertar(Str) {
-//        try {
-////            EntityManager em = this.generadorConexiones.crearConexion();
-//            em.getTransaction().begin();
-//            licencia.setPersona(persona);
-//            licencia.setTipo(TipoTramite.LICENCIA);
-//            licencia.setFecha_emision(Calendar.getInstance());
-//            licencia.setTipo_licencia(licencia.getTipo_licencia());
-//            licencia.setCosto(licencia.getCosto());
-//            licencia.setPersona(licencia.getPersona());
-//            licencia.setTipo_licencia(licencia.getTipo_licencia());
-//            licencia.setVigencia(licencia.getVigencia());
-//
-//            em.persist(licencia);
-//
-//            em.getTransaction().commit();
-//            JOptionPane.showMessageDialog(null, "Se han insertado 20 personas con éxito");
-//        } catch (PersistenceException ex) {
-//            em.getTransaction().rollback();
-//
-//        }
-//        return null;
-//    }
 
     public void actualizar(Long idLicencia) {
 
@@ -128,7 +105,7 @@ public class LicenciasDAO implements ILicenciasDAO {
 
 //Busca el rfc en la tabla de personas
         try {
-            List<Licencia> licencia = em.createQuery("SELECT lic FROM licencia lic WHERE lic.personas.rfc=rfc",
+            List<Licencia> licencia = em.createQuery("SELECT lic FROM Licencia lic WHERE lic.persona.rfc LIKE :rfc",
                     Licencia.class).setParameter("rfc", rfc).getResultList();
 
             for (Licencia lic : licencia) {

@@ -1,16 +1,21 @@
 
 package com.itson.presentacion;
 
+import com.itson.dominio.Persona;
+
+
 /**
  *
  * @author 
  */
 public class FrmPlaca extends javax.swing.JFrame {
 
+    Persona persona = null;
     /**
      * Creates new form Placas
      */
-    public FrmPlaca() {
+    public FrmPlaca(Persona persona) {
+        this.persona = persona;
         initComponents();
     }
 
@@ -24,56 +29,75 @@ public class FrmPlaca extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnUsado = new javax.swing.JButton();
+        btnNuevo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("PLACAS");
 
-        jButton1.setText("VEHÍCULO USADO");
+        btnUsado.setText("VEHÍCULO USADO");
+        btnUsado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUsadoActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("VEHÍCULO NUEVO");
+        btnNuevo.setText("VEHÍCULO NUEVO");
+        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(178, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(94, 94, 94))
             .addGroup(layout.createSequentialGroup()
-                .addGap(136, 136, 136)
+                .addGap(28, 28, 28)
+                .addComponent(btnNuevo)
+                .addGap(38, 38, 38)
+                .addComponent(btnUsado)
+                .addGap(0, 46, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(30, 30, 30)
-                    .addComponent(jButton2)
-                    .addContainerGap(242, Short.MAX_VALUE)))
+                .addGap(175, 175, 175))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(92, 92, 92)
+                .addGap(85, 85, 85)
                 .addComponent(jLabel1)
-                .addGap(53, 53, 53)
-                .addComponent(jButton1)
-                .addContainerGap(116, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(163, Short.MAX_VALUE)
-                    .addComponent(jButton2)
-                    .addGap(114, 114, 114)))
+                .addGap(104, 104, 104)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnNuevo)
+                    .addComponent(btnUsado))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+        // TODO add your handling code here:
+        FrmAutoNuevo frm = new FrmAutoNuevo(persona);
+        frm.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnNuevoActionPerformed
+
+    private void btnUsadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsadoActionPerformed
+        // TODO add your handling code here:
+        FrmAutoUsado frm = new FrmAutoUsado(persona);
+        frm.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnUsadoActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnNuevo;
+    private javax.swing.JButton btnUsado;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

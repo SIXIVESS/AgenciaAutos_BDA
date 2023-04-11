@@ -263,8 +263,8 @@ public class FrmLicencia extends javax.swing.JFrame {
             
             ILicenciasDAO licenciaDAO = new LicenciasDAO();
             try {
-                licenciaDAO.insertar(rfc, nombre, apellidoPaterno, apellidoMaterno, fechaNac, telefono, costo,
-                        vig, discapacitado);
+                licenciaDAO.insertar(rfc, nombre, apellidoPaterno, apellidoMaterno, 
+                        fechaNac, telefono, costo, vig, discapacitado);
                 FrmPrincipal frmPrincipal = new FrmPrincipal();
                 frmPrincipal.setVisible(true);
                 this.dispose();

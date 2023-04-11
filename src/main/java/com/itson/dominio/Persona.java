@@ -9,15 +9,10 @@ import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+
 
 /**
  *
@@ -27,10 +22,6 @@ import javax.persistence.TemporalType;
 @Table(name = "Personas")
 public class Persona implements Serializable {
 
-//    @Id
-//    @Column(name = "id")
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Long id;
     @Id
     @Column(name = "RFC")
     private String rfc;
@@ -47,19 +38,15 @@ public class Persona implements Serializable {
     @Column(name = "fecha_nacimiento", nullable = false)
     private LocalDate fecha_nacimiento;
 
-//    @OneToOne(cascade = CascadeType.PERSIST)
-//    @JoinColumn(name = "idTelefono", nullable = false) // Llave foránea
     @Column(name = "telefono", nullable = false)
     private String telefono;
 
     @OneToMany(mappedBy = "persona", cascade = {CascadeType.REMOVE}) // Nombre del atributo de la otra clase
     private List<Tramite> tramites;
 
-    public Persona() {
-    }
+    public Persona() {}
 
     public Persona(String rfc, String nombres, String ap_paterno, String ap_materno, LocalDate fecha_nacimiento, String telefono, List<Tramite> tramites) {
-
         this.rfc = rfc;
         this.nombres = nombres;
         this.ap_paterno = ap_paterno;
@@ -70,7 +57,6 @@ public class Persona implements Serializable {
     }
 
     public Persona(String rfc, String nombres, String ap_paterno, String ap_materno, LocalDate fecha_nacimiento, String telefono) {
-
         this.rfc = rfc;
         this.nombres = nombres;
         this.ap_paterno = ap_paterno;

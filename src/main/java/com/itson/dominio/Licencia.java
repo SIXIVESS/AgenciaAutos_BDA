@@ -19,9 +19,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Licencia")
 public class Licencia extends Tramite implements Serializable {
-    private static final long serialVersionUID = 1L;
+    
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "estado", nullable = false)
@@ -36,7 +36,6 @@ public class Licencia extends Tramite implements Serializable {
     public Licencia() {
     }
 
-    
     public Licencia(boolean estado, int vigencia, boolean discapacidad, Date fecha_emision, float costo, Persona persona) {
         super(fecha_emision, costo, persona);
         this.estado = estado;
@@ -51,7 +50,6 @@ public class Licencia extends Tramite implements Serializable {
         this.vigencia = vigencia;
         this.discapacidad = discapacidad;
     }
-    
     
     public int getVigencia() {
         return vigencia;

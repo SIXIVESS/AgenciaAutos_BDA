@@ -1,14 +1,8 @@
 package com.itson.dominio;
 
-import com.itson.utils.TipoTramite;
 import java.io.Serializable;
-import java.util.Calendar;
-import static java.util.Calendar.getInstance;
 import java.util.Date;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,7 +11,6 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -38,13 +31,11 @@ public class Tramite implements Serializable {
     private Long id;
 
     @Column(name = "fecha_emision", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date fechaEmision;
 
     @Column(name = "costo", nullable = false)
     private float costo;
-
-//    @Column(name = "tipo", nullable = false)
-//    private TipoTramite tipo;
 
     @ManyToOne
     @JoinColumn(name = "rfc_personas", referencedColumnName="RFC",nullable = false) // Llave foránea
@@ -57,10 +48,6 @@ public class Tramite implements Serializable {
     public Tramite() {
     }
 
-    public Tramite(String nombreTramite,Date fechaEmision, float costo, Persona persona) {
-       
-    }
-    
     public Tramite(Long id, Date fechaEmision, float costo, Persona persona) {
         this.id = id;
         this.fechaEmision = fechaEmision;
@@ -74,7 +61,6 @@ public class Tramite implements Serializable {
         this.persona = persona;
     }
     
-
 //    public Tramite(Calendar fecha_emision, float costo, TipoTramite tipo, Persona persona, Pago pago) {
 //        this.fecha_emision = getInstance();
 //        this.costo = costo;
@@ -105,8 +91,6 @@ public class Tramite implements Serializable {
         this.fechaEmision = fechaEmision;
     }
 
-   
-
     public float getCosto() {
         return costo;
     }
@@ -114,14 +98,6 @@ public class Tramite implements Serializable {
     public void setCosto(float costo) {
         this.costo = costo;
     }
-
-//    public TipoTramite getTipo() {
-//        return tipo;
-//    }
-//
-//    public void setTipo(TipoTramite tipo) {
-//        this.tipo = tipo;
-//    }
 
     public Persona getPersona() {
         return persona;
@@ -131,13 +107,6 @@ public class Tramite implements Serializable {
         this.persona = persona;
     }
 
-//    public Pago getPago() {
-//        return pago;
-//    }
-//
-//    public void setPago(Pago pago) {
-//        this.pago = pago;
-//    }
     @Override
     public int hashCode() {
         int hash = 0;

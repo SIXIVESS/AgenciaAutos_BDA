@@ -169,21 +169,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void btnPlacasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlacasActionPerformed
 //        // TODO add your handling code here:
-//        String rfc = JOptionPane.showInputDialog(null, "Introduce un RFC");
-//        Persona personaConsulta = personaDAO.consultar(rfc);
-//        if (personaConsulta.getRfc().equalsIgnoreCase(rfc)) {
-//            FrmPlaca frm = new FrmPlaca();
-//            frm.setVisible(true);
-//        } else {
-//            JOptionPane.showInputDialog(null, "Persona inexistente", "Error",
-//                    JOptionPane.ERROR_MESSAGE);
-//        }                                
+        FrmConsultaLicencia frm = new FrmConsultaLicencia();
+        frm.setVisible(true);
     }//GEN-LAST:event_btnPlacasActionPerformed
 
     private void btnConsultaTramiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaTramiteActionPerformed
         // TODO add your handling code here:
         FrmConsulta frmConsulta= new FrmConsulta();
-         frmConsulta.setVisible(true);
+        frmConsulta.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnConsultaTramiteActionPerformed
 

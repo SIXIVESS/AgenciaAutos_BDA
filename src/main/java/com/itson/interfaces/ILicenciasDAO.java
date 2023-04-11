@@ -18,6 +18,5 @@ public interface ILicenciasDAO {
 
     //Consulta a la persona por su rfc
     public boolean consultar(String rfc);
-
-//    public Licencia insertar(Persona persona, Licencia licencia);
+    
 }
