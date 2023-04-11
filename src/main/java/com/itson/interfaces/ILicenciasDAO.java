@@ -1,4 +1,3 @@
-
 package com.itson.interfaces;
 
 import com.itson.dominio.Licencia;
@@ -8,16 +7,17 @@ import excepciones.PersistenciaException;
 
 /**
  *
- * @author 
+ * @author
  */
 public interface ILicenciasDAO {
-    
-    public void insertar(String rfc, String nombre,  String apellidoPaterno, String apellidoMaterno, 
-            String fechaNac,  String telefono, double costo, int vigencia, boolean discapacidad) 
+
+    //Registra los datos de la licencia
+    public void insertar(String rfc, String nombre, String apellidoPaterno, String apellidoMaterno,
+            String fechaNac, String telefono, float costo, int vigencia, boolean discapacidad)
             throws PersistenciaException;
 
-    public Licencia consultar(Integer idPersona);
-    
+    //Consulta a la persona por su rfc
+    public boolean consultar(String rfc);
+
 //    public Licencia insertar(Persona persona, Licencia licencia);
-    
 }

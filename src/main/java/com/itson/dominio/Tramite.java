@@ -33,12 +33,12 @@ import javax.persistence.TemporalType;
 public class Tramite implements Serializable {
 
     @Id
-    @Column(name = "folio")
+    @Column(name = "folio", nullable=false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "fecha_emision", nullable = true)
-    private Date fecha_emision;
+    @Column(name = "fecha_emision", nullable = false)
+    private Date fechaEmision;
 
     @Column(name = "costo", nullable = false)
     private float costo;
@@ -46,7 +46,7 @@ public class Tramite implements Serializable {
 //    @Column(name = "tipo", nullable = false)
 //    private TipoTramite tipo;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     @JoinColumn(name = "rfc_personas", referencedColumnName="RFC",nullable = false) // Llave foránea
     private Persona persona;
 
@@ -56,15 +56,15 @@ public class Tramite implements Serializable {
     public Tramite() {
     }
 
-    public Tramite(Long id, Date fecha_emision, float costo, Persona persona) {
+    public Tramite(Long id, Date fechaEmision, float costo, Persona persona) {
         this.id = id;
-        this.fecha_emision = fecha_emision;
+        this.fechaEmision = fechaEmision;
         this.costo = costo;
         this.persona = persona;
     }
 
-    public Tramite(Date fecha_emision, float costo, Persona persona) {
-        this.fecha_emision = fecha_emision;
+    public Tramite(Date fechaEmision, float costo, Persona persona) {
+        this.fechaEmision = fechaEmision;
         this.costo = costo;
         this.persona = persona;
     }
@@ -91,13 +91,15 @@ public class Tramite implements Serializable {
         this.id = id;
     }
 
-    public Date getFecha_emision() {
-        return fecha_emision;
+    public Date getFechaEmision() {
+        return fechaEmision;
     }
 
-    public void setFecha_emision(Date fecha_emision) {
-        this.fecha_emision = fecha_emision;
+    public void setFechaEmision(Date fechaEmision) {
+        this.fechaEmision = fechaEmision;
     }
+
+   
 
     public float getCosto() {
         return costo;

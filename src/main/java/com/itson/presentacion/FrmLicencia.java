@@ -7,6 +7,8 @@ import com.itson.dominio.*;
 import com.itson.interfaces.*;
 import excepciones.PersistenciaException;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
@@ -142,7 +144,7 @@ public class FrmLicencia extends javax.swing.JFrame {
                 btnSiguienteActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 610, -1, -1));
+        jPanel1.add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 610, -1, -1));
 
         btnCancelar.setText("CANCELAR");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -220,7 +222,6 @@ public class FrmLicencia extends javax.swing.JFrame {
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
         // TODO add your handling code here:
-        ILicenciasDAO licenciaDAO = new LicenciasDAO();
 
         String rfc = txtRfc.getText();
         String nombre = txtNombres.getText();
@@ -230,33 +231,41 @@ public class FrmLicencia extends javax.swing.JFrame {
         String telefono = txtTelefono.getText();
 
         //Conversor de texto a float
-        float costo = Float.parseFloat(txtCosto.getText());
-        int vig = 0;
-        boolean discapacitado = false;
+        if (!txtNombres.getText().isEmpty()) {
 
+            float costo = Float.parseFloat(txtCosto.getText());
+            int vig = 0;
 //Opciones del combo box
-        if (cbxVigencia.getSelectedItem().toString().equals("Un año")) {
-            vig = 1;
-        } else if (cbxVigencia.getSelectedItem().toString().equals("Dos años")) {
-            vig = 2;
-        } else if (cbxVigencia.getSelectedItem().toString().equals("Tres años")) {
-            vig = 3;
-        }
+            if (cbxVigencia.getSelectedItem().toString().equals("Un año")) {
+                vig = 1;
+            } else if (cbxVigencia.getSelectedItem().toString().equals("Dos años")) {
+                vig = 2;
+            } else if (cbxVigencia.getSelectedItem().toString().equals("Tres años")) {
+                vig = 3;
+            }
 
-        //Opcición de discapacidad
-        if (chbxSi.isSelected() == false) {
-            discapacitado = false;
-        } else if (chbxSi.isSelected() == true) {
-            discapacitado = true;
-        }
-
-        try {
-            licenciaDAO.insertar(rfc, nombre, apellidoPaterno, apellidoMaterno, fechaNac, telefono, costo,
-                    vig, discapacitado);
-        } catch (PersistenciaException e) {
+            boolean discapacitado = false;
+            //Opcición de discapacidad
+            if (chbxSi.isSelected() == false) {
+                discapacitado = false;
+            } else if (chbxSi.isSelected() == true) {
+                discapacitado = true;
+            }
+            
+            ILicenciasDAO licenciaDAO = new LicenciasDAO();
+            try {
+                licenciaDAO.insertar(rfc, nombre, apellidoPaterno, apellidoMaterno, fechaNac, telefono, costo,
+                        vig, discapacitado);
+                FrmPrincipal frmPrincipal = new FrmPrincipal();
+                frmPrincipal.setVisible(true);
+                this.dispose();
+            } catch (PersistenciaException ex) {
+                Logger.getLogger(FrmLicencia.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
             JOptionPane.showMessageDialog(null, "Error");
-        }
 
+        }
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -274,7 +283,7 @@ public class FrmLicencia extends javax.swing.JFrame {
         if (chbxSi.isSelected() == false) {
             int costo = numVig.guardar(false, opcion);
             txtCosto.setText(String.valueOf(costo));
-            
+
         } else if (chbxSi.isSelected() == true) {
             int costo = numVig.guardar(true, opcion);
             txtCosto.setText(String.valueOf(costo));

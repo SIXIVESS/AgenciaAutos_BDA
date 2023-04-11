@@ -19,7 +19,6 @@ public class TipoVigencia {
     }
 
     public int guardar(boolean discapacitado, String numVigencia) {
-        Licencia licencia = new Licencia();
         int costo = 0;
 
         if (discapacitado == false && numVigencia.equals("Un año")) {
