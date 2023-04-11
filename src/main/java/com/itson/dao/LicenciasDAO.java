@@ -133,7 +133,7 @@ public class LicenciasDAO implements ILicenciasDAO {
 
             for (Licencia lic : licencia) {
                 //Compara la licencia con la fecha actual
-                if (lic.getFecha_emision().getTime() + TimeUnit.DAYS.toMillis(lic.getVigencia() * 365) > actual.getTime()) {
+                if (lic.getFechaEmision().getTime() + TimeUnit.DAYS.toMillis(lic.getVigencia() * 365) > actual.getTime()) {
                     return true;
                 } else {
                     actualizar(lic.getId());
@@ -147,9 +147,9 @@ public class LicenciasDAO implements ILicenciasDAO {
         }
         return false;
     }
-
+    
+//Constructor vacío
     public LicenciasDAO() {
     }
-    
-    
+
 }

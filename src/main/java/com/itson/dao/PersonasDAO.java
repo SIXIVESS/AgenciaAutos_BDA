@@ -63,7 +63,7 @@ public class PersonasDAO implements IPersonasDAO {
             Persona persona15 = new Persona("PEAR030224A7", "Rosalía", "Pérez", "Acuña", LocalDate.of(2003, 2, 24), ("6442331575"));
             Persona persona16 = new Persona("LUSF020730F3", "Fernando ", "Luque", "Steward", LocalDate.of(2002, 7, 30), ("6442463614"));
             Persona persona17 = new Persona("PEIM020810J1", "Marlon", "Pereo", "Iriqui", LocalDate.of(2002, 8, 10), ("6442490437"));
-            Persona persona18 = new Persona("DUPJ020921R3", "Jose Roberto", "Duran", "Padilla", LocalDate.of(2002, 9, 21), ("6441182216"));
+            Persona persona18 = new Persona("VALI050225A1", "Isabella", "Valdéz", "López", LocalDate.of(2005, 2, 25), ("6441547653"));
             Persona persona19 = new Persona("ROPI030901D4", "Ingrid", "Rosas", "Palacios", LocalDate.of(2003, 9, 1), ("2291748899"));
             Persona persona20 = new Persona("NAHA031007H8", "Adriana Guadalupe", "Naal", "Huchin", LocalDate.of(2003, 10, 7), ("9961018583"));
 
