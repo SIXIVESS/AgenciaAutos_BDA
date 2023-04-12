@@ -15,7 +15,7 @@ import java.util.List;
  */
 public interface IPlacasDAO {
     
-    public void insertar(String num_alfanumerico, Vehiculo vehiculo, Persona persona, float costo);
+    public void insertar(String num_alfanumerico, Vehiculo vehiculo, Persona persona, float costo, boolean estado);
     
     public List<Placa> consultar(String placas);
     

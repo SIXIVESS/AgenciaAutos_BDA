@@ -32,7 +32,6 @@ public class FrmAutoUsado extends javax.swing.JFrame {
     }
 
     private void guardarPlacas(){
-        String placas = this.txtPlacas.getText();
         GeneracionPlacas placa = new GeneracionPlacas();
         String placaNueva = placa.generarPlaca();
         float costo = 1000;
@@ -40,8 +39,7 @@ public class FrmAutoUsado extends javax.swing.JFrame {
         Automovil autoConsulta = (Automovil) 
                 autosDAO.consultar(this.txtSerie.getText());
         
-//        placaDAO.actualizar(placas);
-        placaDAO.insertar(placaNueva, autoConsulta, persona, costo);
+        placaDAO.insertar(placaNueva, autoConsulta, persona, costo, true);
         this.txtNumAlfa.setText(placaNueva);
         this.txtCosto.setText(String.valueOf(costo));
     }
@@ -77,13 +75,15 @@ public class FrmAutoUsado extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Placa auto usado");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(txtSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 120, -1));
+
+        txtSerie.setEditable(false);
+        getContentPane().add(txtSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 120, -1));
 
         lblMarca.setText("Marca:");
-        getContentPane().add(lblMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, -1));
+        getContentPane().add(lblMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
 
         lblModelo.setText("Modelo:");
-        getContentPane().add(lblModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, -1, -1));
+        getContentPane().add(lblModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, -1, -1));
 
         txtMarca.setEditable(false);
         txtMarca.addActionListener(new java.awt.event.ActionListener() {
@@ -91,7 +91,7 @@ public class FrmAutoUsado extends javax.swing.JFrame {
                 txtMarcaActionPerformed(evt);
             }
         });
-        getContentPane().add(txtMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, 120, -1));
+        getContentPane().add(txtMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, 120, -1));
 
         txtModelo.setEditable(false);
         txtModelo.addActionListener(new java.awt.event.ActionListener() {
@@ -99,10 +99,10 @@ public class FrmAutoUsado extends javax.swing.JFrame {
                 txtModeloActionPerformed(evt);
             }
         });
-        getContentPane().add(txtModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 240, 120, -1));
+        getContentPane().add(txtModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 300, 120, -1));
 
         lblColor.setText("Color:");
-        getContentPane().add(lblColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
+        getContentPane().add(lblColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, -1, -1));
 
         txtColor.setEditable(false);
         txtColor.addActionListener(new java.awt.event.ActionListener() {
@@ -110,7 +110,7 @@ public class FrmAutoUsado extends javax.swing.JFrame {
                 txtColorActionPerformed(evt);
             }
         });
-        getContentPane().add(txtColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 120, -1));
+        getContentPane().add(txtColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 240, 120, -1));
 
         btnBuscar.setText("BUSCAR");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -121,17 +121,17 @@ public class FrmAutoUsado extends javax.swing.JFrame {
         getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 90, -1, -1));
 
         lblSerie.setText("Núm. de serie:");
-        getContentPane().add(lblSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
+        getContentPane().add(lblSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
 
         jLabel1.setText("Datos placas");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, -1, -1));
 
         lblNumAlfa.setText("Placas:");
-        getContentPane().add(lblNumAlfa, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 200, -1, -1));
+        getContentPane().add(lblNumAlfa, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, -1, -1));
 
         lblCosto.setText("Costo:");
         getContentPane().add(lblCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 460, -1, -1));
-        getContentPane().add(txtPlacas, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 200, 130, -1));
+        getContentPane().add(txtPlacas, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 130, -1));
 
         txtCosto.setEditable(false);
         getContentPane().add(txtCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 460, 130, -1));
@@ -158,16 +158,18 @@ public class FrmAutoUsado extends javax.swing.JFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
-        String serie = this.txtSerie.getText();
+        String placas = this.txtPlacas.getText();
         
         IPlacasDAO placaDAO = new PlacasDAO();
+        placaDAO.actualizar(placas);
         
-        Placa placa = (Placa) placaDAO.consultar(serie);
+        
+//        Placa placa = (Placa) placaDAO.consultar(serie);
 
         //Se llenan los campos de texto de manera automática
-        txtModelo.setText(placa.getVehiculo().getModelo());
-        txtMarca.setText(placa.getVehiculo().getMarca());
-        txtColor.setText(placa.getVehiculo().getColor());
+//        txtModelo.setText(placa.getVehiculo().getModelo());
+//        txtMarca.setText(placa.getVehiculo().getMarca());
+//        txtColor.setText(placa.getVehiculo().getColor());
         
         
     }//GEN-LAST:event_btnBuscarActionPerformed

@@ -41,12 +41,12 @@ public class PlacasDAO implements IPlacasDAO {
     }
 
     @Override
-    public void insertar(String num_alfanumerico, Vehiculo vehiculo, Persona persona, float costo) {
+    public void insertar(String num_alfanumerico, Vehiculo vehiculo, Persona persona, float costo, boolean estado) {
         try {
             Date fechaDos = fecha.parse(formatoFecha);
             em.getTransaction().begin();
 
-            Placa placa = new Placa(num_alfanumerico, vehiculo, fechaDos, costo, persona);
+            Placa placa = new Placa(num_alfanumerico, vehiculo, fechaDos, costo, persona, estado);
 
             em.persist(placa);
             em.getTransaction().commit();
@@ -78,16 +78,26 @@ public class PlacasDAO implements IPlacasDAO {
     }
 
     @Override
-    public void actualizar(String placas) {
-        Placa placa = (Placa) this.consultar(placas);
-        Date fechaDos = null;
-        try {
-            fechaDos = fecha.parse(formatoFecha);
+    public void actualizar(String numAlfa) {
+        TypedQuery<Placa> tq = em.createQuery("SELECT p FROM Placa p WHERE p.num_alfanumerico LIKE :num_alfanumerico", 
+                Placa.class);
+        
+        tq.setParameter("num_alfanumerico", numAlfa);
+        Placa placas = tq.getSingleResult();
+        try{
+            Date fechaDos = fecha.parse(formatoFecha);
+            if(placas != null && placas.isEstado()){
+                em.getTransaction().begin();
+                placas.setEstado(false);
+                placas.setFecha_recepcion(fechaDos);
+                em.merge(placas);
+                JOptionPane.showMessageDialog(null, "Se actualizó la placa");
+                em.getTransaction().commit();
+            }
+        } catch(PersistenceException ex){
+            System.out.println("error");
         } catch (ParseException ex) {
             Logger.getLogger(PlacasDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        placa.setFecha_recepcion(fechaDos);
     }
-
-    
 }

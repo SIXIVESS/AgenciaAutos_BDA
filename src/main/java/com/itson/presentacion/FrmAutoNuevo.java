@@ -50,7 +50,7 @@ public class FrmAutoNuevo extends javax.swing.JFrame {
                 autosDAO.consultar(this.txtSerie.getText());
         
         IPlacasDAO placaDAO = new PlacasDAO();
-        placaDAO.insertar(placaNueva, autoConsulta, persona, costo);
+        placaDAO.insertar(placaNueva, autoConsulta, persona, costo, true);
         this.txtNumAlfa.setText(placaNueva);
         this.txtCosto.setText(String.valueOf(costo));
     }

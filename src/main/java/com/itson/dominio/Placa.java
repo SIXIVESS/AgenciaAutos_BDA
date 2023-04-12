@@ -31,8 +31,10 @@ public class Placa extends Tramite implements Serializable {
     private String num_alfanumerico;
     
     @Column(name = "fecha_recepcion", nullable = true)
-    @Temporal(TemporalType.DATE)
     private Date fecha_recepcion;
+    
+    @Column(name = "estado", nullable = false)
+    private boolean estado;
     
     @ManyToOne
     @JoinColumn(name = "num_serie_auto", referencedColumnName = "num_serie",
@@ -41,21 +43,24 @@ public class Placa extends Tramite implements Serializable {
 
     public Placa() {}
 
-    public Placa(String num_alfanumerico, Vehiculo vehiculo) {
+    public Placa(String num_alfanumerico, Vehiculo vehiculo, boolean estado) {
         this.num_alfanumerico = num_alfanumerico;
         this.vehiculo = vehiculo;
+        this.estado = estado;
     }
 
-    public Placa(String num_alfanumerico, Date fecha_recepcion, Vehiculo vehiculo) {
+    public Placa(String num_alfanumerico, Date fecha_recepcion, Vehiculo vehiculo, boolean estado) {
         this.num_alfanumerico = num_alfanumerico;
         this.fecha_recepcion = fecha_recepcion;
         this.vehiculo = vehiculo;
+        this.estado = estado;
     }
 
-    public Placa(String num_alfanumerico, Vehiculo vehiculo, Date fechaEmision, float costo, Persona persona) {
+    public Placa(String num_alfanumerico, Vehiculo vehiculo, Date fechaEmision, float costo, Persona persona, boolean estado) {
         super(fechaEmision, costo, persona);
         this.num_alfanumerico = num_alfanumerico;
         this.vehiculo = vehiculo;
+        this.estado = estado;
     }
 
     public String getNum_alfanumerico() {
@@ -82,10 +87,26 @@ public class Placa extends Tramite implements Serializable {
         this.vehiculo = vehiculo;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 29 * hash + Objects.hashCode(this.num_alfanumerico);
+        int hash = 7;
+        hash = 17 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -101,8 +122,12 @@ public class Placa extends Tramite implements Serializable {
             return false;
         }
         final Placa other = (Placa) obj;
-        return Objects.equals(this.num_alfanumerico, other.num_alfanumerico);
+        return Objects.equals(this.id, other.id);
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "Placa{" + "id=" + id + ", num_alfanumerico=" + num_alfanumerico + ", fecha_recepcion=" + fecha_recepcion + ", estado=" + estado + ", vehiculo=" + vehiculo + '}';
+    }
+ 
 }
