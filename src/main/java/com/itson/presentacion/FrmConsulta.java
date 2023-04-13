@@ -7,6 +7,9 @@ import com.itson.utils.Busqueda;
 import com.itson.utils.FormatoPaginas;
 import com.itson.utils.Renderizacion;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.persistence.PersistenceException;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -255,13 +258,36 @@ public class FrmConsulta extends javax.swing.JPanel {
 
     private void tblTramitesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTramitesMouseClicked
         // TODO add your handling code here:
+        int columna=this.tblTramites.getColumnModel().getColumnIndexAtX(evt.getX());
+        int fila = evt.getY()/this.tblTramites.getRowHeight();
+        if(fila<this.tblTramites.getRowCount() && fila >=0
+                && columna < this.tblTramites.getColumnCount()
+                && columna >=0){
+            Object valor = this.tblTramites.getValueAt(fila, columna);
+            
+            if (valor instanceof JButton){
+                ((JButton)valor).doClick();
+                JButton boton = (JButton) valor;
+                String rfc = this.tblTramites.getValueAt(fila, 0).toString();
+                try{
+                    System.out.println(rfc);
+                    FrmConsulta2 frm = new FrmConsulta2(rfc);
+                    frm.setVisible(true);
+                    this.dispose();
+                }catch(PersistenceException ex){
+                    Logger.getLogger(FrmConsulta.class.
+                            getName()).log(Level.SEVERE,null,ex);
+                    
+                }
+            }
+        }
     }//GEN-LAST:event_tblTramitesMouseClicked
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         // TODO add your handling code here:
         FrmPrincipal frm = new FrmPrincipal();
         frm.setVisible(true);
-  
+//        this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnAvanzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvanzarActionPerformed
