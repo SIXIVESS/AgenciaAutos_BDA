@@ -68,11 +68,10 @@ public class FrmConsulta extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblTramites = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        lblNombre = new javax.swing.JLabel();
+        lblAnioNacimiento = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         txtFechaNac = new javax.swing.JTextField();
         btnAceptar = new javax.swing.JButton();
@@ -80,10 +79,12 @@ public class FrmConsulta extends javax.swing.JPanel {
         btnAvanzar = new javax.swing.JToggleButton();
         btnRetroceder = new javax.swing.JToggleButton();
         cbxElementosPag = new javax.swing.JComboBox<>();
+        jPanel1 = new javax.swing.JPanel();
+        lblConsulta = new javax.swing.JLabel();
 
-        jLabel1.setText("CONSULTA DE TRÁMITES");
-        jLabel1.setToolTipText("");
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        tblTramites.setFont(new java.awt.Font("Century Gothic", 0, 20)); // NOI18N
         tblTramites.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -117,22 +118,35 @@ public class FrmConsulta extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblTramites);
 
-        jLabel2.setText("NOMBRE:");
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 648, 169));
 
-        jLabel4.setText("AÑO DE NACIMIENTO:");
+        lblNombre.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        lblNombre.setText("Nombre:");
+        add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, -1, -1));
 
+        lblAnioNacimiento.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        lblAnioNacimiento.setText("Año de nacimiento:");
+        add(lblAnioNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, -1, 32));
+
+        txtNombre.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNombreActionPerformed(evt);
             }
         });
+        add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, 168, -1));
 
+        txtFechaNac.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         txtFechaNac.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtFechaNacActionPerformed(evt);
             }
         });
+        add(txtFechaNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, 168, -1));
 
+        btnAceptar.setBackground(new java.awt.Color(255, 90, 130));
+        btnAceptar.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        btnAceptar.setForeground(new java.awt.Color(255, 255, 255));
         btnAceptar.setText("Aceptar");
         btnAceptar.setToolTipText("");
         btnAceptar.addActionListener(new java.awt.event.ActionListener() {
@@ -140,93 +154,54 @@ public class FrmConsulta extends javax.swing.JPanel {
                 btnAceptarActionPerformed(evt);
             }
         });
+        add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 520, -1, -1));
 
+        btnSalir.setBackground(new java.awt.Color(255, 90, 130));
+        btnSalir.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        btnSalir.setForeground(new java.awt.Color(255, 255, 255));
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalirActionPerformed(evt);
             }
         });
+        add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 520, -1, -1));
 
+        btnAvanzar.setBackground(new java.awt.Color(255, 90, 130));
+        btnAvanzar.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        btnAvanzar.setForeground(new java.awt.Color(255, 255, 255));
         btnAvanzar.setText(">>");
         btnAvanzar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAvanzarActionPerformed(evt);
             }
         });
+        add(btnAvanzar, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 450, -1, -1));
 
+        btnRetroceder.setBackground(new java.awt.Color(255, 90, 130));
+        btnRetroceder.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        btnRetroceder.setForeground(new java.awt.Color(255, 255, 255));
         btnRetroceder.setText("<<");
         btnRetroceder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRetrocederActionPerformed(evt);
             }
         });
+        add(btnRetroceder, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 450, -1, -1));
 
+        cbxElementosPag.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         cbxElementosPag.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2", "4", "6" }));
+        add(cbxElementosPag, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 450, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnSalir)
-                        .addGap(27, 27, 27)
-                        .addComponent(btnAceptar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(588, 588, 588)
-                        .addComponent(btnRetroceder)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnAvanzar)))
-                .addGap(45, 45, 45))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 648, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel2))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(cbxElementosPag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(278, 278, 278)
-                        .addComponent(jLabel1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addComponent(jLabel1)
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRetroceder)
-                    .addComponent(btnAvanzar)
-                    .addComponent(cbxElementosPag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSalir)
-                    .addComponent(btnAceptar))
-                .addGap(27, 27, 27))
-        );
+        jPanel1.setBackground(new java.awt.Color(255, 143, 143));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblConsulta.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
+        lblConsulta.setForeground(new java.awt.Color(255, 255, 255));
+        lblConsulta.setText("CONSULTA DE TRÁMITES");
+        jPanel1.add(lblConsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
+
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 760, 90));
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtFechaNacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaNacActionPerformed
@@ -325,10 +300,11 @@ public class FrmConsulta extends javax.swing.JPanel {
     private javax.swing.JToggleButton btnRetroceder;
     private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox<String> cbxElementosPag;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblAnioNacimiento;
+    private javax.swing.JLabel lblConsulta;
+    private javax.swing.JLabel lblNombre;
     private javax.swing.JTable tblTramites;
     private javax.swing.JTextField txtFechaNac;
     private javax.swing.JTextField txtNombre;
