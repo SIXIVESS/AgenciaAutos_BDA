@@ -1,12 +1,9 @@
 
 package com.itson.presentacion;
+import com.itson.dao.PersonasDAO;
+import com.itson.interfaces.IPersonasDAO;
 
-import com.itson.dao.*;
-import com.itson.dominio.*;
-import com.itson.interfaces.*;
-import com.itson.utils.Busqueda;
-import java.util.List;
-import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -14,8 +11,7 @@ import javax.swing.JOptionPane;
  */
 public class FrmPrincipal extends javax.swing.JFrame {
 
-    private Busqueda params;
-    Persona persona = null;
+
     
     /**
      * Creates new form Principal

@@ -80,7 +80,7 @@ public class FrmConsultaPersona extends javax.swing.JFrame {
 
         lblInstruccion.setFont(new java.awt.Font("Century Gothic", 3, 24)); // NOI18N
         lblInstruccion.setText("Ingrese el RFC de la persona");
-        getContentPane().add(lblInstruccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, -1, -1));
+        getContentPane().add(lblInstruccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, -1, -1));
 
         pack();
         setLocationRelativeTo(null);

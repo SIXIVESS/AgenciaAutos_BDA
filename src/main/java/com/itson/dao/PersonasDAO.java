@@ -3,16 +3,21 @@ package com.itson.dao;
 import com.itson.dominio.Persona;
 
 import com.itson.interfaces.IPersonasDAO;
+import com.itson.utils.Busqueda;
+import com.itson.utils.FormatoPaginas;
 import java.time.LocalDate;
 import java.util.GregorianCalendar;
+import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.swing.JOptionPane;
 
@@ -24,6 +29,9 @@ public class PersonasDAO implements IPersonasDAO {
 
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("org.itson.agenciafiscal");
     EntityManager em = emf.createEntityManager();
+
+    public PersonasDAO() {
+    }
 
     @Override
     public void insertar() {
@@ -103,4 +111,42 @@ public class PersonasDAO implements IPersonasDAO {
         }
         return null;
     }
+
+    @Override
+    public List<Persona> consultarListaBusqueda(Busqueda busqueda, FormatoPaginas formato) throws NoResultException {
+        CriteriaBuilder builder = em.getCriteriaBuilder();
+        CriteriaQuery<Persona> crit = builder.createQuery(Persona.class);
+        Root<Persona> root = crit.from(Persona.class);
+        List<Predicate> filtros = new LinkedList<>();
+//Validadores de nombre
+        if (busqueda.getNombre() != null && busqueda.getNombre().isEmpty()) {
+            filtros.add(builder.like(
+                    builder.concat(
+                            builder.concat(root.get("nombres"), root.get("ap_paterno")),
+                            root.get("ap_materno")), "%" + busqueda.getNombre() + "%"));
+        }
+//Validadores de fecha de nacimiento
+        if (busqueda.getFechaNac() != null && !busqueda.getFechaNac().equals(0)) {
+            filtros.add(builder.equal(builder.function("year",
+                    Integer.class, root.get("fecha_nacimiento")),
+                    busqueda.getFechaNac()));
+        }
+        try {
+            crit = crit.select(root).where(builder.or(filtros.toArray(new Predicate[0])));
+            TypedQuery<Persona> query;
+            if (formato != null) {
+                query = em.createQuery(crit).setMaxResults(formato.getElementosPerPag());
+            } else {
+                query = em.createQuery(crit);
+            }
+            List<Persona> persona = query.getResultList();
+            return persona;
+        } catch (NoResultException ex) {
+            return null;
+        }
+
+    }
+
+
+ 
 }
