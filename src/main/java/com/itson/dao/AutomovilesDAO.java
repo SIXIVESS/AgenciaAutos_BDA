@@ -42,16 +42,12 @@ public class AutomovilesDAO implements IAutomovilesDAO{
     }
 
     @Override
-    public void insertarAuto(Automovil auto) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
     public Automovil consultar(String serie) {
          try {
             //Busca el numero de serie en la clase Automovil
             return em.find(Automovil.class, serie);
         } catch (PersistenceException ex) {
+            JOptionPane.showMessageDialog(null, "Error al consultar el auto");
             em.getTransaction().rollback();
         }
         return null;

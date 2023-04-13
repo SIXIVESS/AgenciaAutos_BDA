@@ -17,7 +17,5 @@ public interface IAutomovilesDAO {
     public Automovil insertar(TipoAutomovil tipo, String serie, String marca, String modelo, 
             String color, String linea);
     
-    public void insertarAuto(Automovil auto);
-    
     public Automovil consultar(String serie);
 }

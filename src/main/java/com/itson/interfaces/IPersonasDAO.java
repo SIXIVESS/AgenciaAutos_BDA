@@ -13,5 +13,4 @@ public interface IPersonasDAO {
     public void insertar();
     public Persona consultar(String rfc);
     public List<Persona> consultarLista(String rfc);
-//    public List<Persona> consultarLista(Busqueda params); <----Para cuando se hagan los trámites
 }

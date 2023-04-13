@@ -9,6 +9,7 @@ import excepciones.PersistenciaException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.PersistenceException;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
@@ -17,13 +18,9 @@ import javax.swing.JOptionPane;
  * @author
  */
 public class FrmLicencia extends javax.swing.JFrame {
-//
-//    Persona persona = null;
-//    Licencia licencia = null;
-//    TipoLicencia tipoLicencia;
 
     TipoVigencia numVig = new TipoVigencia();
-
+private static final Logger LOG = Logger.getLogger(FrmLicencia.class.getName());
     /**
      * Creates new form Licencia
      */
@@ -38,36 +35,6 @@ public class FrmLicencia extends javax.swing.JFrame {
 
     }
 
-//    private void guardar() {
-//        Licencia licencia = new Licencia();
-//        if (this.chbxUnAño.isSelected() && this.chbxNo.isSelected()) {
-//            licencia.setVigencia(1);
-//            licencia.setCosto(600);
-//            licencia.setTipo_licencia(TipoLicencia.NORMAL);
-//        } else if (this.chbxUnAño.isSelected() && this.chbxSi.isSelected()) {
-//            licencia.setVigencia(1);
-//            licencia.setCosto(200);
-//            licencia.setTipo_licencia(TipoLicencia.DISCAPACITADO);
-//        } else if (this.chbxDosAños.isSelected() && this.chbxNo.isSelected()) {
-//            licencia.setVigencia(2);
-//            licencia.setCosto(900);
-//            licencia.setTipo_licencia(TipoLicencia.NORMAL);
-//        } else if (this.chbxDosAños.isSelected() && this.chbxSi.isSelected()) {
-//            licencia.setVigencia(2);
-//            licencia.setCosto(500);
-//            licencia.setTipo_licencia(TipoLicencia.DISCAPACITADO);
-//        } else if (this.chbxTresAños.isSelected() && this.chbxNo.isSelected()) {
-//            licencia.setVigencia(3);
-//            licencia.setCosto(1100);
-//            licencia.setTipo_licencia(TipoLicencia.NORMAL);
-//        } else if (this.chbxTresAños.isSelected() && this.chbxSi.isSelected()) {
-//            licencia.setVigencia(3);
-//            licencia.setCosto(700);
-//            licencia.setTipo_licencia(TipoLicencia.DISCAPACITADO);
-//        }
-//        licenciaDAO.insertar(persona, licencia);
-//        JOptionPane.showMessageDialog(this, "Se agrego la licencia: ", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
-//    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -77,20 +44,16 @@ public class FrmLicencia extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        lblDatosLicencia = new javax.swing.JLabel();
         lblRfc = new javax.swing.JLabel();
         lblNombres = new javax.swing.JLabel();
         lblApPaterno = new javax.swing.JLabel();
         lblApMaterno = new javax.swing.JLabel();
         lblFechaNacimiento = new javax.swing.JLabel();
         lblTelefono = new javax.swing.JLabel();
-        lblDiscapacitado = new javax.swing.JLabel();
+        lblCosto = new javax.swing.JLabel();
         chbxSi = new javax.swing.JCheckBox();
-        btnSiguiente = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
         lblVigencia = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
         txtRfc = new javax.swing.JTextField();
         txtApPaterno = new javax.swing.JTextField();
         txtFechaNac = new javax.swing.JTextField();
@@ -101,125 +64,166 @@ public class FrmLicencia extends javax.swing.JFrame {
         lblDiscapacitado1 = new javax.swing.JLabel();
         txtTelefono = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        lblLicencia = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        lblDatosPersona = new javax.swing.JLabel();
+        lblDatosLicencia = new javax.swing.JLabel();
+        btnSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Registro licencia");
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        lblRfc.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        lblRfc.setText("RFC:");
+        getContentPane().add(lblRfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 200, 70, -1));
 
-        lblDatosLicencia.setText("Datos de la licencia");
-        jPanel1.add(lblDatosLicencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 410, 148, -1));
+        lblNombres.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        lblNombres.setText("Nombres:");
+        getContentPane().add(lblNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, 148, -1));
 
-        lblRfc.setText("RFC");
-        jPanel1.add(lblRfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 98, 148, -1));
+        lblApPaterno.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        lblApPaterno.setText("Apellido paterno:");
+        getContentPane().add(lblApPaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, 220, -1));
 
-        lblNombres.setText("NOMBRES");
-        jPanel1.add(lblNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 141, 148, -1));
+        lblApMaterno.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        lblApMaterno.setText("Apellido materno:");
+        getContentPane().add(lblApMaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, 220, -1));
 
-        lblApPaterno.setText("APELLIDO PATERNO");
-        jPanel1.add(lblApPaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 188, 148, -1));
+        lblFechaNacimiento.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        lblFechaNacimiento.setText("Fecha de nacimiento:");
+        getContentPane().add(lblFechaNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 280, -1));
 
-        lblApMaterno.setText("APELLIDO MATERNO");
-        jPanel1.add(lblApMaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 236, 148, -1));
+        lblTelefono.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        lblTelefono.setText("Teléfono:");
+        getContentPane().add(lblTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 440, 120, -1));
 
-        lblFechaNacimiento.setText("FECHA DE NACIMIENTO");
-        jPanel1.add(lblFechaNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 279, 171, -1));
+        lblCosto.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        lblCosto.setText("Costo:");
+        getContentPane().add(lblCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 740, 148, -1));
 
-        lblTelefono.setText("TELÉFONO");
-        jPanel1.add(lblTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 148, -1));
-
-        lblDiscapacitado.setText("COSTO:");
-        jPanel1.add(lblDiscapacitado, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 580, 148, -1));
-
+        chbxSi.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         chbxSi.setText("SÍ");
         chbxSi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 chbxSiActionPerformed(evt);
             }
         });
-        jPanel1.add(chbxSi, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 540, 85, -1));
+        getContentPane().add(chbxSi, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 690, 85, -1));
 
-        btnSiguiente.setText("GUARDAR");
-        btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardar.setBackground(new java.awt.Color(255, 90, 130));
+        btnGuardar.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        btnGuardar.setForeground(new java.awt.Color(255, 255, 255));
+        btnGuardar.setText("GUARDAR");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSiguienteActionPerformed(evt);
+                btnGuardarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 610, -1, -1));
+        getContentPane().add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 800, -1, -1));
 
-        btnCancelar.setText("CANCELAR");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
+        lblVigencia.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        lblVigencia.setText("Vigencia:");
+        getContentPane().add(lblVigencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 640, 148, -1));
+
+        txtRfc.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        txtRfc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtRfcKeyTyped(evt);
             }
         });
-        jPanel1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 610, -1, -1));
-
-        lblVigencia.setText("VIGENCIA");
-        jPanel1.add(lblVigencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 487, 148, -1));
-
-        jLabel10.setText("Datos del solicitante");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 62, 148, -1));
-        jPanel1.add(txtRfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(235, 94, 120, -1));
+        getContentPane().add(txtRfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 190, 180, -1));
 
         txtApPaterno.setEditable(false);
-        jPanel1.add(txtApPaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 180, 184, -1));
+        txtApPaterno.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        getContentPane().add(txtApPaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 290, 184, -1));
 
         txtFechaNac.setEditable(false);
-        jPanel1.add(txtFechaNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 270, 184, -1));
+        txtFechaNac.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        getContentPane().add(txtFechaNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 390, 184, -1));
 
         txtCosto.setEditable(false);
+        txtCosto.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         txtCosto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCostoActionPerformed(evt);
             }
         });
-        jPanel1.add(txtCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 580, 184, -1));
+        getContentPane().add(txtCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 740, 184, -1));
 
         txtNombres.setEditable(false);
-        jPanel1.add(txtNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 184, -1));
+        txtNombres.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        getContentPane().add(txtNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 240, 184, -1));
 
+        cbxVigencia.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         cbxVigencia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Un año", "Dos años", "Tres años" }));
         cbxVigencia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxVigenciaActionPerformed(evt);
             }
         });
-        jPanel1.add(cbxVigencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 480, 220, -1));
+        getContentPane().add(cbxVigencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 630, 220, -1));
 
         txtApMaterno.setEditable(false);
-        jPanel1.add(txtApMaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 230, 184, -1));
+        txtApMaterno.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        getContentPane().add(txtApMaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 340, 184, -1));
 
-        lblDiscapacitado1.setText("DISCAPACITADO");
-        jPanel1.add(lblDiscapacitado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 541, 148, -1));
+        lblDiscapacitado1.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        lblDiscapacitado1.setText("Discapacitado:");
+        getContentPane().add(lblDiscapacitado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 690, 210, -1));
 
         txtTelefono.setEditable(false);
+        txtTelefono.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         txtTelefono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTelefonoActionPerformed(evt);
             }
         });
-        jPanel1.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 320, 184, -1));
+        getContentPane().add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 440, 184, -1));
 
+        btnBuscar.setBackground(new java.awt.Color(255, 90, 130));
+        btnBuscar.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        btnBuscar.setForeground(new java.awt.Color(255, 255, 255));
         btnBuscar.setText("BUSCAR");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 90, -1, -1));
+        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 190, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 660, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
+        jPanel1.setBackground(new java.awt.Color(255, 143, 143));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblLicencia.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
+        lblLicencia.setForeground(new java.awt.Color(255, 255, 255));
+        lblLicencia.setText("REGISTRO LICENCIA");
+        jPanel1.add(lblLicencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 720, 90));
+
+        jPanel2.setBackground(new java.awt.Color(153, 153, 153));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 520, 720, 20));
+
+        lblDatosPersona.setFont(new java.awt.Font("Century Gothic", 3, 24)); // NOI18N
+        lblDatosPersona.setText("DATOS PERSONA");
+        getContentPane().add(lblDatosPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 120, -1, -1));
+
+        lblDatosLicencia.setFont(new java.awt.Font("Century Gothic", 3, 24)); // NOI18N
+        lblDatosLicencia.setText("DATOS LICENCIA");
+        getContentPane().add(lblDatosLicencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 570, -1, -1));
+
+        btnSalir.setBackground(new java.awt.Color(255, 90, 130));
+        btnSalir.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        btnSalir.setForeground(new java.awt.Color(255, 255, 255));
+        btnSalir.setText("SALIR");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 810, -1, -1));
 
         pack();
         setLocationRelativeTo(null);
@@ -229,7 +233,7 @@ public class FrmLicencia extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_chbxSiActionPerformed
 
-    private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
 
         String rfc = txtRfc.getText();
@@ -265,24 +269,13 @@ public class FrmLicencia extends javax.swing.JFrame {
             try {
                 licenciaDAO.insertar(rfc, nombre, apellidoPaterno, apellidoMaterno, 
                         fechaNac, telefono, costo, vig, discapacitado);
-                FrmPrincipal frmPrincipal = new FrmPrincipal();
-                frmPrincipal.setVisible(true);
-                this.dispose();
             } catch (PersistenciaException ex) {
                 Logger.getLogger(FrmLicencia.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Error");
-
+            JOptionPane.showMessageDialog(null, "Nombres vacíos");
         }
-    }//GEN-LAST:event_btnSiguienteActionPerformed
-
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
-        FrmPrincipal frmPrincial = new FrmPrincipal();
-        frmPrincial.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnCancelarActionPerformed
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void cbxVigenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxVigenciaActionPerformed
         // TODO add your handling code here:
@@ -302,19 +295,21 @@ public class FrmLicencia extends javax.swing.JFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
-        String rfc = txtRfc.getText();
-        IPersonasDAO personaDAO = new PersonasDAO();
-
-        Persona persona = personaDAO.consultar(rfc);
-
-//Se llenan los campos de texto de manera automática
-        txtNombres.setText(persona.getNombres());
-        txtApPaterno.setText(persona.getAp_paterno());
-        txtApMaterno.setText(persona.getAp_materno());
-        //Convierte la fecha en String
-        txtFechaNac.setText(persona.getFecha_nacimiento().toString());
-        txtTelefono.setText(persona.getTelefono());
-
+     
+        try {
+            String rfc = txtRfc.getText();
+            IPersonasDAO personaDAO = new PersonasDAO();
+            Persona persona = personaDAO.consultar(rfc);
+            //Se llenan los campos de texto de manera automática
+            txtNombres.setText(persona.getNombres());
+            txtApPaterno.setText(persona.getAp_paterno());
+            txtApMaterno.setText(persona.getAp_materno());
+            //Convierte la fecha en String
+            txtFechaNac.setText(persona.getFecha_nacimiento().toString());
+            txtTelefono.setText(persona.getTelefono());
+        } catch (PersistenceException ex) {
+            JOptionPane.showMessageDialog(this, "No se encontró la persona", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void txtCostoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCostoActionPerformed
@@ -325,21 +320,37 @@ public class FrmLicencia extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTelefonoActionPerformed
 
+    private void txtRfcKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRfcKeyTyped
+        // TODO add your handling code here:
+        if (txtRfc.getText().length() >= 13) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtRfcKeyTyped
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        // TODO add your handling code here:
+        FrmPrincipal frmPrincial = new FrmPrincipal();
+        frmPrincial.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnSiguiente;
+    private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox<String> cbxVigencia;
     private javax.swing.JCheckBox chbxSi;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblApMaterno;
     private javax.swing.JLabel lblApPaterno;
+    private javax.swing.JLabel lblCosto;
     private javax.swing.JLabel lblDatosLicencia;
-    private javax.swing.JLabel lblDiscapacitado;
+    private javax.swing.JLabel lblDatosPersona;
     private javax.swing.JLabel lblDiscapacitado1;
     private javax.swing.JLabel lblFechaNacimiento;
+    private javax.swing.JLabel lblLicencia;
     private javax.swing.JLabel lblNombres;
     private javax.swing.JLabel lblRfc;
     private javax.swing.JLabel lblTelefono;

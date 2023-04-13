@@ -37,8 +37,7 @@ public class PlacasDAO implements IPlacasDAO {
     //Formatea una fecha a texto
     String formatoFecha = fecha.format(actual);
     
-    public PlacasDAO() {
-    }
+    public PlacasDAO() {}
 
     @Override
     public void insertar(String num_alfanumerico, Vehiculo vehiculo, Persona persona, float costo, boolean estado) {
@@ -66,14 +65,9 @@ public class PlacasDAO implements IPlacasDAO {
 
             return query.getResultList();
         } catch (PersistenceException ex) {
+            JOptionPane.showMessageDialog(null, "Error al consultar la placa");
             em.getTransaction().rollback();
         }
-        return null;
-    }
-
-    @Override
-    public Placa consultarPlaca(String placas) {
-        
         return null;
     }
 
@@ -95,8 +89,9 @@ public class PlacasDAO implements IPlacasDAO {
                 em.getTransaction().commit();
             }
         } catch(PersistenceException ex){
-            System.out.println("error");
+            JOptionPane.showMessageDialog(null, "Error al actualizar la placa");
         } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(null, "Error");
             Logger.getLogger(PlacasDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

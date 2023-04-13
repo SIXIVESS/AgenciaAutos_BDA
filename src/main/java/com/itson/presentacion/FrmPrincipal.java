@@ -15,21 +15,15 @@ import javax.swing.JOptionPane;
 public class FrmPrincipal extends javax.swing.JFrame {
 
     private Busqueda params;
-
     Persona persona = null;
-//    private final IPersonasDAO personaDAO;
-//    private final ILicenciasDAO licenciaDAO;
+    
     /**
      * Creates new form Principal
      */
     public FrmPrincipal() {
         initComponents();
-//        this.personaDAO = personaDAO;
-//        this.licenciaDAO = licenciaDAO;
     }
     
-
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,20 +33,23 @@ public class FrmPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
         btnLicencia = new javax.swing.JButton();
         btnPlacas = new javax.swing.JButton();
         btnConsultaTramite = new javax.swing.JButton();
         btnInsertarClientes = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        btnReporteTramite1 = new javax.swing.JButton();
+        btnReporteTramite = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        lblMenu = new javax.swing.JLabel();
+        lblTramites = new javax.swing.JLabel();
+        lblConsultas = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Menú principal");
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(242, 243, 245));
-
-        btnLicencia.setBackground(new java.awt.Color(255, 143, 143));
-        btnLicencia.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        btnLicencia.setBackground(new java.awt.Color(255, 90, 130));
+        btnLicencia.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         btnLicencia.setForeground(new java.awt.Color(255, 255, 255));
         btnLicencia.setText("LICENCIA");
         btnLicencia.addActionListener(new java.awt.event.ActionListener() {
@@ -60,9 +57,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 btnLicenciaActionPerformed(evt);
             }
         });
+        getContentPane().add(btnLicencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 190, -1, -1));
 
-        btnPlacas.setBackground(new java.awt.Color(255, 143, 143));
-        btnPlacas.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        btnPlacas.setBackground(new java.awt.Color(255, 90, 130));
+        btnPlacas.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         btnPlacas.setForeground(new java.awt.Color(255, 255, 255));
         btnPlacas.setText("PLACAS");
         btnPlacas.addActionListener(new java.awt.event.ActionListener() {
@@ -70,9 +68,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 btnPlacasActionPerformed(evt);
             }
         });
+        getContentPane().add(btnPlacas, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 280, -1, -1));
 
-        btnConsultaTramite.setBackground(new java.awt.Color(255, 143, 143));
-        btnConsultaTramite.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        btnConsultaTramite.setBackground(new java.awt.Color(255, 90, 130));
+        btnConsultaTramite.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         btnConsultaTramite.setForeground(new java.awt.Color(255, 255, 255));
         btnConsultaTramite.setText("CONSULTAR TRÁMITES");
         btnConsultaTramite.addActionListener(new java.awt.event.ActionListener() {
@@ -80,9 +79,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 btnConsultaTramiteActionPerformed(evt);
             }
         });
+        getContentPane().add(btnConsultaTramite, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 190, -1, -1));
 
-        btnInsertarClientes.setBackground(new java.awt.Color(255, 143, 143));
-        btnInsertarClientes.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        btnInsertarClientes.setBackground(new java.awt.Color(255, 90, 130));
+        btnInsertarClientes.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         btnInsertarClientes.setForeground(new java.awt.Color(255, 255, 255));
         btnInsertarClientes.setText("INSERTAR CLIENTES");
         btnInsertarClientes.addActionListener(new java.awt.event.ActionListener() {
@@ -90,78 +90,39 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 btnInsertarClientesActionPerformed(evt);
             }
         });
+        getContentPane().add(btnInsertarClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, -1, -1));
 
-        jLabel1.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 18)); // NOI18N
-        jLabel1.setText("TRÁMITES");
-
-        btnReporteTramite1.setBackground(new java.awt.Color(255, 143, 143));
-        btnReporteTramite1.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        btnReporteTramite1.setForeground(new java.awt.Color(255, 255, 255));
-        btnReporteTramite1.setText("REPORTE DE TRÁMITES");
-        btnReporteTramite1.addActionListener(new java.awt.event.ActionListener() {
+        btnReporteTramite.setBackground(new java.awt.Color(255, 90, 130));
+        btnReporteTramite.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        btnReporteTramite.setForeground(new java.awt.Color(255, 255, 255));
+        btnReporteTramite.setText("REPORTE DE TRÁMITES");
+        btnReporteTramite.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReporteTramite1ActionPerformed(evt);
+                btnReporteTramiteActionPerformed(evt);
             }
         });
+        getContentPane().add(btnReporteTramite, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 280, -1, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(132, 132, 132)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnLicencia)
-                    .addComponent(btnPlacas))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
-                .addComponent(btnConsultaTramite)
-                .addGap(105, 105, 105))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(257, 257, 257)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(239, 239, 239)
-                        .addComponent(btnInsertarClientes)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                    .addContainerGap(371, Short.MAX_VALUE)
-                    .addComponent(btnReporteTramite1)
-                    .addGap(94, 94, 94)))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(79, 79, 79)
-                .addComponent(jLabel1)
-                .addGap(95, 95, 95)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnLicencia)
-                    .addComponent(btnConsultaTramite))
-                .addGap(45, 45, 45)
-                .addComponent(btnPlacas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
-                .addComponent(btnInsertarClientes)
-                .addGap(55, 55, 55))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                    .addContainerGap(278, Short.MAX_VALUE)
-                    .addComponent(btnReporteTramite1)
-                    .addGap(133, 133, 133)))
-        );
+        jPanel3.setBackground(new java.awt.Color(153, 153, 153));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 90, 20, 400));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        jPanel2.setBackground(new java.awt.Color(255, 143, 143));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblMenu.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
+        lblMenu.setForeground(new java.awt.Color(255, 255, 255));
+        lblMenu.setText("MENÚ PRINCIPAL");
+        jPanel2.add(lblMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 640, 90));
+
+        lblTramites.setFont(new java.awt.Font("Century Gothic", 3, 24)); // NOI18N
+        lblTramites.setText("TRÁMITES");
+        getContentPane().add(lblTramites, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, -1, 30));
+
+        lblConsultas.setFont(new java.awt.Font("Century Gothic", 3, 24)); // NOI18N
+        lblConsultas.setText("CONSULTAS");
+        getContentPane().add(lblConsultas, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 120, -1, 30));
 
         pack();
         setLocationRelativeTo(null);
@@ -169,48 +130,33 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void btnPlacasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlacasActionPerformed
 //        // TODO add your handling code here:
-        FrmConsultaLicencia frm = new FrmConsultaLicencia();
+        FrmConsultaPersona frm = new FrmConsultaPersona();
         frm.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnPlacasActionPerformed
 
     private void btnConsultaTramiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaTramiteActionPerformed
         // TODO add your handling code here:
         FrmConsulta frmConsulta= new FrmConsulta();
         frmConsulta.setVisible(true);
-        dispose();
+        this.dispose();
     }//GEN-LAST:event_btnConsultaTramiteActionPerformed
 
     private void btnInsertarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertarClientesActionPerformed
         // TODO add your handling code here:
         IPersonasDAO personaDAO = new PersonasDAO();
-       personaDAO.insertar();
-       
+        personaDAO.insertar();
     }//GEN-LAST:event_btnInsertarClientesActionPerformed
 
-    private void btnReporteTramite1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteTramite1ActionPerformed
+    private void btnReporteTramiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteTramiteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnReporteTramite1ActionPerformed
+    }//GEN-LAST:event_btnReporteTramiteActionPerformed
 
     private void btnLicenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLicenciaActionPerformed
         // TODO add your handling code here:
           FrmLicencia frm = new FrmLicencia();
         frm.setVisible(true);
-        dispose();
-//        String rfc = JOptionPane.showInputDialog(null, "Introduce un RFC");
-//        IPersonasDAO personaDAO=new PersonasDAO();
-////        Persona persona =   personaDAO.consultar(rfc);
-//        
-//        List<Persona> personas = personaDAO.consultarLista(rfc);
-//        for (Persona p : personas) 
-//          this.persona = p;
-//            if (personas.contains(rfc)) {
-//                frm.setVisible(true);
-//            } else {
-//                JOptionPane.showInputDialog(null, "Persona inexistente", "Error",
-//                        JOptionPane.ERROR_MESSAGE);
-//            }
-        
-        
+        this.dispose();
     }//GEN-LAST:event_btnLicenciaActionPerformed
 
 
@@ -219,9 +165,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnInsertarClientes;
     private javax.swing.JButton btnLicencia;
     private javax.swing.JButton btnPlacas;
-    private javax.swing.JButton btnReporteTramite1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton btnReporteTramite;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel lblConsultas;
+    private javax.swing.JLabel lblMenu;
+    private javax.swing.JLabel lblTramites;
     // End of variables declaration//GEN-END:variables
 }
 

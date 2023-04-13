@@ -19,7 +19,5 @@ public interface IPlacasDAO {
     
     public List<Placa> consultar(String placas);
     
-    public Placa consultarPlaca(String placas);
-    
     public void actualizar(String placas);
 }

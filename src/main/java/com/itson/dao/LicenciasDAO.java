@@ -29,14 +29,6 @@ import javax.swing.JOptionPane;
  */
 public class LicenciasDAO implements ILicenciasDAO {
 
-//
-//    private static final Logger LOG = Logger.getLogger(LicenciasDAO.class.getName());
-//    private final IConexionBD generadorConexiones;
-//
-//    public LicenciasDAO(IConexionBD generadorConexiones) {
-//        this.generadorConexiones = generadorConexiones;
-//    }
-//    
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("org.itson.agenciafiscal");
     EntityManager em = emf.createEntityManager();
 
@@ -46,6 +38,9 @@ public class LicenciasDAO implements ILicenciasDAO {
     //Formatea una fecha a texto
     String formatoFecha = fecha.format(actual);
 
+    //Constructor vacío
+    public LicenciasDAO() {}
+    
     @Override
     public void insertar(String rfc, String nombre, String apellidoPaterno, 
             String apellidoMaterno, String fechaNac, String telefono, float costo, 
@@ -79,29 +74,11 @@ public class LicenciasDAO implements ILicenciasDAO {
             em.merge(licencia);
             em.getTransaction().commit();
             JOptionPane.showMessageDialog(null, "Se actualizó la licencia");
-
         }
-
     }
 
     @Override
-    public boolean consultar(String rfc) {
-//        try {
-//            // Experto que sabe hacer consultas
-//            CriteriaBuilder builder = em.getCriteriaBuilder();
-//            // Consulta que se esta construyendo
-//            CriteriaQuery<Licencia> criteria = builder.createQuery(Licencia.class);
-//            Root<Licencia> root = criteria.from(Licencia.class);
-//
-//            Licencia licencia = (Licencia) criteria.select(root)
-//                    .where(builder.equal(root.get("rfc"), rfc));
-//            em.getTransaction().begin();
-//
-//            return true;
-//        } catch (PersistenceException ex) {
-//            em.getTransaction().rollback();
-//        }
-//        return false;
+    public boolean consultar(String rfc){
 
 //Busca el rfc en la tabla de personas
         try {
@@ -117,16 +94,9 @@ public class LicenciasDAO implements ILicenciasDAO {
                 }
             }
             return false;
-
         } catch (PersistenceException ex) {
             em.getTransaction().rollback();
-
         }
         return false;
     }
-    
-//Constructor vacío
-    public LicenciasDAO() {
-    }
-
 }

@@ -63,7 +63,8 @@ public class FrmAutoNuevo extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblSerie = new javax.swing.JLabel();
+        btnSalir = new javax.swing.JButton();
+        lblDatosPlacas = new javax.swing.JLabel();
         lblModelo = new javax.swing.JLabel();
         lblMarca = new javax.swing.JLabel();
         lblColor = new javax.swing.JLabel();
@@ -73,94 +74,161 @@ public class FrmAutoNuevo extends javax.swing.JFrame {
         txtMarca = new javax.swing.JTextField();
         txtColor = new javax.swing.JTextField();
         txtLinea = new javax.swing.JTextField();
-        lblRegistroAuto = new javax.swing.JLabel();
+        lblAutoNuevo = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JButton();
         btnPlacas = new javax.swing.JButton();
         lblCosto = new javax.swing.JLabel();
         txtCosto = new javax.swing.JTextField();
         lblNumAlfa = new javax.swing.JLabel();
         txtNumAlfa = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
+        lblSerie = new javax.swing.JLabel();
+        lblDatosAuto = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        btnSalir1 = new javax.swing.JButton();
+
+        btnSalir.setBackground(new java.awt.Color(255, 90, 130));
+        btnSalir.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        btnSalir.setForeground(new java.awt.Color(255, 255, 255));
+        btnSalir.setText("SALIR");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Registro de automovil");
+        setTitle("Placas para vehículo nuevo");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblSerie.setText("Núm. de serie:");
-        getContentPane().add(lblSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
+        lblDatosPlacas.setFont(new java.awt.Font("Century Gothic", 3, 24)); // NOI18N
+        lblDatosPlacas.setText("DATOS PLACAS");
+        getContentPane().add(lblDatosPlacas, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 500, -1, -1));
 
+        lblModelo.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         lblModelo.setText("Modelo:");
-        getContentPane().add(lblModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, -1, -1));
+        getContentPane().add(lblModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, -1, -1));
 
+        lblMarca.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         lblMarca.setText("Marca:");
-        getContentPane().add(lblMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, -1));
+        getContentPane().add(lblMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, -1, -1));
 
+        lblColor.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         lblColor.setText("Color:");
-        getContentPane().add(lblColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, -1, -1));
+        getContentPane().add(lblColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, -1, -1));
 
+        lblLinea.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         lblLinea.setText("Linea:");
-        getContentPane().add(lblLinea, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, -1, -1));
+        getContentPane().add(lblLinea, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, -1));
 
+        txtModelo.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         txtModelo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtModeloActionPerformed(evt);
             }
         });
-        getContentPane().add(txtModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 270, 120, -1));
+        getContentPane().add(txtModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 360, 170, -1));
 
+        txtSerie.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         txtSerie.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtSerieActionPerformed(evt);
             }
         });
-        getContentPane().add(txtSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 120, -1));
+        getContentPane().add(txtSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 170, -1));
 
+        txtMarca.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         txtMarca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtMarcaActionPerformed(evt);
             }
         });
-        getContentPane().add(txtMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 120, -1));
+        getContentPane().add(txtMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, 170, -1));
 
+        txtColor.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         txtColor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtColorActionPerformed(evt);
             }
         });
-        getContentPane().add(txtColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, 120, -1));
+        getContentPane().add(txtColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 260, 170, -1));
 
+        txtLinea.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         txtLinea.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtLineaActionPerformed(evt);
             }
         });
-        getContentPane().add(txtLinea, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, 120, -1));
+        getContentPane().add(txtLinea, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 310, 170, -1));
 
-        lblRegistroAuto.setText("REGISTRO AUTO NUEVO");
-        getContentPane().add(lblRegistroAuto, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, -1, -1));
+        lblAutoNuevo.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
+        lblAutoNuevo.setForeground(new java.awt.Color(255, 255, 255));
+        lblAutoNuevo.setText("PLACAS: AUTO NUEVO");
+        getContentPane().add(lblAutoNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
 
+        btnGuardar.setBackground(new java.awt.Color(255, 90, 130));
+        btnGuardar.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        btnGuardar.setForeground(new java.awt.Color(255, 255, 255));
         btnGuardar.setText("GUARDAR");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 340, -1, -1));
+        getContentPane().add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 420, -1, -1));
 
-        btnPlacas.setText("PLACAS");
+        btnPlacas.setBackground(new java.awt.Color(255, 90, 130));
+        btnPlacas.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        btnPlacas.setForeground(new java.awt.Color(255, 255, 255));
+        btnPlacas.setText("GENERAR PLACAS");
         btnPlacas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPlacasActionPerformed(evt);
             }
         });
-        getContentPane().add(btnPlacas, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 500, -1, -1));
+        getContentPane().add(btnPlacas, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 690, -1, -1));
 
+        lblCosto.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         lblCosto.setText("Costo:");
-        getContentPane().add(lblCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 440, -1, -1));
-        getContentPane().add(txtCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 440, 130, -1));
+        getContentPane().add(lblCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 620, -1, -1));
 
+        txtCosto.setEditable(false);
+        txtCosto.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        getContentPane().add(txtCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 620, 130, -1));
+
+        lblNumAlfa.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         lblNumAlfa.setText("Número alfanúmerico:");
-        getContentPane().add(lblNumAlfa, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, -1, -1));
-        getContentPane().add(txtNumAlfa, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 400, 130, -1));
+        getContentPane().add(lblNumAlfa, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 560, -1, -1));
+
+        txtNumAlfa.setEditable(false);
+        txtNumAlfa.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        getContentPane().add(txtNumAlfa, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 560, 150, -1));
+
+        jPanel1.setBackground(new java.awt.Color(255, 143, 143));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 90));
+
+        lblSerie.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        lblSerie.setText("Núm. de serie:");
+        getContentPane().add(lblSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
+
+        lblDatosAuto.setFont(new java.awt.Font("Century Gothic", 3, 24)); // NOI18N
+        lblDatosAuto.setText("DATOS AUTOMOVIL");
+        getContentPane().add(lblDatosAuto, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, -1, -1));
+
+        jPanel2.setBackground(new java.awt.Color(153, 153, 153));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 470, 460, -1));
+
+        btnSalir1.setBackground(new java.awt.Color(255, 90, 130));
+        btnSalir1.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        btnSalir1.setForeground(new java.awt.Color(255, 255, 255));
+        btnSalir1.setText("SALIR");
+        btnSalir1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalir1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSalir1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 690, -1, -1));
 
         pack();
         setLocationRelativeTo(null);
@@ -196,16 +264,36 @@ public class FrmAutoNuevo extends javax.swing.JFrame {
         this.guardarPlacas();
     }//GEN-LAST:event_btnPlacasActionPerformed
 
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        // TODO add your handling code here:
+        FrmPrincipal frmPrincial = new FrmPrincipal();
+        frmPrincial.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void btnSalir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalir1ActionPerformed
+        // TODO add your handling code here:
+        FrmPrincipal frmPrincial = new FrmPrincipal();
+        frmPrincial.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnSalir1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnPlacas;
+    private javax.swing.JButton btnSalir;
+    private javax.swing.JButton btnSalir1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lblAutoNuevo;
     private javax.swing.JLabel lblColor;
     private javax.swing.JLabel lblCosto;
+    private javax.swing.JLabel lblDatosAuto;
+    private javax.swing.JLabel lblDatosPlacas;
     private javax.swing.JLabel lblLinea;
     private javax.swing.JLabel lblMarca;
     private javax.swing.JLabel lblModelo;
     private javax.swing.JLabel lblNumAlfa;
-    private javax.swing.JLabel lblRegistroAuto;
     private javax.swing.JLabel lblSerie;
     private javax.swing.JTextField txtColor;
     private javax.swing.JTextField txtCosto;

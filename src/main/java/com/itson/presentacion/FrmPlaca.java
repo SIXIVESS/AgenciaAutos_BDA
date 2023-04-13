@@ -28,54 +28,58 @@ public class FrmPlaca extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         btnUsado = new javax.swing.JButton();
         btnNuevo = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        lblPlacas = new javax.swing.JLabel();
+        btnSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Placas");
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("PLACAS");
-
+        btnUsado.setBackground(new java.awt.Color(255, 90, 130));
+        btnUsado.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        btnUsado.setForeground(new java.awt.Color(255, 255, 255));
         btnUsado.setText("VEHÍCULO USADO");
         btnUsado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUsadoActionPerformed(evt);
             }
         });
+        getContentPane().add(btnUsado, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
 
+        btnNuevo.setBackground(new java.awt.Color(255, 90, 130));
+        btnNuevo.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        btnNuevo.setForeground(new java.awt.Color(255, 255, 255));
         btnNuevo.setText("VEHÍCULO NUEVO");
         btnNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNuevoActionPerformed(evt);
             }
         });
+        getContentPane().add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(btnNuevo)
-                .addGap(38, 38, 38)
-                .addComponent(btnUsado)
-                .addGap(0, 46, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(175, 175, 175))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(85, 85, 85)
-                .addComponent(jLabel1)
-                .addGap(104, 104, 104)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnNuevo)
-                    .addComponent(btnUsado))
-                .addContainerGap(72, Short.MAX_VALUE))
-        );
+        jPanel1.setBackground(new java.awt.Color(255, 143, 143));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblPlacas.setFont(new java.awt.Font("Century Gothic", 1, 30)); // NOI18N
+        lblPlacas.setForeground(new java.awt.Color(255, 255, 255));
+        lblPlacas.setText("PLACAS");
+        jPanel1.add(lblPlacas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 320, 70));
+
+        btnSalir.setBackground(new java.awt.Color(255, 90, 130));
+        btnSalir.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        btnSalir.setForeground(new java.awt.Color(255, 255, 255));
+        btnSalir.setText("SALIR");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 340, -1, -1));
 
         pack();
         setLocationRelativeTo(null);
@@ -95,9 +99,18 @@ public class FrmPlaca extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnUsadoActionPerformed
 
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        // TODO add your handling code here:
+        FrmPrincipal frmPrincial = new FrmPrincipal();
+        frmPrincial.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNuevo;
+    private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnUsado;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblPlacas;
     // End of variables declaration//GEN-END:variables
 }

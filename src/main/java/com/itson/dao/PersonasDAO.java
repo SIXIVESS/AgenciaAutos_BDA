@@ -22,29 +22,13 @@ import javax.swing.JOptionPane;
  */
 public class PersonasDAO implements IPersonasDAO {
 
-//    private static final Logger LOG = Logger.getLogger(PersonasDAO.class.getName());
-//    private final IConexionBD generadorConexiones = true;
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("org.itson.agenciafiscal");
     EntityManager em = emf.createEntityManager();
-//    private final IConexionBD generadorConexiones;
 
-//    public PersonasDAO(IConexionBD generadorConexiones) {
-//        this.generadorConexiones = generadorConexiones;
-//        EntityManager em = this.generadorConexiones.crearConexion();
-//
-//    }
     @Override
     public void insertar() {
-//        EntityManagerFactory managerFactory
-//                = Persistence.createEntityManagerFactory("org.itson.agenciafiscal");
         try {
             em.getTransaction().begin();
-//            Persona persona1 = new Persona("SOEA031129H0", "Alexa María", "Soto", "Esquer", new GregorianCalendar(2003, 11, 29), new Telefono("6471220381"));
-//            Persona persona2 = new Persona("ROMJ030820A1", "José Ángel", "Romero", "Montiel", new GregorianCalendar(2003, 8, 20), new Telefono("6471055623"));
-//            Persona persona3 = new Persona("RAEM030303L8", "Magda Paola", "Rámirez", "Escalante", new GregorianCalendar(2003, 3, 3), new Telefono("6688293570"));
-//            Persona persona4 = new Persona("SARI031113H2", "Ignacio Alejandro", "Saijas", "Ruiz", new GregorianCalendar(2003, 11, 13), new Telefono("6471369445"));
-//            Persona persona5 = new Persona("SOTR760126P9", "Raúl", "Soto", "Torres", new GregorianCalendar(1976, 1, 26), new Telefono("6474820426"));
-//            Persona persona6 = new Persona("ESPC771112M1", "Concepción", "Esquer", "Pacheco", new GregorianCalendar(1977, 11, 12), new Telefono("6471241569"));
 
             Persona persona1 = new Persona("SOEA031129H0", "Alexa María", "Soto", "Esquer", LocalDate.of(2003, 11, 29), "6471220381");
             Persona persona2 = new Persona("ROMJ030820A1", "José Ángel", "Romero", "Montiel", LocalDate.of(2003, 8, 20), "6471055623");
@@ -93,7 +77,6 @@ public class PersonasDAO implements IPersonasDAO {
         } catch (PersistenceException ex) {
             em.getTransaction().rollback();
         }
-
     }
 
     @Override
@@ -102,6 +85,7 @@ public class PersonasDAO implements IPersonasDAO {
             //Busca el rfc en la clase persona
             return em.find(Persona.class, rfc);
         } catch (PersistenceException ex) {
+            JOptionPane.showMessageDialog(null, "Error al consultar a la persona");
             return null;
         }
     }
