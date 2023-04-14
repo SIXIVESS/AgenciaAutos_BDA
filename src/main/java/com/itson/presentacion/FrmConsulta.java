@@ -6,6 +6,7 @@ import com.itson.interfaces.IPersonasDAO;
 import com.itson.utils.Busqueda;
 import com.itson.utils.FormatoPaginas;
 import com.itson.utils.Renderizacion;
+import java.awt.event.ItemEvent;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -134,6 +135,11 @@ public class FrmConsulta extends javax.swing.JPanel {
                 txtNombreActionPerformed(evt);
             }
         });
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreKeyTyped(evt);
+            }
+        });
         add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, 168, -1));
 
         txtFechaNac.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
@@ -149,6 +155,11 @@ public class FrmConsulta extends javax.swing.JPanel {
         btnAceptar.setForeground(new java.awt.Color(255, 255, 255));
         btnAceptar.setText("Aceptar");
         btnAceptar.setToolTipText("");
+        btnAceptar.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                btnRetrocederItemStateChanged(evt);
+            }
+        });
         btnAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAceptarActionPerformed(evt);
@@ -160,6 +171,11 @@ public class FrmConsulta extends javax.swing.JPanel {
         btnSalir.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         btnSalir.setForeground(new java.awt.Color(255, 255, 255));
         btnSalir.setText("Salir");
+        btnSalir.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                btnRetrocederItemStateChanged(evt);
+            }
+        });
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalirActionPerformed(evt);
@@ -171,6 +187,11 @@ public class FrmConsulta extends javax.swing.JPanel {
         btnAvanzar.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         btnAvanzar.setForeground(new java.awt.Color(255, 255, 255));
         btnAvanzar.setText(">>");
+        btnAvanzar.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                btnRetrocederItemStateChanged(evt);
+            }
+        });
         btnAvanzar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAvanzarActionPerformed(evt);
@@ -182,6 +203,11 @@ public class FrmConsulta extends javax.swing.JPanel {
         btnRetroceder.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         btnRetroceder.setForeground(new java.awt.Color(255, 255, 255));
         btnRetroceder.setText("<<");
+        btnRetroceder.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                btnRetrocederItemStateChanged(evt);
+            }
+        });
         btnRetroceder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRetrocederActionPerformed(evt);
@@ -191,6 +217,16 @@ public class FrmConsulta extends javax.swing.JPanel {
 
         cbxElementosPag.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         cbxElementosPag.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2", "4", "6" }));
+        cbxElementosPag.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxElementosPagItemStateChanged(evt);
+            }
+        });
+        cbxElementosPag.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxElementosPagActionPerformed(evt);
+            }
+        });
         add(cbxElementosPag, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 450, -1, -1));
 
         jPanel1.setBackground(new java.awt.Color(255, 143, 143));
@@ -248,7 +284,7 @@ public class FrmConsulta extends javax.swing.JPanel {
                     System.out.println(rfc);
                     FrmConsulta2 frm = new FrmConsulta2(rfc);
                     frm.setVisible(true);
-                    this.dispose();
+                    System.exit(0);
                 }catch(PersistenceException ex){
                     Logger.getLogger(FrmConsulta.class.
                             getName()).log(Level.SEVERE,null,ex);
@@ -292,6 +328,38 @@ public class FrmConsulta extends javax.swing.JPanel {
         atras(busqueda);        
 // TODO add your handling code here:
     }//GEN-LAST:event_btnRetrocederActionPerformed
+
+    private void btnRetrocederItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_btnRetrocederItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRetrocederItemStateChanged
+
+    private void cbxElementosPagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxElementosPagActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxElementosPagActionPerformed
+
+    private void cbxElementosPagItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxElementosPagItemStateChanged
+        // TODO add your handling code here:
+        String nombre = this.txtNombre.getText();
+        Integer fechaNac;
+
+        if (this.txtFechaNac.getText().equals("")) {
+            fechaNac = null;
+        } else {
+            fechaNac = Integer.valueOf(this.txtFechaNac.getText());
+        }
+        Busqueda busqueda = new Busqueda(nombre, fechaNac);
+       if(evt.getStateChange()==ItemEvent.SELECTED){
+           int elementosPerPag = Integer.parseInt(evt.getItem().toString());
+           this.formato.setElementosPerPag(elementosPerPag);
+           this.cargar(busqueda);
+       }
+        
+    }//GEN-LAST:event_cbxElementosPagItemStateChanged
+
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+        // TODO add your handling code here:
+////        kk
+    }//GEN-LAST:event_txtNombreKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

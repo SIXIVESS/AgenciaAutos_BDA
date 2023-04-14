@@ -14,8 +14,9 @@ import java.util.List;
  * @author
  */
 public interface ITramitesDAO {
-    
-    public List<Tramite>consultaTramite (String rfc, FormatoPaginas formato);
-    public List <Tramite> buscar (ReportesDAO reporte, FormatoPaginas formato);
-    
+
+    public List<Tramite> buscar(ReportesDAO reporte, FormatoPaginas formato);
+
+    public List<Tramite> consultaTramite(String rfc, FormatoPaginas formato);
+
 }
