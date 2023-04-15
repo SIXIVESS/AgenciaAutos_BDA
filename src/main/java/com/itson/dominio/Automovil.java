@@ -7,6 +7,7 @@ package com.itson.dominio;
 import com.itson.utils.TipoAutomovil;
 import java.io.Serializable;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,83 +16,30 @@ import javax.persistence.Table;
 
 /**
  *
- * @author 
+ * @author Alexa Soto(236348) y Rosalía Perez (233505)
  */
 @Entity
 @Table(name = "Automovil")
+@DiscriminatorValue("Automovil")
 public class Automovil extends Vehiculo implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name = "linea", nullable = false)
-    private String linea;
-
-    @Column(name = "tipo", nullable = false)
-    private TipoAutomovil tipo;
-    
+    /**
+     * Constructor por defecto
+     */
     public Automovil() {
     }
 
-    public Automovil(String linea, TipoAutomovil tipo) {
-        this.linea = linea;
-        this.tipo = tipo;
-    }
-
-    public Automovil(String linea, TipoAutomovil tipo, String num_serie, String marca, String color, String modelo) {
-        super(num_serie, marca, color, modelo);
-        this.linea = linea;
-        this.tipo = tipo;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getLinea() {
-        return linea;
-    }
-
-    public void setLinea(String linea) {
-        this.linea = linea;
-    }
-
-    public TipoAutomovil getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(TipoAutomovil tipo) {
-        this.tipo = tipo;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Automovil)) {
-            return false;
-        }
-        Automovil other = (Automovil) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.itson.dominio.AutoNuevo[ id=" + id + " ]";
+    /**
+     * Constructor que hereda de vehículo
+     * @param num_serie Número de serie del vehículo
+     * @param marca Marca del vehículo
+     * @param color Color del vehículo
+     * @param modelo Modelo del vehículo
+     * @param linea Línea del auto
+     * @param persona Dueño del vehículo
+     */
+    public Automovil(String num_serie, String marca, String color, String modelo, String linea, Persona persona) {
+        super(num_serie, marca, color, modelo, linea, persona);
     }
 
 }
