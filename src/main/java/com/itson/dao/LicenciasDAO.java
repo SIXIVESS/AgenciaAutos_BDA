@@ -2,16 +2,12 @@ package com.itson.dao;
 
 import com.itson.dominio.Licencia;
 import com.itson.dominio.Persona;
-
 import javax.persistence.EntityManager;
-
 import com.itson.interfaces.ILicenciasDAO;
 import excepciones.PersistenciaException;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -20,12 +16,11 @@ import java.util.logging.Logger;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
-import javax.persistence.TypedQuery;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author
+ * @author Alexa Soto(236348) y Rosalía Perez (233505)
  */
 public class LicenciasDAO implements ILicenciasDAO {
 
@@ -38,9 +33,25 @@ public class LicenciasDAO implements ILicenciasDAO {
     //Formatea una fecha a texto
     String formatoFecha = fecha.format(actual);
 
-    //Constructor vacío
+  /**
+   * Constructor por defecto
+   */
     public LicenciasDAO() {}
     
+    
+    /**
+     * Método que se encarga de registrar una licencia
+     * @param rfc Cadena de carácteres que identifican a una persona
+     * @param nombre Nombre de la persona
+     * @param apellidoPaterno Apellido paterno de la persona
+     * @param apellidoMaterno Apellido materno de la persona
+     * @param fechaNac Fecha de nacimiento de la persona
+     * @param telefono Teléfono de la persona
+     * @param costo Costo de la licencia
+     * @param vigencia Vigencia de la licencia
+     * @param discapacidad Representa si la persona tiene discapacidad o no
+     * @throws PersistenciaException Lanza una excepción en caso de que ocurra un error
+     */
     @Override
     public void insertar(String rfc, String nombre, String apellidoPaterno, 
             String apellidoMaterno, String fechaNac, String telefono, float costo, 
@@ -63,6 +74,10 @@ public class LicenciasDAO implements ILicenciasDAO {
         }
     }
 
+    /**
+     * Método que actualiza el estado de la licencia
+     * @param idLicencia Identificador que se le otorga a la licencia que se le cambiará el estado
+     */
     public void actualizar(Long idLicencia) {
 
         //Busca la licencia en la clase
@@ -77,6 +92,11 @@ public class LicenciasDAO implements ILicenciasDAO {
         }
     }
 
+    /**
+     * Método que se encarga de consutlar una licencia usando el RFC del dueño de la licencia
+     * @param rfc Cadena de carácteres que identifican a una persona
+     * @return Regresa verdadero si la licencia buscada está vigente, en otro caso regresará falso
+     */
     @Override
     public boolean consultar(String rfc){
 

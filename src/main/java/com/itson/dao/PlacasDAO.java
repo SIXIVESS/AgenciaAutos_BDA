@@ -17,14 +17,20 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author 
+ * @author Alexa Soto(236348) y Rosalía Perez (233505)
  */
 public class PlacasDAO implements IPlacasDAO {
 
@@ -36,9 +42,22 @@ public class PlacasDAO implements IPlacasDAO {
     Date actual = new Date();
     //Formatea una fecha a texto
     String formatoFecha = fecha.format(actual);
-    
-    public PlacasDAO() {}
 
+    /**
+     * Constructor por defecto
+     */
+    public PlacasDAO() {
+    }
+
+    /**
+     * Método que registra las placas
+     *
+     * @param num_alfanumerico Serie de carácteres que se le otorgan a una placa
+     * @param vehiculo Vehículo al que le pertenece la placa
+     * @param persona Propietario del vehículo
+     * @param costo Costo del trámite
+     * @param estado Estado de la placa
+     */
     @Override
     public void insertar(String num_alfanumerico, Vehiculo vehiculo, Persona persona, float costo, boolean estado) {
         try {
@@ -55,6 +74,12 @@ public class PlacasDAO implements IPlacasDAO {
         }
     }
 
+    /**
+     * Método que se encarga de consultar la placa mediante su número de serie
+     *
+     * @param serie Serie de carácteres que se le otorgan a un vehículo
+     * @return Regresa la placa consultada
+     */
     @Override
     public List<Placa> consultar(String serie) {
         try {
@@ -71,16 +96,23 @@ public class PlacasDAO implements IPlacasDAO {
         return null;
     }
 
+    /**
+     * Método que actualiza el estado de una placa
+     *
+     * @param numAlfa Serie de carácteres que se le otorgan a una placa
+     * @throws PersistenceException Método que arroja una excepción en caso de
+     * que ocurra un error
+     */
     @Override
-    public void actualizar(String numAlfa) {
-        TypedQuery<Placa> tq = em.createQuery("SELECT p FROM Placa p WHERE p.num_alfanumerico LIKE :num_alfanumerico", 
+    public void actualizar(String numAlfa) throws PersistenceException {
+        TypedQuery<Placa> tq = em.createQuery("SELECT p FROM Placa p WHERE p.num_alfanumerico LIKE :num_alfanumerico",
                 Placa.class);
-        
+
         tq.setParameter("num_alfanumerico", numAlfa);
         Placa placas = tq.getSingleResult();
-        try{
+        try {
             Date fechaDos = fecha.parse(formatoFecha);
-            if(placas != null && placas.isEstado()){
+            if (placas != null && placas.isEstado()) {
                 em.getTransaction().begin();
                 placas.setEstado(false);
                 placas.setFecha_recepcion(fechaDos);
@@ -88,11 +120,35 @@ public class PlacasDAO implements IPlacasDAO {
                 JOptionPane.showMessageDialog(null, "Se actualizó la placa");
                 em.getTransaction().commit();
             }
-        } catch(PersistenceException ex){
+        } catch (PersistenceException ex) {
             JOptionPane.showMessageDialog(null, "Error al actualizar la placa");
         } catch (ParseException ex) {
             JOptionPane.showMessageDialog(null, "Error");
             Logger.getLogger(PlacasDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    /**
+     * Método que se encarga de consultar las placas activas
+     * @param serie Serie de carácteres que se le otorgan a un vehículo
+     * @return Regresa la placa activa en caso de que exista, sino regresará una excepción
+     */
+    public Placa consultarActiva(String serie) {
+        try {
+            CriteriaBuilder crit = em.getCriteriaBuilder();
+            CriteriaQuery<Placa> consulta = crit.createQuery(Placa.class);
+            Root<Placa> root = consulta.from(Placa.class);
+            Join<Placa, Vehiculo> join = root.join("vehiculo");
+            Predicate pred = crit.and(crit.equal(root.get("Estado"), true),
+                    crit.equal(join.get("Serie"), serie));
+            consulta.where(pred);
+            TypedQuery<Placa> query = em.createQuery(consulta);
+            Placa placaActiva = query.getSingleResult();
+            System.out.println(placaActiva);
+            return placaActiva;
+
+        } catch (NoResultException ex) {
+            return null;
         }
     }
 }

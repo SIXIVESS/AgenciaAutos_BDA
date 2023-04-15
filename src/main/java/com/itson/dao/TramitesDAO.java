@@ -23,16 +23,25 @@ import javax.persistence.criteria.Root;
 
 /**
  *
- * @author
+ * @author Alexa Soto(236348) y Rosalía Perez (233505)
  */
 public class TramitesDAO implements ITramitesDAO {
 
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("org.itson.agenciafiscal");
     EntityManager em = emf.createEntityManager();
 
+    /**
+     * Constructor por defecto
+     */
     public TramitesDAO() {
     }
 
+    /**
+     * Método que se encarga de buscar los trámites mediante filtros.
+     * @param reporte Filtros para buscar el reporte
+     * @param formato Formato para la tabla
+     * @return Lista de trámites
+     */
     @Override
     public List<Tramite> buscar(ReportesDAO reporte, FormatoPaginas formato) {
         CriteriaBuilder crit = em.getCriteriaBuilder();
@@ -69,6 +78,13 @@ public class TramitesDAO implements ITramitesDAO {
 
     }
     
+    /**
+     * Método que se encarga de consultar los trámites realizados por las personas
+     * @param rfc Cadena de carácteres que identifican a una persona
+     * @param formato Formato para la tabla de trámites
+     * @return Regresa una lista de todos los trámites realizados por la persona buscada
+     */
+    @Override
         public List<Tramite> consultaTramite(String rfc, FormatoPaginas formato){
             try{
                 String sql = "SELECT tr FROM Tramite tr WHERE tr.persona.rfc = : rfc";

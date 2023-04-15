@@ -6,6 +6,7 @@ import com.itson.interfaces.IPersonasDAO;
 import com.itson.utils.Busqueda;
 import com.itson.utils.FormatoPaginas;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -146,6 +147,17 @@ public class PersonasDAO implements IPersonasDAO {
 
     }
 
+    public Boolean edad(Persona persona) {
+        LocalDate actual = LocalDate.now();
+        LocalDate year = persona.getFecha_nacimiento();
+        int edad = Period.between(year, actual).getYears();
 
- 
+        if (edad >= 18) {
+            return true;
+        } else {
+            JOptionPane.showMessageDialog(null, "Edad inválida de" + persona.getRfc(), "Cuidado", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+    }
+
 }

@@ -37,8 +37,7 @@ public class Placa extends Tramite implements Serializable {
     private boolean estado;
     
     @ManyToOne
-    @JoinColumn(name = "num_serie_auto", referencedColumnName = "num_serie",
-            nullable = false) // Llave foránea
+    @JoinColumn(name = "num_serie_auto", referencedColumnName = "num_serie") // Llave foránea
     private Vehiculo vehiculo;
 
     public Placa() {}
