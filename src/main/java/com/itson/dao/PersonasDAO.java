@@ -6,7 +6,6 @@ import com.itson.interfaces.IPersonasDAO;
 import com.itson.utils.Busqueda;
 import com.itson.utils.FormatoPaginas;
 import java.time.LocalDate;
-import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.EntityManager;

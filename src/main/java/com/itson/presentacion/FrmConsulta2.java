@@ -333,7 +333,7 @@ public class FrmConsulta2 extends javax.swing.JFrame {
                     frm.setVisible(true);
                     System.exit(0);
                 } catch (PersistenceException ex) {
-                    Logger.getLogger(FrmConsulta.class.
+                    Logger.getLogger(FrmConsulta2.class.
                             getName()).log(Level.SEVERE, null, ex);
 
                 }

@@ -125,21 +125,18 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPlacasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlacasActionPerformed
-//        // TODO add your handling code here:
         FrmConsultaPersona frm = new FrmConsultaPersona();
         frm.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnPlacasActionPerformed
 
     private void btnConsultaTramiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaTramiteActionPerformed
-        // TODO add your handling code here:
-        FrmConsulta frmConsulta= new FrmConsulta();
+        FrmConsulta1 frmConsulta= new FrmConsulta1();
         frmConsulta.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnConsultaTramiteActionPerformed
 
     private void btnInsertarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertarClientesActionPerformed
-        // TODO add your handling code here:
         IPersonasDAO personaDAO = new PersonasDAO();
         personaDAO.insertar();
     }//GEN-LAST:event_btnInsertarClientesActionPerformed
