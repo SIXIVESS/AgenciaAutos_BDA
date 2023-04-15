@@ -345,7 +345,7 @@ public class FrmConsulta1 extends javax.swing.JFrame {
         // TODO add your handling code here:
         FrmPrincipal frm = new FrmPrincipal();
         frm.setVisible(true);
-        //        this.dispose();
+        this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnAvanzarbtnRetrocederItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_btnAvanzarbtnRetrocederItemStateChanged

@@ -8,7 +8,6 @@ public class Busqueda {
 
     //Con esto va a buscar por nombre y fecha
     private String nombre;
-
     private Integer fechaNac;
 
     public Busqueda(String nombre, Integer fechaNac) {

@@ -52,9 +52,7 @@ public class FrmConsulta2 extends javax.swing.JFrame {
                 Object[] fila = {"Placas", tramite.getCosto(), fecha.format(tramite.getFechaEmision())};
                 tabla.addRow(fila);
             }
-
         }
-
     }
 
     public void cargarTexto(Persona persona) {
@@ -335,7 +333,6 @@ public class FrmConsulta2 extends javax.swing.JFrame {
                 } catch (PersistenceException ex) {
                     Logger.getLogger(FrmConsulta2.class.
                             getName()).log(Level.SEVERE, null, ex);
-
                 }
             }
         }
@@ -356,7 +353,6 @@ public class FrmConsulta2 extends javax.swing.JFrame {
         FrmPrincipal frm = new FrmPrincipal();
         frm.setVisible(true);
         this.dispose();
-
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void cbxElementosPagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxElementosPagActionPerformed

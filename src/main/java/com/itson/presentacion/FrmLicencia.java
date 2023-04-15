@@ -307,7 +307,7 @@ private static final Logger LOG = Logger.getLogger(FrmLicencia.class.getName());
             //Convierte la fecha en String
             txtFechaNac.setText(persona.getFecha_nacimiento().toString());
             txtTelefono.setText(persona.getTelefono());
-        } catch (PersistenceException ex) {
+        } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(this, "No se encontró la persona", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnBuscarActionPerformed

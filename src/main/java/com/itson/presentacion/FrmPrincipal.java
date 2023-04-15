@@ -11,8 +11,6 @@ import com.itson.interfaces.IPersonasDAO;
  */
 public class FrmPrincipal extends javax.swing.JFrame {
 
-
-    
     /**
      * Creates new form Principal
      */
@@ -147,7 +145,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void btnLicenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLicenciaActionPerformed
         // TODO add your handling code here:
-          FrmLicencia frm = new FrmLicencia();
+        FrmLicencia frm = new FrmLicencia();
         frm.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnLicenciaActionPerformed

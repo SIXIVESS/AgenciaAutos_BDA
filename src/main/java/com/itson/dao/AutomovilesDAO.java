@@ -5,15 +5,12 @@
 package com.itson.dao;
 
 import com.itson.dominio.Automovil;
-import com.itson.dominio.Persona;
 import com.itson.interfaces.IAutomovilesDAO;
 import com.itson.utils.TipoAutomovil;
-import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
-import javax.persistence.TypedQuery;
 import javax.swing.JOptionPane;
 
 /**

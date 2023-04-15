@@ -4,7 +4,6 @@
  */
 package com.itson.dao;
 
-import com.itson.dominio.Licencia;
 import com.itson.dominio.Persona;
 import com.itson.dominio.Placa;
 import com.itson.dominio.Vehiculo;
@@ -70,6 +69,8 @@ public class PlacasDAO implements IPlacasDAO {
             em.getTransaction().commit();
             JOptionPane.showMessageDialog(null, "Se insertó la placa");
         } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(null, "No se pudo insertar la placa", 
+                    "ERROR", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(PlacasDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -148,6 +149,8 @@ public class PlacasDAO implements IPlacasDAO {
             return placaActiva;
 
         } catch (NoResultException ex) {
+            JOptionPane.showMessageDialog(null, "No se encontró placa activa", 
+                    "ERROR", JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }

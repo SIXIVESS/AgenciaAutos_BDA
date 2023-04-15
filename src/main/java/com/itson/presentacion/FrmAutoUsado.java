@@ -12,6 +12,8 @@ import com.itson.dominio.Placa;
 import com.itson.interfaces.IAutomovilesDAO;
 import com.itson.interfaces.IPlacasDAO;
 import com.itson.utils.GeneracionPlacas;
+import javax.persistence.NoResultException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -238,18 +240,22 @@ public class FrmAutoUsado extends javax.swing.JFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
-        String placas = this.txtPlacas.getText();
-        
         IPlacasDAO placaDAO = new PlacasDAO();
-        placaDAO.actualizar(placas);
-        
-        Automovil autoConsulta = (Automovil) 
-                autosDAO.consultar(this.txtSerie.getText());
-        this.txtColor.setText(autoConsulta.getColor());
-        this.txtLinea.setText(autoConsulta.getLinea());
-        this.txtMarca.setText(autoConsulta.getMarca());
-        this.txtModelo.setText(autoConsulta.getModelo());
-        
+        try {
+            if (this.txtPlacas.getText().equals("") || this.txtSerie.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "Advertencia: Favor de llenar los dos campos");
+            } else {
+                String placas = this.txtPlacas.getText();
+                placaDAO.actualizar(placas);
+                Automovil autoConsulta = (Automovil) autosDAO.consultar(this.txtSerie.getText());
+                this.txtColor.setText(autoConsulta.getColor());
+                this.txtLinea.setText(autoConsulta.getLinea());
+                this.txtMarca.setText(autoConsulta.getMarca());
+                this.txtModelo.setText(autoConsulta.getModelo());
+            } 
+        } catch (NoResultException ex) {
+            JOptionPane.showMessageDialog(this, "No se encontró el automovil", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnPlacasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlacasActionPerformed

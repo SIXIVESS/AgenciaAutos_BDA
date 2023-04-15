@@ -83,6 +83,7 @@ public class PersonasDAO implements IPersonasDAO {
             em.getTransaction().commit();
             JOptionPane.showMessageDialog(null, "Se han insertado 20 personas con éxito");
         } catch (PersistenceException ex) {
+            JOptionPane.showMessageDialog(null, "Error al insertar");
             em.getTransaction().rollback();
         }
     }
@@ -107,6 +108,7 @@ public class PersonasDAO implements IPersonasDAO {
 
             return query.getResultList();
         } catch (PersistenceException ex) {
+            JOptionPane.showMessageDialog(null, "No se encontró a la persona");
             em.getTransaction().rollback();
         }
         return null;
@@ -142,6 +144,7 @@ public class PersonasDAO implements IPersonasDAO {
             List<Persona> persona = query.getResultList();
             return persona;
         } catch (NoResultException ex) {
+            JOptionPane.showMessageDialog(null, "No se encontró a la persona");
             return null;
         }
 
@@ -155,7 +158,8 @@ public class PersonasDAO implements IPersonasDAO {
         if (edad >= 18) {
             return true;
         } else {
-            JOptionPane.showMessageDialog(null, "Edad inválida de" + persona.getRfc(), "Cuidado", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Edad inválida de" 
+                    + persona.getRfc(), "Cuidado", JOptionPane.ERROR_MESSAGE);
             return false;
         }
     }

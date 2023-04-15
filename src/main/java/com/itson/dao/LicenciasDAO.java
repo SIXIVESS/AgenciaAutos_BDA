@@ -69,6 +69,8 @@ public class LicenciasDAO implements ILicenciasDAO {
             JOptionPane.showMessageDialog(null, "Se ha insertado la licencia");
 
         } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(null, "No se pudo insertar la licencia", 
+                    "ERROR", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(LicenciasDAO.class.getName()).log(Level.SEVERE, null, ex);
 
         }
@@ -89,6 +91,9 @@ public class LicenciasDAO implements ILicenciasDAO {
             em.merge(licencia);
             em.getTransaction().commit();
             JOptionPane.showMessageDialog(null, "Se actualizó la licencia");
+        } else {
+            JOptionPane.showMessageDialog(null, "No se pudo actualizar la licencia", 
+                    "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -111,10 +116,13 @@ public class LicenciasDAO implements ILicenciasDAO {
                     return true;
                 } else {
                     actualizar(lic.getId());
+                    JOptionPane.showMessageDialog(null, "No hay licencia vigente");
                 }
             }
             return false;
         } catch (PersistenceException ex) {
+            JOptionPane.showMessageDialog(null, "No se pudo actualizar la licencia", 
+                    "ERROR", JOptionPane.ERROR_MESSAGE);
             em.getTransaction().rollback();
         }
         return false;
