@@ -115,7 +115,7 @@ private static final Logger LOG = Logger.getLogger(FrmLicencia.class.getName());
         btnGuardar.setBackground(new java.awt.Color(255, 90, 130));
         btnGuardar.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         btnGuardar.setForeground(new java.awt.Color(255, 255, 255));
-        btnGuardar.setText("GUARDAR");
+        btnGuardar.setText("PAGAR");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);

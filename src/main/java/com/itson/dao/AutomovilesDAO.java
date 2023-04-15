@@ -14,7 +14,7 @@ import javax.persistence.PersistenceException;
 import javax.swing.JOptionPane;
 
 /**
- * 
+ *
  * @author Alexa Soto(236348) y Rosalía Perez (233505)
  */
 public class AutomovilesDAO implements IAutomovilesDAO {
@@ -31,26 +31,19 @@ public class AutomovilesDAO implements IAutomovilesDAO {
     /**
      * Método que inserta un automóvil
      *
-     * @param tipo Tipo de automóvil
-     * @param serie Serie del automóvil para ser identificado
-     * @param marca Marca del automóvil
-     * @param modelo Modelo del automóvil
-     * @param color Color del automóvil
-     * @param linea Línea del automóvil
-     * @return Regresa el automóvil que se registró
+     * @param auto Automóvil a registrar
      */
     @Override
-    public Automovil insertar(TipoAutomovil tipo, String serie, String marca, String modelo,
-            String color, String linea) {
-        em.getTransaction().begin();
+    public void insertar(Automovil auto) {
+        try {
+            em.getTransaction().begin();
+            em.persist(auto);
+            em.getTransaction().commit();
+            JOptionPane.showMessageDialog(null, "Se ha insertado el auto");
+        } catch (Exception ex) {
+            em.getTransaction().rollback();
+        }
 
-        Automovil auto = new Automovil(linea, TipoAutomovil.NUEVO, serie, marca,
-                color, modelo);
-
-        em.persist(auto);
-        em.getTransaction().commit();
-        JOptionPane.showMessageDialog(null, "Se ha insertado el auto");
-        return auto;
     }
 
     /**
@@ -77,6 +70,7 @@ public class AutomovilesDAO implements IAutomovilesDAO {
      * @param serie Número de serie que identifica al automóvil
      * @return Regresa nulo en caso de que el automóvil no exista
      */
+    @Override
     public boolean existe(String serie) {
         boolean existencia = false;
 

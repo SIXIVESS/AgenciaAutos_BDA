@@ -4,7 +4,6 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>com.itson.dominio.Persona</class>
     <class>com.itson.dominio.Tramite</class>
-    <class>com.itson.dominio.Pago</class>
     <class>com.itson.dominio.Placa</class>
     <class>com.itson.dominio.Licencia</class>
     <class>com.itson.dominio.Vehiculo</class>

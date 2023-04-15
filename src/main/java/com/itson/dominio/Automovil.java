@@ -4,14 +4,9 @@
  */
 package com.itson.dominio;
 
-import com.itson.utils.TipoAutomovil;
 import java.io.Serializable;
-import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
@@ -31,6 +26,7 @@ public class Automovil extends Vehiculo implements Serializable {
 
     /**
      * Constructor que hereda de vehículo
+     *
      * @param num_serie Número de serie del vehículo
      * @param marca Marca del vehículo
      * @param color Color del vehículo

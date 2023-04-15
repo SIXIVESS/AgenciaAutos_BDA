@@ -5,17 +5,17 @@
 package com.itson.interfaces;
 
 import com.itson.dominio.Automovil;
-import com.itson.utils.TipoAutomovil;
-import java.util.List;
+
 
 /**
  *
- * @author 
+ * @author
  */
 public interface IAutomovilesDAO {
-    
-    public Automovil insertar(TipoAutomovil tipo, String serie, String marca, String modelo, 
-            String color, String linea);
-    
+
+    public void insertar(Automovil auto);
+
     public Automovil consultar(String serie);
+
+    public boolean existe(String serie);
 }
