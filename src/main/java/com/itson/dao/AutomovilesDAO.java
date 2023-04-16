@@ -5,6 +5,8 @@
 package com.itson.dao;
 
 import com.itson.dominio.Automovil;
+import com.itson.dominio.Persona;
+import static com.itson.dominio.Tramite_.persona;
 import com.itson.interfaces.IAutomovilesDAO;
 import com.itson.utils.TipoAutomovil;
 import javax.persistence.EntityManager;
@@ -44,6 +46,28 @@ public class AutomovilesDAO implements IAutomovilesDAO {
             em.getTransaction().rollback();
         }
 
+    }
+    
+   /**
+    *
+     * @param num_serie
+    * @param marca
+    * @param modelo
+    * @param color
+    * @param linea
+     * @param persona
+    * @return 
+    */
+    @Override
+    public Automovil insertar2(String num_serie, String marca, String color, String modelo, String linea, Persona persona) {
+        em.getTransaction().begin();
+
+        Automovil auto = new Automovil(num_serie, marca, color, modelo, linea, persona);
+
+        em.persist(auto);
+        em.getTransaction().commit();
+        JOptionPane.showMessageDialog(null, "Se ha insertado el auto");
+        return auto;
     }
 
     /**

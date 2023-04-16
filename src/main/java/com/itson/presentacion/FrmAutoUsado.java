@@ -41,7 +41,7 @@ public class FrmAutoUsado extends javax.swing.JFrame {
         Automovil autoConsulta = (Automovil) 
                 autosDAO.consultar(this.txtSerie.getText());
         
-        placaDAO.insertar(placaNueva, autoConsulta, persona, costo, true);
+        placaDAO.insertar2(placaNueva, autoConsulta, persona, costo, true);
         this.txtNumAlfa.setText(placaNueva);
         this.txtCosto.setText(String.valueOf(costo));
     }

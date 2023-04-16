@@ -38,7 +38,7 @@ public class FrmAutoNuevo extends javax.swing.JFrame {
         String modelo = this.txtModelo.getText();
         String linea = this.txtLinea.getText();
         
-        autosDAO.insertar(tipo, serie, marca, modelo, color, linea);
+        autosDAO.insertar2(serie, marca, color, modelo, linea, persona);
     }
     
     private void guardarPlacas(){
@@ -50,7 +50,7 @@ public class FrmAutoNuevo extends javax.swing.JFrame {
                 autosDAO.consultar(this.txtSerie.getText());
         
         IPlacasDAO placaDAO = new PlacasDAO();
-        placaDAO.insertar(placaNueva, autoConsulta, persona, costo, true);
+        placaDAO.insertar2(placaNueva, autoConsulta, persona, costo, true);
         this.txtNumAlfa.setText(placaNueva);
         this.txtCosto.setText(String.valueOf(costo));
     }
@@ -122,43 +122,18 @@ public class FrmAutoNuevo extends javax.swing.JFrame {
         getContentPane().add(lblLinea, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, -1));
 
         txtModelo.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
-        txtModelo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtModeloActionPerformed(evt);
-            }
-        });
         getContentPane().add(txtModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 360, 170, -1));
 
         txtSerie.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
-        txtSerie.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSerieActionPerformed(evt);
-            }
-        });
         getContentPane().add(txtSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 170, -1));
 
         txtMarca.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
-        txtMarca.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMarcaActionPerformed(evt);
-            }
-        });
         getContentPane().add(txtMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, 170, -1));
 
         txtColor.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
-        txtColor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtColorActionPerformed(evt);
-            }
-        });
         getContentPane().add(txtColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 260, 170, -1));
 
         txtLinea.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
-        txtLinea.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtLineaActionPerformed(evt);
-            }
-        });
         getContentPane().add(txtLinea, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 310, 170, -1));
 
         lblAutoNuevo.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
@@ -233,26 +208,6 @@ public class FrmAutoNuevo extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtModeloActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtModeloActionPerformed
-
-    private void txtSerieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSerieActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSerieActionPerformed
-
-    private void txtMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMarcaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtMarcaActionPerformed
-
-    private void txtColorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtColorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtColorActionPerformed
-
-    private void txtLineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLineaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtLineaActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:

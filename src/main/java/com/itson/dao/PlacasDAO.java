@@ -57,7 +57,7 @@ public class PlacasDAO implements IPlacasDAO {
      * @param costo Costo del trámite
      */
     @Override
-    public void insertar(Vehiculo vehiculo, Persona persona, float costo) throws PersistenceException {
+    public void insertar1(Vehiculo vehiculo, Persona persona, float costo) throws PersistenceException {
         String num = RandomStringUtils.randomNumeric(3);
         String letras = RandomStringUtils.randomAlphabetic(3).toUpperCase();
         String random = num + "-" + letras;
@@ -76,6 +76,33 @@ public class PlacasDAO implements IPlacasDAO {
         } catch (ParseException ex) {
             JOptionPane.showMessageDialog(null, "Error al consultar la placa");
             em.getTransaction().rollback();
+        }
+    }
+    
+
+    /**
+     * Método que registra las placas
+     * @param num_alfanumerico Serie de carácteres que se le otorgan a una placa
+     * @param vehiculo Serie de carácteres que se le otorgan a una placa
+     * @param persona Propietario del vehículo
+     * @param costo Costo del trámite
+     * @param estado Estado de la placa
+     */
+    @Override
+    public void insertar2(String num_alfanumerico, Vehiculo vehiculo, Persona persona, float costo, boolean estado) {
+        try {
+            Date fechaDos = fecha.parse(formatoFecha);
+            em.getTransaction().begin();
+
+            Placa placa = new Placa(num_alfanumerico, estado, vehiculo, fechaDos, costo, persona);
+
+            em.persist(placa);
+            em.getTransaction().commit();
+            JOptionPane.showMessageDialog(null, "Se insertó la placa");
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(null, "No se pudo insertar la placa", 
+                    "ERROR", JOptionPane.ERROR_MESSAGE);
+            Logger.getLogger(PlacasDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -158,14 +185,8 @@ void actualizar(String numAlfa) throws PersistenceException {
             CriteriaBuilder crit = em.getCriteriaBuilder();
             CriteriaQuery
 
-<Placa> consulta = crit.createQuery(Placa.class  
-
-);
-            Root
-
-<Placa> root = consulta.from(Placa.class  
-
-);
+<Placa> consulta = crit.createQuery(Placa.class);
+Root<Placa> root = consulta.from(Placa.class  );
             Join<Placa, Vehiculo> join = root.join("vehiculo");
             Predicate pred = crit.and(crit.equal(root.get("Estado"), true),
                     crit.equal(join.get("Serie"), serie));

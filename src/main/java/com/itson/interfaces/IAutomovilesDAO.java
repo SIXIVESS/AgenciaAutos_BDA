@@ -5,6 +5,8 @@
 package com.itson.interfaces;
 
 import com.itson.dominio.Automovil;
+import com.itson.dominio.Persona;
+import com.itson.utils.TipoAutomovil;
 
 
 /**
@@ -14,6 +16,8 @@ import com.itson.dominio.Automovil;
 public interface IAutomovilesDAO {
 
     public void insertar(Automovil auto);
+    
+    public Automovil insertar2(String num_serie, String marca, String color, String modelo, String linea, Persona persona);
 
     public Automovil consultar(String serie);
 
