@@ -24,6 +24,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Predicate;
+import org.apache.commons.lang3.RandomStringUtils;
 import javax.persistence.criteria.Root;
 import javax.swing.JOptionPane;
 
@@ -51,42 +52,50 @@ public class PlacasDAO implements IPlacasDAO {
     /**
      * Método que registra las placas
      *
-     * @param num_alfanumerico Serie de carácteres que se le otorgan a una placa
      * @param vehiculo Vehículo al que le pertenece la placa
      * @param persona Propietario del vehículo
      * @param costo Costo del trámite
-     * @param estado Estado de la placa
      */
     @Override
-    public void insertar(String num_alfanumerico, Vehiculo vehiculo, Persona persona, float costo, boolean estado) {
+    public void insertar(Vehiculo vehiculo, Persona persona, float costo) throws PersistenceException {
+        String num = RandomStringUtils.randomNumeric(3);
+        String letras = RandomStringUtils.randomAlphabetic(3).toUpperCase();
+        String random = num + "-" + letras;
+
         try {
-            Date fechaDos = fecha.parse(formatoFecha);
-            em.getTransaction().begin();
-
-            Placa placa = new Placa(num_alfanumerico, vehiculo, fechaDos, costo, persona, estado);
-
-            em.persist(placa);
-            em.getTransaction().commit();
-            JOptionPane.showMessageDialog(null, "Se insertó la placa");
+            List<Placa> placas = em.createQuery("SELECT p FROM Placa p WHERE p.num_alfanumerico = :num_serie", Placa.class).setParameter("numeroPlaca", random).getResultList();
+            Date fecha2 = fecha.parse(formatoFecha);
+            //Validación
+            if (placas.isEmpty()) {
+                em.getTransaction().begin();
+                Placa placa = new Placa(num, fecha2, true, vehiculo, fecha2, costo, persona);
+                em.persist(placa);
+                em.getTransaction().commit();
+                JOptionPane.showMessageDialog(null, "Se insertó la placa");
+            }
         } catch (ParseException ex) {
-            JOptionPane.showMessageDialog(null, "No se pudo insertar la placa", 
-                    "ERROR", JOptionPane.ERROR_MESSAGE);
-            Logger.getLogger(PlacasDAO.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error al consultar la placa");
+            em.getTransaction().rollback();
         }
     }
 
-    /**
-     * Método que se encarga de consultar la placa mediante su número de serie
-     *
-     * @param serie Serie de carácteres que se le otorgan a un vehículo
-     * @return Regresa la placa consultada
-     */
-    @Override
-    public List<Placa> consultar(String serie) {
+
+/**
+ * Método que se encarga de consultar la placa mediante su número de serie
+ *
+ * @param serie Serie de carácteres que se le otorgan a un vehículo
+ * @return Regresa la placa consultada
+ */
+@Override
+public List<Placa> consultar(String serie) {
         try {
             String codigoJPQL = "SELECT p FROM Placa p WHERE p.automovil.num_serie "
                     + "LIKE :num_serie";
-            TypedQuery<Placa> query = em.createQuery(codigoJPQL, Placa.class);
+            TypedQuery
+
+<Placa> query = em.createQuery(codigoJPQL, Placa.class  
+
+);
             query.setParameter("num_serie", serie);
 
             return query.getResultList();
@@ -105,9 +114,13 @@ public class PlacasDAO implements IPlacasDAO {
      * que ocurra un error
      */
     @Override
-    public void actualizar(String numAlfa) throws PersistenceException {
+public 
+
+void actualizar(String numAlfa) throws PersistenceException {
         TypedQuery<Placa> tq = em.createQuery("SELECT p FROM Placa p WHERE p.num_alfanumerico LIKE :num_alfanumerico",
-                Placa.class);
+                Placa.class  
+
+);
 
         tq.setParameter("num_alfanumerico", numAlfa);
         Placa placas = tq.getSingleResult();
@@ -125,20 +138,34 @@ public class PlacasDAO implements IPlacasDAO {
             JOptionPane.showMessageDialog(null, "Error al actualizar la placa");
         } catch (ParseException ex) {
             JOptionPane.showMessageDialog(null, "Error");
-            Logger.getLogger(PlacasDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger
+
+.getLogger(PlacasDAO.class  
+
+.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     /**
      * Método que se encarga de consultar las placas activas
+     *
      * @param serie Serie de carácteres que se le otorgan a un vehículo
-     * @return Regresa la placa activa en caso de que exista, sino regresará una excepción
+     * @return Regresa la placa activa en caso de que exista, sino regresará una
+     * excepción
      */
     public Placa consultarActiva(String serie) {
         try {
             CriteriaBuilder crit = em.getCriteriaBuilder();
-            CriteriaQuery<Placa> consulta = crit.createQuery(Placa.class);
-            Root<Placa> root = consulta.from(Placa.class);
+            CriteriaQuery
+
+<Placa> consulta = crit.createQuery(Placa.class  
+
+);
+            Root
+
+<Placa> root = consulta.from(Placa.class  
+
+);
             Join<Placa, Vehiculo> join = root.join("vehiculo");
             Predicate pred = crit.and(crit.equal(root.get("Estado"), true),
                     crit.equal(join.get("Serie"), serie));
@@ -149,7 +176,7 @@ public class PlacasDAO implements IPlacasDAO {
             return placaActiva;
 
         } catch (NoResultException ex) {
-            JOptionPane.showMessageDialog(null, "No se encontró placa activa", 
+            JOptionPane.showMessageDialog(null, "No se encontró placa activa",
                     "ERROR", JOptionPane.ERROR_MESSAGE);
             return null;
         }
