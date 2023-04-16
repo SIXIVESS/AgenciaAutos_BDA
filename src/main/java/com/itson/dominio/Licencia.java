@@ -142,7 +142,7 @@ public class Licencia extends Tramite implements Serializable {
     }
 
     /**
-     * Método que calcula el hascode de la identificación de una licencia
+     * Método que calcula el hashcode de la identificación de una licencia
      *
      * @return Hashcode del identificador
      */
@@ -177,6 +177,7 @@ public class Licencia extends Tramite implements Serializable {
 
     /**
      * Cadena de texto con los parámetros de licencia
+     *
      * @return Cadena de texto con los parámetros de licencia
      */
     @Override
