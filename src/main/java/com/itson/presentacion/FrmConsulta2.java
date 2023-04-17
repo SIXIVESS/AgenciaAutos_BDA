@@ -32,7 +32,7 @@ public class FrmConsulta2 extends javax.swing.JFrame {
     ITramitesDAO tramiteDao = new TramitesDAO();
 
     /**
-     * Creates new form FrmConsulta2
+     * 
      */
     public void cargar() {
         DefaultTableModel tabla = (DefaultTableModel) this.tblTramites.getModel();
@@ -50,6 +50,11 @@ public class FrmConsulta2 extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Método que llena los campos de texto según los datos de la persona dada
+     * en el parámetro
+     * @param persona Persona de la que se quieren los datos
+     */
     public void cargarTexto(Persona persona) {
 
         Integer fechaNac = persona.getFecha_nacimiento().getYear();
@@ -71,11 +76,17 @@ public class FrmConsulta2 extends javax.swing.JFrame {
 
     }
 
+    /**
+     * Método que retrocede de página
+     */
     private void atras() {
         this.formato.retroceder();
         this.cargar();
     }
 
+    /**
+     * Método que avanza de página
+     */
     private void sigPagina() {
         this.formato.avanzar();
         this.cargar();

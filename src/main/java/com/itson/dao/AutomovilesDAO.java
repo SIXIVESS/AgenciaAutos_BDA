@@ -48,16 +48,17 @@ public class AutomovilesDAO implements IAutomovilesDAO {
 
     }
     
-   /**
-    *
-     * @param num_serie
-    * @param marca
-    * @param modelo
-    * @param color
-    * @param linea
-     * @param persona
-    * @return 
-    */
+    /**
+     * Método que inserte un automovil con todos sus atributos
+     *
+     * @param num_serie Número de serie del auto
+     * @param marca Marca del auto
+     * @param color Color del auto
+     * @param modelo Modelo del auto
+     * @param linea Linea del auto
+     * @param persona Persona dueña del auto
+     * @return Automovil registrado
+     */
     @Override
     public Automovil insertar2(String num_serie, String marca, String color, String modelo, String linea, Persona persona) {
         em.getTransaction().begin();

@@ -30,6 +30,9 @@ public class FrmAutoNuevo extends javax.swing.JFrame {
         initComponents();
     }
 
+    /**
+     * Método que guarda un automóvil
+     */
     private void guardar(){
 //        TipoAutomovil tipo = TipoAutomovil.NUEVO;
         String serie = this.txtSerie.getText();
@@ -41,6 +44,9 @@ public class FrmAutoNuevo extends javax.swing.JFrame {
         autosDAO.insertar2(serie, marca, color, modelo, linea, persona);
     }
     
+    /**
+     * Método que guarda las placas de un automóvil
+     */
     private void guardarPlacas(){
         GeneracionPlacas placa = new GeneracionPlacas();
         String placaNueva = placa.generarPlaca();

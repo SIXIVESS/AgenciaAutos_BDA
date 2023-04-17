@@ -30,9 +30,15 @@ public class PersonasDAO implements IPersonasDAO {
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("org.itson.agenciafiscal");
     EntityManager em = emf.createEntityManager();
 
+    /**
+     * Constructor por defecto
+     */
     public PersonasDAO() {
     }
 
+    /**
+     * Método que realiza una inserción "masiva" de 20 personas 
+     */
     @Override
     public void insertar() {
         try {
@@ -88,6 +94,11 @@ public class PersonasDAO implements IPersonasDAO {
         }
     }
 
+    /**
+     * Método que consulta a una persona por medio de su RFC
+     * @param rfc RFC de la persona
+     * @return Persona a la que corresponde dicho RFC
+     */
     @Override
     public Persona consultar(String rfc) {
         try {
@@ -99,6 +110,11 @@ public class PersonasDAO implements IPersonasDAO {
         }
     }
 
+    /**
+     * Método que consulta la lista de personas con el RFC recibido
+     * @param rfc RFC del que se requiere encontrar a la persona
+     * @return Lista de personas
+     */
     @Override
     public List<Persona> consultarLista(String rfc) {
         try {
@@ -114,6 +130,13 @@ public class PersonasDAO implements IPersonasDAO {
         return null;
     }
 
+    /**
+     * Método que busca a una persona con filtros de nombre y año de nacimiento
+     * @param busqueda Filtros
+     * @param formato
+     * @return Persona que coincide con dichos filtros
+     * @throws NoResultException 
+     */
     @Override
     public List<Persona> consultarListaBusqueda(Busqueda busqueda, FormatoPaginas formato) throws NoResultException {
         CriteriaBuilder builder = em.getCriteriaBuilder();
@@ -150,6 +173,11 @@ public class PersonasDAO implements IPersonasDAO {
 
     }
 
+    /**
+     * Método que determina si una persona es mayor de edad o no
+     * @param persona Persona de la que se quiere determinar la mayoría de edad
+     * @return true si es mayor de edad, false en caso contrario
+     */
     public Boolean edad(Persona persona) {
         LocalDate actual = LocalDate.now();
         LocalDate year = persona.getFecha_nacimiento();

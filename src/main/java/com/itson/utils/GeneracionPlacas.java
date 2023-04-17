@@ -10,6 +10,10 @@ package com.itson.utils;
  */
 public class GeneracionPlacas {
     
+    /**
+     * Método que genera una placa aleatoria
+     * @return Placa generada
+     */
     public String generarPlaca() {
 
         char placa[] = new char[7];
@@ -24,18 +28,35 @@ public class GeneracionPlacas {
         return String.valueOf(placa);
     }
 
+    /**
+     * Método que genera una consonante
+     * @return Consonante generada
+     */
     public char generarConsonante() {
         return generarRandomChar("BCDFGHJKLMNPQRSTVWXYZ");
     }
 
+    /**
+     * Método que genera la primer vocal
+     * @return Primer vocal
+     */
     public char generarVocal() {
         return generarRandomChar("AEIOU");
     }
 
+    /**
+     * Método que genera un número
+     * @return Número
+     */
     public char generarNumero() {
         return generarRandomChar("0123456789");
     }
 
+    /**
+     * Método que genera un char aleatorio
+     * @param str
+     * @return 
+     */
     public char generarRandomChar(String str) {
         char caracteres[] = str.toCharArray();
         int index = (int) (Math.random() * caracteres.length);

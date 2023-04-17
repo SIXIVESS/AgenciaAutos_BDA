@@ -1,8 +1,6 @@
 package com.itson.dominio;
 
-import com.itson.utils.TipoTramite;
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Column;

@@ -123,8 +123,10 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
         txtTipoAuto = new javax.swing.JTextField();
         lblTipo = new javax.swing.JLabel();
         txtCosto = new javax.swing.JTextField();
+        jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 143, 143));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -134,33 +136,45 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
         lblAutoNuevo.setText("PLACAS");
         jPanel1.add(lblAutoNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
 
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 617, 90));
+
         lblDatosPersona.setFont(new java.awt.Font("Century Gothic", 3, 24)); // NOI18N
         lblDatosPersona.setText("DATOS CLIENTE");
+        getContentPane().add(lblDatosPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(221, 108, -1, -1));
 
         lblSerie.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         lblSerie.setText("Núm. de serie:");
+        getContentPane().add(lblSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 460, -1, -1));
 
         lblMarca.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         lblMarca.setText("Marca:");
+        getContentPane().add(lblMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 520, -1, -1));
 
         txtNombre.setEditable(false);
         txtNombre.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(213, 218, 170, -1));
 
         lblColor.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         lblColor.setText("Color:");
+        getContentPane().add(lblColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 570, -1, -1));
 
         txtApellido.setEditable(false);
         txtApellido.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        getContentPane().add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(213, 275, 170, -1));
 
         lblLinea.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         lblLinea.setText("Linea:");
+        getContentPane().add(lblLinea, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 620, -1, -1));
 
         txtLinea.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        getContentPane().add(txtLinea, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 620, 170, -1));
 
         lblModelo.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         lblModelo.setText("Modelo:");
+        getContentPane().add(lblModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 670, -1, -1));
 
         txtModelo.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        getContentPane().add(txtModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 670, 170, -1));
 
         btnGuardar.setBackground(new java.awt.Color(255, 90, 130));
         btnGuardar.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
@@ -171,6 +185,7 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
                 btnGuardarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 830, -1, -1));
 
         btnBuscarSerie.setBackground(new java.awt.Color(255, 90, 130));
         btnBuscarSerie.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
@@ -181,15 +196,19 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
                 btnBuscarSerieActionPerformed(evt);
             }
         });
+        getContentPane().add(btnBuscarSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 460, -1, -1));
 
         lblRfc.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         lblRfc.setText("RFC:");
+        getContentPane().add(lblRfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(143, 171, -1, -1));
 
         lblApellido.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         lblApellido.setText("Apellido:");
+        getContentPane().add(lblApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 279, -1, -1));
 
         lblNombre.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         lblNombre.setText("Nombre:");
+        getContentPane().add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(93, 222, -1, -1));
 
         txtSerie.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         txtSerie.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -197,6 +216,7 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
                 txtSerieKeyTyped(evt);
             }
         });
+        getContentPane().add(txtSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 460, 170, -1));
 
         txtRfc2.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         txtRfc2.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -204,10 +224,13 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
                 txtRfc2KeyTyped(evt);
             }
         });
+        getContentPane().add(txtRfc2, new org.netbeans.lib.awtextra.AbsoluteConstraints(213, 167, 170, -1));
 
         txtMarca.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        getContentPane().add(txtMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 510, 170, -1));
 
         txtColor.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        getContentPane().add(txtColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 560, 170, -1));
 
         btnBuscarRfc.setBackground(new java.awt.Color(255, 90, 130));
         btnBuscarRfc.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
@@ -218,138 +241,30 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
                 btnBuscarRfcActionPerformed(evt);
             }
         });
+        getContentPane().add(btnBuscarRfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 170, -1, -1));
 
         lblDatosAuto1.setFont(new java.awt.Font("Century Gothic", 3, 24)); // NOI18N
         lblDatosAuto1.setText("DATOS AUTOMÓVIL");
+        getContentPane().add(lblDatosAuto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 400, -1, -1));
 
         lblCosto.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         lblCosto.setText("Costo:");
+        getContentPane().add(lblCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 740, -1, -1));
 
         txtTipoAuto.setEditable(false);
         txtTipoAuto.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        getContentPane().add(txtTipoAuto, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 780, 170, -1));
 
         lblTipo.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         lblTipo.setText("Tipo:");
+        getContentPane().add(lblTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 790, -1, -1));
 
         txtCosto.setEditable(false);
         txtCosto.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        getContentPane().add(txtCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 730, 170, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblDatosPersona))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(214, 214, 214)
-                        .addComponent(btnGuardar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(173, 173, 173)
-                        .addComponent(lblDatosAuto1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(90, 90, 90)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblRfc)
-                            .addComponent(lblNombre)
-                            .addComponent(lblApellido))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtRfc2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnBuscarRfc))
-                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblModelo)
-                            .addComponent(lblLinea)
-                            .addComponent(lblColor)
-                            .addComponent(lblMarca)
-                            .addComponent(lblSerie)
-                            .addComponent(lblCosto)
-                            .addComponent(lblTipo))
-                        .addGap(44, 44, 44)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtSerie, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnBuscarSerie))
-                            .addComponent(txtLinea, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtColor, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTipoAuto, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 59, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblDatosPersona)
-                .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblRfc)
-                    .addComponent(txtRfc2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscarRfc))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNombre))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblApellido)
-                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44)
-                .addComponent(lblDatosAuto1)
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblSerie)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnBuscarSerie)
-                        .addComponent(txtSerie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblMarca)
-                    .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(13, 13, 13)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblColor)
-                    .addComponent(txtColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(13, 13, 13)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtLinea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblLinea))
-                .addGap(13, 13, 13)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblModelo))
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 96, Short.MAX_VALUE)
-                        .addComponent(btnGuardar)
-                        .addGap(61, 61, 61))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblCosto)
-                            .addComponent(txtCosto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblTipo)
-                            .addComponent(txtTipoAuto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-        );
+        jPanel2.setBackground(new java.awt.Color(153, 153, 153));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 350, 620, 20));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -361,7 +276,7 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
         try {
             Placa placa = placaDao.consultar(txtSerie.getText());
             Automovil auto = automovilDao.consultar(this.txtSerie.getText());
-            Persona persona = personaDao.consultar(this.txtRfc.getText());
+            Persona persona = personaDao.consultar(this.txtRfc2.getText());
 
             if (licenciasDao.consultar(persona.getRfc())) {
                 if (placa != null) {
@@ -417,7 +332,7 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
     private void btnBuscarRfcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarRfcActionPerformed
 
         try {
-            String rfc = txtRfc.getText();
+            String rfc = txtRfc2.getText();
 
             IPersonasDAO personaDAO = new PersonasDAO();
             Persona persona = personaDAO.consultar(rfc);
@@ -467,6 +382,7 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscarSerie;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblApellido;
     private javax.swing.JLabel lblAutoNuevo;
     private javax.swing.JLabel lblColor;
@@ -487,8 +403,6 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
     private javax.swing.JTextField txtMarca;
     private javax.swing.JTextField txtModelo;
     private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtRfc;
-    private javax.swing.JTextField txtRfc1;
     private javax.swing.JTextField txtRfc2;
     private javax.swing.JTextField txtSerie;
     private javax.swing.JTextField txtTipoAuto;

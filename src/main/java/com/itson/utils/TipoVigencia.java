@@ -15,9 +15,19 @@ public class TipoVigencia {
         "Tres años"
     };
 
+    /**
+     * Constructor por defecto
+     */
     public TipoVigencia() {
     }
 
+    /**
+     * Método que guarda el tipo de vigencia y si es discapacitado o no la persona.
+     * Con esos datos asigna el costo correspondiente
+     * @param discapacitado true si es discapacitado, false en caso contrario
+     * @param numVigencia Vigencia solicitada
+     * @return Regresa el costo
+     */
     public int guardar(boolean discapacitado, String numVigencia) {
         int costo = 0;
 
@@ -37,6 +47,10 @@ public class TipoVigencia {
         return costo;
     }
 
+    /**
+     * Método que obtiene las vigencias disponibles
+     * @return Vigencias
+     */
     public String[] obtenerVigencias() {
         return numVigencia;
     }
