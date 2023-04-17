@@ -7,16 +7,13 @@ package com.itson.presentacion;
 import com.itson.dao.AutomovilesDAO;
 import com.itson.dao.LicenciasDAO;
 import com.itson.dao.PersonasDAO;
-import com.itson.dao.PlacasDAO;
 import com.itson.dao.VehiculosDAO;
 import com.itson.dominio.Automovil;
 import com.itson.dominio.Persona;
 import com.itson.interfaces.IAutomovilesDAO;
 import com.itson.interfaces.ILicenciasDAO;
 import com.itson.interfaces.IPersonasDAO;
-import com.itson.interfaces.IPlacasDAO;
 import com.itson.interfaces.IVehiculosDAO;
-import com.itson.utils.GeneracionPlacas;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
@@ -30,7 +27,6 @@ public class FrmAutoNuevo extends javax.swing.JFrame {
     ILicenciasDAO licenciaDao = new LicenciasDAO();
     IAutomovilesDAO autoDao = new AutomovilesDAO();
     IVehiculosDAO vehiculoDao = new VehiculosDAO();
-    
 
     private String rfc, serie;
 
@@ -48,7 +44,7 @@ public class FrmAutoNuevo extends javax.swing.JFrame {
      */
     public FrmAutoNuevo(String rfc) {
         this.rfc = rfc;
-        txtNombre.setText(rfc);
+        txtRfc.setText(rfc);
         initComponents();
     }
 
@@ -74,36 +70,32 @@ public class FrmAutoNuevo extends javax.swing.JFrame {
         String serie = this.txtSerie.getText();
         String marca = this.txtMarca.getText();
 
-      if(licenciaDao.consultar(rfc)){
-          Automovil auto = new Automovil();
-           Persona persona = personaDao.consultar(rfc);
-           
-           //Validaciones
-           
-           if(vehiculoDao.buscar(serie)==null){
-               auto.setColor(color);
-               auto.setLinea(linea);
-               auto.setMarca(marca);
-               auto.setModelo(modelo);
-               auto.setNum_serie(serie);
-               auto.setPersona(persona);
-               autoDao.insertar(auto);
-               
-               //Abre el form de placas
-               
-               FrmPruebaPlacas frm = new FrmPruebaPlacas(serie, rfc);
-               frm.setVisible(true);
-               System.out.println(serie);
-               System.out.println(rfc);
-               this.dispose();
-           }else{
-               JOptionPane.showMessageDialog(null, "Error con el número de serie");
-           }
-          
-      }else{
-                         JOptionPane.showMessageDialog(rootPane, "Licencia vencida");
+        if (!licenciaDao.consultar(rfc)) {
+            Automovil auto = new Automovil();
+            Persona persona = personaDao.consultar(rfc);
 
-      }
+            //Validaciones
+            if (vehiculoDao.buscar(serie) == null) {
+                auto.setColor(color);
+                auto.setLinea(linea);
+                auto.setMarca(marca);
+                auto.setModelo(modelo);
+                auto.setNum_serie(serie);
+                auto.setPersona(persona);
+                autoDao.insertar(auto);
+
+                //Abre el form de placas
+                FrmPruebaPlacas frm = new FrmPruebaPlacas(serie, rfc);
+                frm.setVisible(true);
+                System.out.println(serie);
+                System.out.println(rfc);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "Error con el número de serie");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Licencia vencida");
+        }
     }
 
     /**

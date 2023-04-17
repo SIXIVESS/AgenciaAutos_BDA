@@ -38,7 +38,6 @@ public class LicenciasDAO implements ILicenciasDAO {
    */
     public LicenciasDAO() {}
     
-    
     /**
      * Método que se encarga de registrar una licencia
      * @param rfc Cadena de carácteres que identifican a una persona

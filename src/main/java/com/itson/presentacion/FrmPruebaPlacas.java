@@ -35,6 +35,7 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
     IAutomovilesDAO automovilDao = new AutomovilesDAO();
     IPersonasDAO personaDao = new PersonasDAO();
     ILicenciasDAO licenciasDao = new LicenciasDAO();
+    
 
     /**
      * Constructor que inicializa las variables de serie y rfc
@@ -91,6 +92,10 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
 
     }
 
+    /**
+     * Método que busca a una persona por su rfc
+     * @param rfc RFC de la persona
+     */
     public void buscarRfc(String rfc) {
         Persona persona = new Persona();
         persona = personaDao.consultar(rfc);
@@ -320,6 +325,8 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
         // TODO add your handling code here:
         String numSerie = this.txtSerie.getText();
 
+        String rfc = txtRfc2.getText();
+        
         try {
             Placa placas = placaDao.consultarActiva(numSerie);
             if (automovilDao.existe(numSerie)) {
@@ -338,7 +345,6 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
 
         } catch (PersistenceException ex) {
             Logger.getLogger(FrmPruebaPlacas.class.getName()).log(Level.SEVERE, null, ex);
-
         }
     }//GEN-LAST:event_btnBuscarSerieActionPerformed
 
