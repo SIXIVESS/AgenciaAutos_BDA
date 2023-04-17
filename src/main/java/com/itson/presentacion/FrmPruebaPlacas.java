@@ -4,17 +4,64 @@
  */
 package com.itson.presentacion;
 
+import com.itson.dao.AutomovilesDAO;
+import com.itson.dao.PersonasDAO;
+import com.itson.dao.PlacasDAO;
+import com.itson.dominio.Automovil;
+import com.itson.dominio.Persona;
+import com.itson.dominio.Placa;
+import com.itson.interfaces.IAutomovilesDAO;
+import com.itson.interfaces.IPersonasDAO;
+import com.itson.interfaces.IPlacasDAO;
+import com.itson.utils.TipoAutomovil;
+import javax.swing.JOptionPane;
+
 /**
  *
- * @author chaly
+ * @author Alexa Soto(236348) y Rosalía Perez (233505)
  */
 public class FrmPruebaPlacas extends javax.swing.JFrame {
 
+    private String serie, rfc;
+
+    IPlacasDAO placaDao = new PlacasDAO();
+
     /**
-     * Creates new form FrmPruebaConsulta
+     * Constructor que inicializa las variables de serie y rfc
      */
-    public FrmPruebaPlacas() {
+    public FrmPruebaPlacas(String serie, String rfc) {
         initComponents();
+        this.rfc = rfc;
+        this.txtRfc2.setText(rfc);
+
+        this.serie = serie;
+        this.txtSerie.setText(serie);
+        this.txtSerie.setEditable(false);
+    }
+    
+    /**
+     * Método que busca un auto existente mediante su número de serie
+     * @param serie Número de serie del auto
+     */
+    public void buscarAuto(String serie){
+        TipoAutomovil tipoAuto = new TipoAutomovil();
+        Automovil auto = new Automovil();
+        IAutomovilesDAO automovilesDao = new AutomovilesDAO();
+        //Consulta la placa
+        Placa placa = placaDao.consultar(serie);
+        //Busca el automovil
+        auto=automovilesDao.consultar(serie);
+        
+        this.btnGuardar.setEnabled(true);
+        
+        //Campos de texto que se rellenan automaticamente si se encontró el automóvil
+
+        this.txtColor.setText(auto.getColor());
+        this.txtLinea.setText(auto.getLinea());
+        this.txtMarca.setText(auto.getMarca());
+        this.txtModelo.setText(auto.getModelo());
+        
+        
     }
 
     /**
@@ -28,19 +75,27 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         lblAutoNuevo = new javax.swing.JLabel();
-        lblDatosAuto = new javax.swing.JLabel();
+        lblDatosPersona = new javax.swing.JLabel();
         lblSerie = new javax.swing.JLabel();
-        txtSerie = new javax.swing.JTextField();
         lblMarca = new javax.swing.JLabel();
-        txtMarca = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
         lblColor = new javax.swing.JLabel();
-        txtColor = new javax.swing.JTextField();
+        txtApellido = new javax.swing.JTextField();
         lblLinea = new javax.swing.JLabel();
         txtLinea = new javax.swing.JTextField();
         lblModelo = new javax.swing.JLabel();
         txtModelo = new javax.swing.JTextField();
         btnGuardar = new javax.swing.JButton();
-        btnBuscar = new javax.swing.JButton();
+        btnBuscarSerie = new javax.swing.JButton();
+        lblRfc = new javax.swing.JLabel();
+        lblApellido = new javax.swing.JLabel();
+        lblNombre = new javax.swing.JLabel();
+        txtSerie = new javax.swing.JTextField();
+        txtRfc2 = new javax.swing.JTextField();
+        txtMarca = new javax.swing.JTextField();
+        txtColor = new javax.swing.JTextField();
+        btnBuscarRfc = new javax.swing.JButton();
+        lblDatosAuto1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,23 +107,23 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
         lblAutoNuevo.setText("PLACAS");
         jPanel1.add(lblAutoNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
 
-        lblDatosAuto.setFont(new java.awt.Font("Century Gothic", 3, 24)); // NOI18N
-        lblDatosAuto.setText("DATOS AUTOMOVIL");
+        lblDatosPersona.setFont(new java.awt.Font("Century Gothic", 3, 24)); // NOI18N
+        lblDatosPersona.setText("DATOS CLIENTE");
 
         lblSerie.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         lblSerie.setText("Núm. de serie:");
 
-        txtSerie.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
-
         lblMarca.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         lblMarca.setText("Marca:");
 
-        txtMarca.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        txtNombre.setEditable(false);
+        txtNombre.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
 
         lblColor.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         lblColor.setText("Color:");
 
-        txtColor.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        txtApellido.setEditable(false);
+        txtApellido.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
 
         lblLinea.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         lblLinea.setText("Linea:");
@@ -90,15 +145,45 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
             }
         });
 
-        btnBuscar.setBackground(new java.awt.Color(255, 90, 130));
-        btnBuscar.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
-        btnBuscar.setForeground(new java.awt.Color(255, 255, 255));
-        btnBuscar.setText("BUSCAR");
-        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscarSerie.setBackground(new java.awt.Color(255, 90, 130));
+        btnBuscarSerie.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        btnBuscarSerie.setForeground(new java.awt.Color(255, 255, 255));
+        btnBuscarSerie.setText("BUSCAR");
+        btnBuscarSerie.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarActionPerformed(evt);
+                btnBuscarSerieActionPerformed(evt);
             }
         });
+
+        lblRfc.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        lblRfc.setText("RFC:");
+
+        lblApellido.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        lblApellido.setText("Apellido:");
+
+        lblNombre.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        lblNombre.setText("Nombre:");
+
+        txtSerie.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+
+        txtRfc2.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+
+        txtMarca.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+
+        txtColor.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+
+        btnBuscarRfc.setBackground(new java.awt.Color(255, 90, 130));
+        btnBuscarRfc.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        btnBuscarRfc.setForeground(new java.awt.Color(255, 255, 255));
+        btnBuscarRfc.setText("BUSCAR");
+        btnBuscarRfc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarRfcActionPerformed(evt);
+            }
+        });
+
+        lblDatosAuto1.setFont(new java.awt.Font("Century Gothic", 3, 24)); // NOI18N
+        lblDatosAuto1.setText("DATOS AUTOMÓVIL");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -108,10 +193,21 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(124, 124, 124)
-                        .addComponent(lblDatosAuto))
+                        .addGap(90, 90, 90)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblRfc)
+                            .addComponent(lblApellido)
+                            .addComponent(lblNombre))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtRfc2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnBuscarRfc))
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
+                        .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblModelo)
                             .addComponent(lblLinea)
@@ -123,36 +219,61 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(txtSerie, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnBuscar))
-                            .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtColor, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnBuscarSerie))
                             .addComponent(txtLinea, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(208, 208, 208)
-                        .addComponent(btnGuardar)))
-                .addContainerGap(33, Short.MAX_VALUE))
+                            .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtColor, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(lblDatosPersona)
+                                .addGap(166, 166, 166))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(lblDatosAuto1)
+                                .addGap(140, 140, 140)))))
+                .addGap(0, 60, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(214, 214, 214)
+                .addComponent(btnGuardar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lblDatosAuto)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblDatosPersona)
                 .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblRfc)
+                    .addComponent(txtRfc2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscarRfc))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNombre))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblApellido)
+                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(79, 79, 79)
+                .addComponent(lblDatosAuto1)
+                .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblSerie)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtSerie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnBuscar)))
+                        .addComponent(btnBuscarSerie)
+                        .addComponent(txtSerie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblMarca))
+                    .addComponent(lblMarca)
+                    .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblColor))
+                    .addComponent(lblColor)
+                    .addComponent(txtColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtLinea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -161,9 +282,9 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblModelo))
-                .addGap(49, 49, 49)
+                .addGap(43, 43, 43)
                 .addComponent(btnGuardar)
-                .addGap(0, 37, Short.MAX_VALUE))
+                .addGap(61, 61, 61))
         );
 
         pack();
@@ -174,32 +295,63 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
 //        this.guardar();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+    private void btnBuscarSerieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarSerieActionPerformed
         // TODO add your handling code here:
-        String serie = this.txtSerie.getText();
-        Costo costo = new Costo();
-    }//GEN-LAST:event_btnBuscarActionPerformed
+        String serie = this.txtRfc2.getText();
+        TipoAutomovil costo = new TipoAutomovil();
+        Automovil auto = new Automovil();
+
+        try {
+            Placa placas = placaDao
+        }
+    }//GEN-LAST:event_btnBuscarSerieActionPerformed
+
+    private void btnBuscarRfcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarRfcActionPerformed
+
+         try {
+            String rfc = txtRfc.getText();
+            
+            IPersonasDAO personaDAO = new PersonasDAO();
+            Persona persona = personaDAO.consultar(rfc);
+            //Se llenan los campos de texto de manera automática
+            txtNombre.setText(persona.getNombres());
+            txtApellido.setText(persona.getAp_paterno());
+            //Convierte la fecha en String
+
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(this, "No se encontró la persona", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnBuscarRfcActionPerformed
 
     /**
      * @param args the command line arguments
      */
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnBuscarRfc;
+    private javax.swing.JButton btnBuscarSerie;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblApellido;
     private javax.swing.JLabel lblAutoNuevo;
     private javax.swing.JLabel lblColor;
-    private javax.swing.JLabel lblDatosAuto;
+    private javax.swing.JLabel lblDatosAuto1;
+    private javax.swing.JLabel lblDatosPersona;
     private javax.swing.JLabel lblLinea;
     private javax.swing.JLabel lblMarca;
     private javax.swing.JLabel lblModelo;
+    private javax.swing.JLabel lblNombre;
+    private javax.swing.JLabel lblRfc;
     private javax.swing.JLabel lblSerie;
+    private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtColor;
     private javax.swing.JTextField txtLinea;
     private javax.swing.JTextField txtMarca;
     private javax.swing.JTextField txtModelo;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtRfc;
+    private javax.swing.JTextField txtRfc1;
+    private javax.swing.JTextField txtRfc2;
     private javax.swing.JTextField txtSerie;
     // End of variables declaration//GEN-END:variables
 }

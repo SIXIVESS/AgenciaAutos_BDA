@@ -19,7 +19,7 @@ public interface IPlacasDAO {
     
      public void insertar2(String num_alfanumerico, Vehiculo vehiculo, Persona persona, float costo, boolean estado);
     
-    public List<Placa> consultar(String placas);
+    public Placa consultar(String serie);
     
     public void actualizar(String placas);
 }
