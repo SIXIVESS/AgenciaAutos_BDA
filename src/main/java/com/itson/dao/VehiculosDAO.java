@@ -1,7 +1,7 @@
 package com.itson.dao;
 
 import com.itson.dominio.Vehiculo;
-import com.itson.interfaces.IVehículoDAO;
+import com.itson.interfaces.IVehiculosDAO;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
  *
  * @author Alexa Soto(236348) y Rosalía Perez (233505)
  */
-public class VehículosDAO implements IVehículoDAO {
+public class VehiculosDAO implements IVehiculosDAO {
 
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("org.itson.agenciafiscal");
     EntityManager em = emf.createEntityManager();
@@ -21,17 +21,18 @@ public class VehículosDAO implements IVehículoDAO {
     /**
      * Constructor por defecto
      */
-    public VehículosDAO() {
+    public VehiculosDAO() {
     }
     
     /**
      * Método que se encarga de buscar un vehículo usando su número de serie
-     * @param num_serie Identificador del vehículo
+     * @param serie Identificador del vehículo
      * @return Regresa el vehículo encontrado, sino, regresará nulo
      */
-    public Vehiculo buscarVehiculo(String num_serie){
+    @Override
+    public Vehiculo buscar(String serie){
         try{
-            Vehiculo v = em.find(Vehiculo.class, num_serie);
+            Vehiculo v = em.find(Vehiculo.class, serie);
             return v;
         }catch(NoResultException ex){
             JOptionPane.showMessageDialog(null, "No se encontró el vehículo");
@@ -41,12 +42,13 @@ public class VehículosDAO implements IVehículoDAO {
     
     /**
      * Método encargado de consultar el vehículo dependiendo de su número de serie
-     * @param num_serie  Identificador del vehículo
+     * @param serie  Identificador del vehículo
      * @return Regresa el tipo de vehículo buscado
      */
-    public String consultar(String num_serie){
+    @Override
+    public String consultar(String serie){
         try{
-            Vehiculo v = em.find(Vehiculo.class, num_serie);
+            Vehiculo v = em.find(Vehiculo.class, serie);
             if(v !=null){
                 return v.getClass().getAnnotation(DiscriminatorValue.class).value();
             }else{

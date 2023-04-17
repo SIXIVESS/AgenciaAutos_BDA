@@ -38,6 +38,9 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
 
     /**
      * Constructor que inicializa las variables de serie y rfc
+     *
+     * @param serie
+     * @param rfc
      */
     public FrmPruebaPlacas(String serie, String rfc) {
         initComponents();
@@ -47,6 +50,9 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
         this.serie = serie;
         this.txtSerie.setText(serie);
         this.txtSerie.setEditable(false);
+
+        buscarRfc(rfc);
+        buscarAuto(serie);
     }
 
     public FrmPruebaPlacas() {
@@ -61,20 +67,18 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
     public void buscarAuto(String serie) {
         TipoAutomovil tipoAuto = new TipoAutomovil();
         Automovil auto = new Automovil();
-        IAutomovilesDAO automovilesDao = new AutomovilesDAO();
-        //Consulta la placa
-        Placa placa = placaDao.consultar(serie);
-        //Busca el automovil
-        auto = automovilesDao.consultar(serie);
 
-        this.btnGuardar.setEnabled(true);
+        //Consulta la placa
+        Placa placa = placaDao.consultarActiva(serie);
+        //Busca el automovil
+        auto = automovilDao.consultar(serie);
 
         //Campos de texto que se rellenan automaticamente si se encontró el automóvil
         this.txtColor.setText(auto.getColor());
         this.txtLinea.setText(auto.getLinea());
         this.txtMarca.setText(auto.getMarca());
         this.txtModelo.setText(auto.getModelo());
-
+        this.btnGuardar.setEnabled(true);
         //Validaciones
         if (placa != null) {
             //Si no es null, entonces el auto ya existe
@@ -84,6 +88,16 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
             this.txtTipoAuto.setText(String.valueOf(tipoAuto.costoAuto(txtTipoAuto.getText())));
             this.txtTipoAuto.setText("Nuevo");
         }
+
+    }
+
+    public void buscarRfc(String rfc) {
+        Persona persona = new Persona();
+        persona = personaDao.consultar(rfc);
+
+        //Se llenan los campos de texto de manera automática
+        txtNombre.setText(persona.getNombres());
+        txtApellido.setText(persona.getAp_paterno());
 
     }
 
@@ -166,6 +180,7 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
         lblLinea.setText("Linea:");
         getContentPane().add(lblLinea, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 620, -1, -1));
 
+        txtLinea.setEditable(false);
         txtLinea.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         getContentPane().add(txtLinea, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 620, 170, -1));
 
@@ -173,6 +188,7 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
         lblModelo.setText("Modelo:");
         getContentPane().add(lblModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 670, -1, -1));
 
+        txtModelo.setEditable(false);
         txtModelo.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         getContentPane().add(txtModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 670, 170, -1));
 
@@ -185,7 +201,7 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
                 btnGuardarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 830, -1, -1));
+        getContentPane().add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 880, -1, -1));
 
         btnBuscarSerie.setBackground(new java.awt.Color(255, 90, 130));
         btnBuscarSerie.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
@@ -196,7 +212,7 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
                 btnBuscarSerieActionPerformed(evt);
             }
         });
-        getContentPane().add(btnBuscarSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 460, -1, -1));
+        getContentPane().add(btnBuscarSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 460, -1, -1));
 
         lblRfc.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         lblRfc.setText("RFC:");
@@ -226,9 +242,11 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
         });
         getContentPane().add(txtRfc2, new org.netbeans.lib.awtextra.AbsoluteConstraints(213, 167, 170, -1));
 
+        txtMarca.setEditable(false);
         txtMarca.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         getContentPane().add(txtMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 510, 170, -1));
 
+        txtColor.setEditable(false);
         txtColor.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         getContentPane().add(txtColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 560, 170, -1));
 
@@ -274,7 +292,7 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
         float costo = Float.parseFloat(this.txtCosto.getText());
 
         try {
-            Placa placa = placaDao.consultar(txtSerie.getText());
+            Placa placa = placaDao.consultarActiva(txtSerie.getText());
             Automovil auto = automovilDao.consultar(this.txtSerie.getText());
             Persona persona = personaDao.consultar(this.txtRfc2.getText());
 
@@ -293,21 +311,19 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
             this.txtSerie.setText("");
             this.txtLinea.setText("");
             this.txtTipoAuto.setText("");
-        } catch (PersistenceException ex) {
+        } catch (PersistenciaException ex) {
             Logger.getLogger(FrmPruebaPlacas.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnBuscarSerieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarSerieActionPerformed
         // TODO add your handling code here:
-        String serie = this.txtSerie.getText();
-        TipoAutomovil costo = new TipoAutomovil();
-        Automovil auto = new Automovil();
+        String numSerie = this.txtSerie.getText();
 
         try {
-            Placa placas = placaDao.consultar(serie);
-            if (automovilDao.existe(serie)) {
-                buscarAuto(serie);
+            Placa placas = placaDao.consultarActiva(numSerie);
+            if (automovilDao.existe(numSerie)) {
+                buscarAuto(numSerie);
             } else {
                 int op = JOptionPane.showOptionDialog(null, "Número de serie inexistente",
                         "Error inesperado", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
@@ -317,12 +333,9 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
                     FrmAutoNuevo frm = new FrmAutoNuevo(rfc);
                     frm.setVisible(true);
                     this.dispose();
-                } else if (op == JOptionPane.NO_OPTION) {
-                    FrmPrincipal frm = new FrmPrincipal();
-                    frm.setVisible(true);
-                    this.dispose();
                 }
             }
+
         } catch (PersistenceException ex) {
             Logger.getLogger(FrmPruebaPlacas.class.getName()).log(Level.SEVERE, null, ex);
 

@@ -78,10 +78,10 @@ public class PlacasDAO implements IPlacasDAO {
             em.getTransaction().rollback();
         }
     }
-    
 
     /**
      * Método que registra las placas
+     *
      * @param num_alfanumerico Serie de carácteres que se le otorgan a una placa
      * @param vehiculo Serie de carácteres que se le otorgan a una placa
      * @param persona Propietario del vehículo
@@ -100,32 +100,25 @@ public class PlacasDAO implements IPlacasDAO {
             em.getTransaction().commit();
             JOptionPane.showMessageDialog(null, "Se insertó la placa");
         } catch (ParseException ex) {
-            JOptionPane.showMessageDialog(null, "No se pudo insertar la placa", 
+            JOptionPane.showMessageDialog(null, "No se pudo insertar la placa",
                     "ERROR", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(PlacasDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-
-/**
- * Método que se encarga de consultar la placa mediante su número de serie
- *
- * @param serie Serie de carácteres que se le otorgan a un vehículo
- * @return Regresa la placa consultada
- */
-@Override
-public Placa consultar(String serie) {
+    /**
+     * Método que se encarga de consultar la placa mediante su número de serie
+     *
+     * @param idPlaca Serie de carácteres que se le otorgan a una placa
+     * @return Regresa la placa consultada
+     */
+    @Override
+    public Placa consultar(Long idPlaca) {
         try {
-            String codigoJPQL = "SELECT p FROM Placa p WHERE p.automovil.num_serie "
-                    + "LIKE :num_serie";
-            TypedQuery
 
-<Placa> query = em.createQuery(codigoJPQL, Placa.class  
+//Regresa lo que se encontró en la clase de placa
+            return em.find(Placa.class, idPlaca);
 
-);
-            query.setParameter("num_serie", serie);
-
-            return (Placa) query.getResultList();
         } catch (PersistenceException ex) {
             JOptionPane.showMessageDialog(null, "Error al consultar la placa");
             em.getTransaction().rollback();
@@ -141,13 +134,10 @@ public Placa consultar(String serie) {
      * que ocurra un error
      */
     @Override
-public 
-
-void actualizar(String numAlfa) throws PersistenceException {
+    public void actualizar(String numAlfa) throws PersistenceException {
         TypedQuery<Placa> tq = em.createQuery("SELECT p FROM Placa p WHERE p.num_alfanumerico LIKE :num_alfanumerico",
-                Placa.class  
-
-);
+                Placa.class
+        );
 
         tq.setParameter("num_alfanumerico", numAlfa);
         Placa placas = tq.getSingleResult();
@@ -166,10 +156,8 @@ void actualizar(String numAlfa) throws PersistenceException {
         } catch (ParseException ex) {
             JOptionPane.showMessageDialog(null, "Error");
             Logger
-
-.getLogger(PlacasDAO.class  
-
-.getName()).log(Level.SEVERE, null, ex);
+                    .getLogger(PlacasDAO.class
+                            .getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -180,16 +168,15 @@ void actualizar(String numAlfa) throws PersistenceException {
      * @return Regresa la placa activa en caso de que exista, sino regresará una
      * excepción
      */
+    @Override
     public Placa consultarActiva(String serie) {
         try {
             CriteriaBuilder crit = em.getCriteriaBuilder();
-            CriteriaQuery
-
-<Placa> consulta = crit.createQuery(Placa.class);
-Root<Placa> root = consulta.from(Placa.class  );
+            CriteriaQuery<Placa> consulta = crit.createQuery(Placa.class);
+            Root<Placa> root = consulta.from(Placa.class);
             Join<Placa, Vehiculo> join = root.join("vehiculo");
-            Predicate pred = crit.and(crit.equal(root.get("Estado"), true),
-                    crit.equal(join.get("Serie"), serie));
+            Predicate pred = crit.and(crit.equal(root.get("estado"), true),
+                    crit.equal(join.get("num_serie"), serie));
             consulta.where(pred);
             TypedQuery<Placa> query = em.createQuery(consulta);
             Placa placaActiva = query.getSingleResult();

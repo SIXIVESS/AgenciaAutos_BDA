@@ -1,10 +1,9 @@
 package com.itson.utils;
 
-import com.itson.dominio.Licencia;
 
 /**
  *
- * @author
+ * @author Alexa Soto(236348) y Rosalía Perez (233505)
  */
 public class TipoVigencia {
 

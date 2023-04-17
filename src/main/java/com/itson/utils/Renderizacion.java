@@ -7,7 +7,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 
 /**
  *
- * @author
+ * @author Alexa Soto(236348) y Rosalía Perez (233505)
  */
 public class Renderizacion extends DefaultTableCellRenderer {
 
@@ -18,13 +18,13 @@ public class Renderizacion extends DefaultTableCellRenderer {
     }
 
     /**
-     * 
-     * @param tabla
-     * @param valor
+     *  Método que se encarga de crear un botón dentro de la tabla
+     * @param tabla Tabla de los trámites
+     * @param valor 
      * @param isSelected
      * @param hasFocus
-     * @param row
-     * @param column
+     * @param row Fila
+     * @param column Columna
      * @return 
      */
     @Override

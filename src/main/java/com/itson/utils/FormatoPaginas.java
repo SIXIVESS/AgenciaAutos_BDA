@@ -2,7 +2,7 @@ package com.itson.utils;
 
 /**
  *
- * @author 
+ * @author Alexa Soto(236348) y Rosalía Perez (233505)
  */
 public class FormatoPaginas {
     private int elementosPerPag;
