@@ -25,8 +25,9 @@ public class TipoAutomovil {
         double costo;
         if (tipoAuto.equals("Nuevo")) {
             return costo = 1500;
-        } else {
+        } else if (tipoAuto.equals("Usado")){
             return costo = 1000;
         }
+        return -1;
     }
 }

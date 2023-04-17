@@ -36,25 +36,25 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
     IPersonasDAO personaDao = new PersonasDAO();
     ILicenciasDAO licenciasDao = new LicenciasDAO();
     
-
-    /**
-     * Constructor que inicializa las variables de serie y rfc
-     *
-     * @param serie
-     * @param rfc
-     */
-    public FrmPruebaPlacas(String serie, String rfc) {
-        initComponents();
-        this.rfc = rfc;
-        this.txtRfc2.setText(rfc);
-
-        this.serie = serie;
-        this.txtSerie.setText(serie);
-        this.txtSerie.setEditable(false);
-
-        buscarRfc(rfc);
-        buscarAuto(serie);
-    }
+//
+//    /**
+//     * Constructor que inicializa las variables de serie y rfc
+//     *
+//     * @param serie
+//     * @param rfc
+//     */
+//    public FrmPruebaPlacas(String serie, String rfc) {
+//        initComponents();
+//        this.rfc = rfc;
+//        this.txtRfc2.setText(rfc);
+//
+//        this.serie = serie;
+//        this.txtSerie.setText(serie);
+//        this.txtSerie.setEditable(false);
+//
+//        buscarRfc(rfc);
+//        buscarAuto(serie);
+//    }
 
     public FrmPruebaPlacas() {
         initComponents();
@@ -83,13 +83,12 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
         //Validaciones
         if (placa != null) {
             //Si no es null, entonces el auto ya existe
-            this.txtTipoAuto.setText(String.valueOf(tipoAuto.costoAuto(txtTipoAuto.getText())));
             this.txtTipoAuto.setText("Usado");
+            this.txtCosto.setText(String.valueOf(tipoAuto.costoAuto(txtTipoAuto.getText())));
         } else {
-            this.txtTipoAuto.setText(String.valueOf(tipoAuto.costoAuto(txtTipoAuto.getText())));
             this.txtTipoAuto.setText("Nuevo");
+            this.txtCosto.setText(String.valueOf(tipoAuto.costoAuto(txtTipoAuto.getText())));
         }
-
     }
 
     /**
@@ -325,9 +324,8 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
         // TODO add your handling code here:
         String numSerie = this.txtSerie.getText();
 
-        String rfc = txtRfc2.getText();
-        
         try {
+            rfc = txtRfc2.getText();
             Placa placas = placaDao.consultarActiva(numSerie);
             if (automovilDao.existe(numSerie)) {
                 buscarAuto(numSerie);
@@ -337,12 +335,11 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
                         null, new Object[]{"Registrar auto", "No"}, null);
 
                 if (op == JOptionPane.YES_OPTION) {
-                    FrmAutoNuevo frm = new FrmAutoNuevo(rfc);
+                    FrmAutoNuevo frm = new FrmAutoNuevo();
                     frm.setVisible(true);
                     this.dispose();
                 }
             }
-
         } catch (PersistenceException ex) {
             Logger.getLogger(FrmPruebaPlacas.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -351,7 +348,7 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
     private void btnBuscarRfcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarRfcActionPerformed
 
         try {
-            String rfc = txtRfc2.getText();
+            rfc = txtRfc2.getText();
 
             IPersonasDAO personaDAO = new PersonasDAO();
             Persona persona = personaDAO.consultar(rfc);

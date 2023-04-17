@@ -37,16 +37,16 @@ public class FrmAutoNuevo extends javax.swing.JFrame {
         initComponents();
     }
 
-    /**
-     * Constructor que inicializa la variable de rfc
-     *
-     * @param rfc RFC de la persona
-     */
-    public FrmAutoNuevo(String rfc) {
-        this.rfc = rfc;
-        txtRfc.setText(rfc);
-        initComponents();
-    }
+//    /**
+//     * Constructor que inicializa la variable de rfc
+//     *
+//     * @param rfc RFC de la persona
+//     */
+//    public FrmAutoNuevo(String rfc) {
+//        this.rfc = rfc;
+//        txtRfc.setText(rfc);
+//        initComponents();
+//    }
 
     /**
      * Busca una persona por su rfc
@@ -70,7 +70,7 @@ public class FrmAutoNuevo extends javax.swing.JFrame {
         String serie = this.txtSerie.getText();
         String marca = this.txtMarca.getText();
 
-        if (!licenciaDao.consultar(rfc)) {
+        if (licenciaDao.consultar(rfc)) {
             Automovil auto = new Automovil();
             Persona persona = personaDao.consultar(rfc);
 
@@ -85,10 +85,10 @@ public class FrmAutoNuevo extends javax.swing.JFrame {
                 autoDao.insertar(auto);
 
                 //Abre el form de placas
-                FrmPruebaPlacas frm = new FrmPruebaPlacas(serie, rfc);
+                FrmPruebaPlacas frm = new FrmPruebaPlacas();
                 frm.setVisible(true);
-                System.out.println(serie);
-                System.out.println(rfc);
+//                System.out.println(serie);
+//                System.out.println(rfc);
                 this.dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "Error con el número de serie");
@@ -200,7 +200,7 @@ public class FrmAutoNuevo extends javax.swing.JFrame {
 
         lblDatosAuto.setFont(new java.awt.Font("Century Gothic", 3, 24)); // NOI18N
         lblDatosAuto.setText("DATOS AUTOMOVIL");
-        getContentPane().add(lblDatosAuto, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, -1, -1));
+        getContentPane().add(lblDatosAuto, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 120, -1, -1));
 
         btnSalir1.setBackground(new java.awt.Color(255, 90, 130));
         btnSalir1.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -229,7 +229,6 @@ public class FrmAutoNuevo extends javax.swing.JFrame {
         lblSerie2.setText("RFC:");
         getContentPane().add(lblSerie2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 200, -1, -1));
 
-        txtRfc.setEditable(false);
         txtRfc.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         txtRfc.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -262,7 +261,7 @@ public class FrmAutoNuevo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalir1ActionPerformed
 
     private void txtRfcKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRfcKeyTyped
-        if (txtRfc.getText().length() >= 20) {
+        if (txtRfc.getText().length() >= 13) {
             evt.consume();
         }
         final char key = evt.getKeyChar();

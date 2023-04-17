@@ -300,11 +300,11 @@ public class FrmConsulta1 extends javax.swing.JFrame {
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
         // TODO add your handling code here:
-        if (txtNombre.getText().length() >= 4) {
+        if (txtNombre.getText().length() >= 40) {
             evt.consume();
         }
         final char key = evt.getKeyChar();
-        if (!(Character.isDigit(key) || (key == KeyEvent.VK_BACK_SPACE) || key == KeyEvent.VK_DELETE)) {
+        if ((Character.isDigit(key) || (key == KeyEvent.VK_BACK_SPACE) || key == KeyEvent.VK_DELETE)) {
             evt.consume();
         }
     }//GEN-LAST:event_txtNombreKeyTyped
