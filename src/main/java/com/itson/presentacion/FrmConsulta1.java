@@ -11,6 +11,7 @@ import com.itson.utils.Busqueda;
 import com.itson.utils.FormatoPaginas;
 import com.itson.utils.Renderizacion;
 import java.awt.event.ItemEvent;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,7 +26,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class FrmConsulta1 extends javax.swing.JFrame {
 
-     //Objeto tipo persona
+    //Objeto tipo persona
     IPersonasDAO personasDAO = new PersonasDAO();
     private final FormatoPaginas formato;
 
@@ -54,12 +55,13 @@ public class FrmConsulta1 extends javax.swing.JFrame {
         }
         this.tblTramites.setModel(tabla);
     }
-    private void atras(Busqueda busqueda){
+
+    private void atras(Busqueda busqueda) {
         this.formato.retroceder();
         this.cargar(busqueda);
     }
-    
-    private void sigPagina(Busqueda busqueda){
+
+    private void sigPagina(Busqueda busqueda) {
         this.formato.avanzar();
         this.cargar(busqueda);
     }
@@ -129,7 +131,7 @@ public class FrmConsulta1 extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblTramites);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 648, 169));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 648, 180));
 
         lblNombre.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         lblNombre.setText("Nombre:");
@@ -140,11 +142,6 @@ public class FrmConsulta1 extends javax.swing.JFrame {
         jPanel1.add(lblAnioNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, -1, 32));
 
         txtNombre.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
-        txtNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreActionPerformed(evt);
-            }
-        });
         txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNombreKeyTyped(evt);
@@ -153,9 +150,9 @@ public class FrmConsulta1 extends javax.swing.JFrame {
         jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, 168, -1));
 
         txtFechaNac.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
-        txtFechaNac.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFechaNacActionPerformed(evt);
+        txtFechaNac.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtFechaNacKeyTyped(evt);
             }
         });
         jPanel1.add(txtFechaNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, 168, -1));
@@ -276,43 +273,41 @@ public class FrmConsulta1 extends javax.swing.JFrame {
 
     private void tblTramitesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTramitesMouseClicked
         // TODO add your handling code here:
-        int columna=this.tblTramites.getColumnModel().getColumnIndexAtX(evt.getX());
-        int fila = evt.getY()/this.tblTramites.getRowHeight();
-        if(fila<this.tblTramites.getRowCount() && fila >=0
-            && columna < this.tblTramites.getColumnCount()
-            && columna >=0){
+        int columna = this.tblTramites.getColumnModel().getColumnIndexAtX(evt.getX());
+        int fila = evt.getY() / this.tblTramites.getRowHeight();
+        if (fila < this.tblTramites.getRowCount() && fila >= 0
+                && columna < this.tblTramites.getColumnCount()
+                && columna >= 0) {
             Object valor = this.tblTramites.getValueAt(fila, columna);
 
-            if (valor instanceof JButton){
-                ((JButton)valor).doClick();
+            if (valor instanceof JButton) {
+                ((JButton) valor).doClick();
                 JButton boton = (JButton) valor;
                 String rfc = this.tblTramites.getValueAt(fila, 0).toString();
-                try{
+                try {
                     System.out.println(rfc);
                     FrmConsulta2 frm = new FrmConsulta2(rfc);
                     frm.setVisible(true);
                     System.exit(0);
-                }catch(PersistenceException ex){
+                } catch (PersistenceException ex) {
                     Logger.getLogger(FrmConsulta1.class.
-                        getName()).log(Level.SEVERE,null,ex);
+                            getName()).log(Level.SEVERE, null, ex);
 
                 }
             }
         }
     }//GEN-LAST:event_tblTramitesMouseClicked
 
-    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreActionPerformed
-
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
         // TODO add your handling code here:
-        ////        kk
+        if (txtNombre.getText().length() >= 4) {
+            evt.consume();
+        }
+        final char key = evt.getKeyChar();
+        if (!(Character.isDigit(key) || (key == KeyEvent.VK_BACK_SPACE) || key == KeyEvent.VK_DELETE)) {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtNombreKeyTyped
-
-    private void txtFechaNacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaNacActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtFechaNacActionPerformed
 
     private void btnAceptarbtnRetrocederItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_btnAceptarbtnRetrocederItemStateChanged
         // TODO add your handling code here:
@@ -331,7 +326,7 @@ public class FrmConsulta1 extends javax.swing.JFrame {
 
         if (nombre.equals("") && fechaNac == null) {
             JOptionPane.showMessageDialog(null, "Campos incompletos",
-                "Mucho ojo", JOptionPane.ERROR);
+                    "Mucho ojo", JOptionPane.ERROR);
         }
         Busqueda busqueda = new Busqueda(nombre, fechaNac);
         this.cargar(busqueda);
@@ -395,7 +390,7 @@ public class FrmConsulta1 extends javax.swing.JFrame {
             fechaNac = Integer.valueOf(this.txtFechaNac.getText());
         }
         Busqueda busqueda = new Busqueda(nombre, fechaNac);
-        if(evt.getStateChange()==ItemEvent.SELECTED){
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
             int elementosPerPag = Integer.parseInt(evt.getItem().toString());
             this.formato.setElementosPerPag(elementosPerPag);
             this.cargar(busqueda);
@@ -406,6 +401,17 @@ public class FrmConsulta1 extends javax.swing.JFrame {
     private void cbxElementosPagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxElementosPagActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxElementosPagActionPerformed
+
+    private void txtFechaNacKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFechaNacKeyTyped
+        // TODO add your handling code here:
+        if (txtFechaNac.getText().length() >= 4) {
+            evt.consume();
+        }
+        final char key = evt.getKeyChar();
+        if (!(Character.isDigit(key) || (key == KeyEvent.VK_BACK_SPACE) || key == KeyEvent.VK_DELETE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtFechaNacKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;

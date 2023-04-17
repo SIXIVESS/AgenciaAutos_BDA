@@ -11,16 +11,14 @@ import com.itson.dominio.Persona;
 import com.itson.dominio.Tramite;
 import com.itson.interfaces.IPersonasDAO;
 import com.itson.interfaces.ITramitesDAO;
-import com.itson.utils.Busqueda;
 import com.itson.utils.FormatoPaginas;
-import com.itson.utils.Renderizacion;
+import java.awt.event.ItemEvent;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.PersistenceException;
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -37,9 +35,6 @@ public class FrmConsulta2 extends javax.swing.JFrame {
      * Creates new form FrmConsulta2
      */
     public void cargar() {
-//        this.tblTramites.setDefaultRenderer(Object.class, new Renderizacion());
-//        JButton btnSeleccion = new JButton("Selección");
-//        btnSeleccion.setName("Selección");
         DefaultTableModel tabla = (DefaultTableModel) this.tblTramites.getModel();
         tabla.setRowCount(0);
         SimpleDateFormat fecha = new SimpleDateFormat("dd/mm/yyy");
@@ -182,11 +177,6 @@ public class FrmConsulta2 extends javax.swing.JFrame {
         cbxElementosPag.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbxElementosPagItemStateChanged(evt);
-            }
-        });
-        cbxElementosPag.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxElementosPagActionPerformed(evt);
             }
         });
 
@@ -355,12 +345,13 @@ public class FrmConsulta2 extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
-    private void cbxElementosPagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxElementosPagActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbxElementosPagActionPerformed
-
     private void cbxElementosPagItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxElementosPagItemStateChanged
         // TODO add your handling code here:
+        if(evt.getStateChange()==ItemEvent.SELECTED){
+            int elementosPerPag = Integer.parseInt(evt.getItem().toString());
+            this.formato.setElementosPerPag(elementosPerPag);
+            this.cargar();
+        }
     }//GEN-LAST:event_cbxElementosPagItemStateChanged
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed

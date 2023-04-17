@@ -6,9 +6,9 @@ package com.itson.dao;
 
 import com.itson.dominio.Automovil;
 import com.itson.dominio.Persona;
-import static com.itson.dominio.Tramite_.persona;
+
 import com.itson.interfaces.IAutomovilesDAO;
-import com.itson.utils.TipoAutomovil;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;

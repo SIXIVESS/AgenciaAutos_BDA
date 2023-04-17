@@ -5,15 +5,21 @@
 package com.itson.presentacion;
 
 import com.itson.dao.AutomovilesDAO;
+import com.itson.dao.LicenciasDAO;
 import com.itson.dao.PersonasDAO;
 import com.itson.dao.PlacasDAO;
 import com.itson.dominio.Automovil;
 import com.itson.dominio.Persona;
 import com.itson.dominio.Placa;
 import com.itson.interfaces.IAutomovilesDAO;
+import com.itson.interfaces.ILicenciasDAO;
 import com.itson.interfaces.IPersonasDAO;
 import com.itson.interfaces.IPlacasDAO;
 import com.itson.utils.TipoAutomovil;
+import java.awt.event.KeyEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.persistence.PersistenceException;
 import javax.swing.JOptionPane;
 
 /**
@@ -25,6 +31,9 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
     private String serie, rfc;
 
     IPlacasDAO placaDao = new PlacasDAO();
+    IAutomovilesDAO automovilDao = new AutomovilesDAO();
+    IPersonasDAO personaDao = new PersonasDAO();
+    ILicenciasDAO licenciasDao = new LicenciasDAO();
 
     /**
      * Constructor que inicializa las variables de serie y rfc
@@ -38,30 +47,39 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
         this.txtSerie.setText(serie);
         this.txtSerie.setEditable(false);
     }
-    
+
     /**
      * Método que busca un auto existente mediante su número de serie
+     *
      * @param serie Número de serie del auto
      */
-    public void buscarAuto(String serie){
+    public void buscarAuto(String serie) {
         TipoAutomovil tipoAuto = new TipoAutomovil();
         Automovil auto = new Automovil();
         IAutomovilesDAO automovilesDao = new AutomovilesDAO();
         //Consulta la placa
         Placa placa = placaDao.consultar(serie);
         //Busca el automovil
-        auto=automovilesDao.consultar(serie);
-        
-        this.btnGuardar.setEnabled(true);
-        
-        //Campos de texto que se rellenan automaticamente si se encontró el automóvil
+        auto = automovilesDao.consultar(serie);
 
+        this.btnGuardar.setEnabled(true);
+
+        //Campos de texto que se rellenan automaticamente si se encontró el automóvil
         this.txtColor.setText(auto.getColor());
         this.txtLinea.setText(auto.getLinea());
         this.txtMarca.setText(auto.getMarca());
         this.txtModelo.setText(auto.getModelo());
-        
-        
+
+        //Validaciones
+        if (placa != null) {
+            //Si no es null, entonces el auto ya existe
+            this.txtTipoAuto.setText(String.valueOf(tipoAuto.costoAuto(txtTipoAuto.getText())));
+            this.txtTipoAuto.setText("Usado");
+        } else {
+            this.txtTipoAuto.setText(String.valueOf(tipoAuto.costoAuto(txtTipoAuto.getText())));
+            this.txtTipoAuto.setText("Nuevo");
+        }
+
     }
 
     /**
@@ -96,6 +114,10 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
         txtColor = new javax.swing.JTextField();
         btnBuscarRfc = new javax.swing.JButton();
         lblDatosAuto1 = new javax.swing.JLabel();
+        lblCosto = new javax.swing.JLabel();
+        txtTipoAuto = new javax.swing.JTextField();
+        lblTipo = new javax.swing.JLabel();
+        txtCosto = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -165,8 +187,18 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
         lblNombre.setText("Nombre:");
 
         txtSerie.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        txtSerie.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtSerieKeyTyped(evt);
+            }
+        });
 
         txtRfc2.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        txtRfc2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtRfc2KeyTyped(evt);
+            }
+        });
 
         txtMarca.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
 
@@ -185,6 +217,18 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
         lblDatosAuto1.setFont(new java.awt.Font("Century Gothic", 3, 24)); // NOI18N
         lblDatosAuto1.setText("DATOS AUTOMÓVIL");
 
+        lblCosto.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        lblCosto.setText("Costo:");
+
+        txtTipoAuto.setEditable(false);
+        txtTipoAuto.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+
+        lblTipo.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        lblTipo.setText("Tipo:");
+
+        txtCosto.setEditable(false);
+        txtCosto.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -193,11 +237,23 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblDatosPersona))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(214, 214, 214)
+                        .addComponent(btnGuardar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(173, 173, 173)
+                        .addComponent(lblDatosAuto1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(90, 90, 90)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblRfc)
-                            .addComponent(lblApellido)
-                            .addComponent(lblNombre))
+                            .addComponent(lblNombre)
+                            .addComponent(lblApellido))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -207,13 +263,15 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
                             .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
+                        .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblModelo)
                             .addComponent(lblLinea)
                             .addComponent(lblColor)
                             .addComponent(lblMarca)
-                            .addComponent(lblSerie))
+                            .addComponent(lblSerie)
+                            .addComponent(lblCosto)
+                            .addComponent(lblTipo))
                         .addGap(44, 44, 44)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -223,21 +281,10 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
                             .addComponent(txtLinea, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtColor, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(lblDatosPersona)
-                                .addGap(166, 166, 166))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(lblDatosAuto1)
-                                .addGap(140, 140, 140)))))
-                .addGap(0, 60, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(214, 214, 214)
-                .addComponent(btnGuardar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(txtColor, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtTipoAuto, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(0, 59, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -254,13 +301,13 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblNombre))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblApellido)
                     .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(79, 79, 79)
+                .addGap(44, 44, 44)
                 .addComponent(lblDatosAuto1)
-                .addGap(41, 41, 41)
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblSerie)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -282,9 +329,21 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblModelo))
-                .addGap(43, 43, 43)
-                .addComponent(btnGuardar)
-                .addGap(61, 61, 61))
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 96, Short.MAX_VALUE)
+                        .addComponent(btnGuardar)
+                        .addGap(61, 61, 61))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblCosto)
+                            .addComponent(txtCosto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblTipo)
+                            .addComponent(txtTipoAuto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
@@ -292,7 +351,31 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
-//        this.guardar();
+        float costo = Float.parseFloat(this.txtCosto.getText());
+
+        try {
+            Placa placa = placaDao.consultar(txtSerie.getText());
+            Automovil auto = automovilDao.consultar(this.txtSerie.getText());
+            Persona persona = personaDao.consultar(this.txtRfc.getText());
+
+            if (licenciasDao.consultar(persona.getRfc())) {
+                if (placa != null) {
+                    placaDao.insertar1(auto, persona, costo);
+                    placaDao.actualizar(placa.getNum_alfanumerico());
+                } else {
+                    placaDao.insertar1(auto, persona, costo);
+                }
+            }
+            this.txtColor.setText("");
+            this.txtCosto.setText("");
+            this.txtModelo.setText("");
+            this.txtMarca.setText("");
+            this.txtSerie.setText("");
+            this.txtLinea.setText("");
+            this.txtTipoAuto.setText("");
+        } catch (PersistenceException ex) {
+            Logger.getLogger(FrmPruebaPlacas.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnBuscarSerieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarSerieActionPerformed
@@ -308,9 +391,9 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
 
     private void btnBuscarRfcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarRfcActionPerformed
 
-         try {
+        try {
             String rfc = txtRfc.getText();
-            
+
             IPersonasDAO personaDAO = new PersonasDAO();
             Persona persona = personaDAO.consultar(rfc);
             //Se llenan los campos de texto de manera automática
@@ -323,10 +406,37 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnBuscarRfcActionPerformed
 
+    private void txtSerieKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSerieKeyTyped
+        // TODO add your handling code here:
+        if (txtSerie.getText().length() >= 30) {
+            evt.consume();
+        }
+        final char key = evt.getKeyChar();
+
+        if (Character.isLowerCase(key) || (key == KeyEvent.VK_BACK_SPACE) || key == KeyEvent.VK_DELETE) {
+            evt.setKeyChar(Character.toUpperCase(key));
+        } else if (!(Character.isLetterOrDigit(key) || (key == KeyEvent.VK_BACK_SPACE) || key == KeyEvent.VK_DELETE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtSerieKeyTyped
+
+    private void txtRfc2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRfc2KeyTyped
+        // TODO add your handling code here:
+        if (txtRfc2.getText().length() >= 20) {
+            evt.consume();
+        }
+        final char key = evt.getKeyChar();
+
+        if (Character.isLowerCase(key) || (key == KeyEvent.VK_BACK_SPACE) || key == KeyEvent.VK_DELETE) {
+            evt.setKeyChar(Character.toUpperCase(key));
+        } else if (!(Character.isLetterOrDigit(key) || (key == KeyEvent.VK_BACK_SPACE) || key == KeyEvent.VK_DELETE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtRfc2KeyTyped
+
     /**
      * @param args the command line arguments
      */
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarRfc;
     private javax.swing.JButton btnBuscarSerie;
@@ -335,6 +445,7 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
     private javax.swing.JLabel lblApellido;
     private javax.swing.JLabel lblAutoNuevo;
     private javax.swing.JLabel lblColor;
+    private javax.swing.JLabel lblCosto;
     private javax.swing.JLabel lblDatosAuto1;
     private javax.swing.JLabel lblDatosPersona;
     private javax.swing.JLabel lblLinea;
@@ -343,8 +454,10 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblRfc;
     private javax.swing.JLabel lblSerie;
+    private javax.swing.JLabel lblTipo;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtColor;
+    private javax.swing.JTextField txtCosto;
     private javax.swing.JTextField txtLinea;
     private javax.swing.JTextField txtMarca;
     private javax.swing.JTextField txtModelo;
@@ -353,5 +466,6 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
     private javax.swing.JTextField txtRfc1;
     private javax.swing.JTextField txtRfc2;
     private javax.swing.JTextField txtSerie;
+    private javax.swing.JTextField txtTipoAuto;
     // End of variables declaration//GEN-END:variables
 }

@@ -11,7 +11,7 @@ import com.itson.dominio.Persona;
 import com.itson.interfaces.IAutomovilesDAO;
 import com.itson.interfaces.IPlacasDAO;
 import com.itson.utils.GeneracionPlacas;
-import com.itson.utils.TipoAutomovil;
+
 
 /**
  *
@@ -31,7 +31,7 @@ public class FrmAutoNuevo extends javax.swing.JFrame {
     }
 
     private void guardar(){
-        TipoAutomovil tipo = TipoAutomovil.NUEVO;
+//        TipoAutomovil tipo = TipoAutomovil.NUEVO;
         String serie = this.txtSerie.getText();
         String marca = this.txtMarca.getText();
         String color = this.txtColor.getText();

@@ -114,7 +114,7 @@ public class PlacasDAO implements IPlacasDAO {
  * @return Regresa la placa consultada
  */
 @Override
-public List<Placa> consultar(String serie) {
+public Placa consultar(String serie) {
         try {
             String codigoJPQL = "SELECT p FROM Placa p WHERE p.automovil.num_serie "
                     + "LIKE :num_serie";
@@ -125,7 +125,7 @@ public List<Placa> consultar(String serie) {
 );
             query.setParameter("num_serie", serie);
 
-            return query.getResultList();
+            return (Placa) query.getResultList();
         } catch (PersistenceException ex) {
             JOptionPane.showMessageDialog(null, "Error al consultar la placa");
             em.getTransaction().rollback();
