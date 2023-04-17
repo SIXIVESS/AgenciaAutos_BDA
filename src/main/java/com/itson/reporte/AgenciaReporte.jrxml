@@ -7,17 +7,15 @@
 		<![CDATA[SELECT
      tramites.`DTYPE` AS tramites_DTYPE,
      tramites.`costo` AS tramites_costo,
-     tramites.`fecha_emision` AS tramites_fecha_emision,
-     personas.`RFC` AS personas_RFC,
-     personas.`nombres` AS personas_nombres
+     personas.`nombres` AS personas_nombres,
+     tramites.`fecha_emision` AS tramites_fecha_emision
 FROM
      `personas` personas INNER JOIN `tramites` tramites ON personas.`RFC` = tramites.`rfc_personas`]]>
 	</queryString>
 	<field name="tramites_DTYPE" class="java.lang.String"/>
 	<field name="tramites_costo" class="java.lang.Float"/>
-	<field name="tramites_fecha_emision" class="java.time.LocalDateTime"/>
-	<field name="personas_RFC" class="java.lang.String"/>
 	<field name="personas_nombres" class="java.lang.String"/>
+	<field name="tramites_fecha_emision" class="java.time.LocalDateTime"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -144,11 +142,6 @@ FROM
 				</textElement>
 				<textFieldExpression><![CDATA[$F{tramites_costo}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="420" y="0" width="134" height="59" uuid="1a4624cc-4fe3-4809-b9c1-21b47b2e6da1"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{tramites_fecha_emision}]]></textFieldExpression>
-			</textField>
 		</band>
 	</detail>
 	<columnFooter>
@@ -157,20 +150,20 @@ FROM
 	<pageFooter>
 		<band height="54" splitType="Stretch">
 			<staticText>
-				<reportElement x="151" y="14" width="280" height="20" uuid="7ce36332-f29d-42ed-8b0a-2f45eefa2413"/>
+				<reportElement x="150" y="0" width="280" height="20" uuid="7ce36332-f29d-42ed-8b0a-2f45eefa2413"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Century Gothic" size="14"/>
 				</textElement>
 				<text><![CDATA[Realizado por Alexa Soto y Rosalía Pérez]]></text>
 			</staticText>
-		</band>
-	</pageFooter>
-	<summary>
-		<band height="42" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="22" width="100" height="20" uuid="5605480c-4edc-4db2-9d04-c46a17c5d3c2"/>
+				<reportElement x="238" y="34" width="100" height="20" uuid="5605480c-4edc-4db2-9d04-c46a17c5d3c2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
 	</summary>
 </jasperReport>

@@ -12,7 +12,7 @@ import java.time.LocalDate;
  */
 public class ReportesDAO {
     private LocalDate inicio, fin;
-    private String nombre, tipo, fechaExpedicion, costo;
+    private String nombre, tipo, fechaEmision, costo;
 
     /**
      * Constructor que inicializan los parámetros que se utilizarán para la búsqueda
@@ -32,13 +32,13 @@ public class ReportesDAO {
      * Constructor que inicializa los valores para el reporte
      * @param nombre Nombre de la persona
      * @param tipo Tipo de trámite
-     * @param fechaExpedicion Fecha en que se hizo el trámite
+     * @param fechaEmision Fecha en que se hizo el trámite
      * @param costo Costo del trámite
      */
-    public ReportesDAO(String nombre, String tipo, String fechaExpedicion, String costo) {
+    public ReportesDAO(String nombre, String tipo, String fechaEmision, String costo) {
         this.nombre = nombre;
         this.tipo = tipo;
-        this.fechaExpedicion = fechaExpedicion;
+        this.fechaEmision = fechaEmision;
         this.costo = costo;
     }
 
@@ -110,16 +110,16 @@ public class ReportesDAO {
      * Regresa la fecha en la que se realizó el trámite
      * @return Fecha en la que se realizó el trámite
      */
-    public String getFechaExpedicion() {
-        return fechaExpedicion;
+    public String getFechaEmision() {
+        return fechaEmision;
     }
 
     /**
      * Asigna la fecha en la que se realizó el trámite
      * @param fechaExpedicion Fecha en la que se realizó el trámite
      */
-    public void setFechaExpedicion(String fechaExpedicion) {
-        this.fechaExpedicion = fechaExpedicion;
+    public void setFechaEmision(String fechaExpedicion) {
+        this.fechaEmision = fechaExpedicion;
     }
 
     /**
