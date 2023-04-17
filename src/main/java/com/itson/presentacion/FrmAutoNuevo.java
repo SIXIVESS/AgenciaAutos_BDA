@@ -25,7 +25,7 @@ public class FrmAutoNuevo extends javax.swing.JFrame {
     /**
      * Creates new form FrmVehiculoNuevo
      */
-    public FrmAutoNuevo(Persona persona) {
+    public FrmAutoNuevo(String rfc) {
         this.persona = persona;
         initComponents();
     }

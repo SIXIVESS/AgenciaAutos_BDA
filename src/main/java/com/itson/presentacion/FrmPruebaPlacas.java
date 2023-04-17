@@ -16,6 +16,7 @@ import com.itson.interfaces.ILicenciasDAO;
 import com.itson.interfaces.IPersonasDAO;
 import com.itson.interfaces.IPlacasDAO;
 import com.itson.utils.TipoAutomovil;
+import excepciones.PersistenciaException;
 import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -46,6 +47,10 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
         this.serie = serie;
         this.txtSerie.setText(serie);
         this.txtSerie.setEditable(false);
+    }
+
+    public FrmPruebaPlacas() {
+        initComponents();
     }
 
     /**
@@ -380,12 +385,32 @@ public class FrmPruebaPlacas extends javax.swing.JFrame {
 
     private void btnBuscarSerieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarSerieActionPerformed
         // TODO add your handling code here:
-        String serie = this.txtRfc2.getText();
+        String serie = this.txtSerie.getText();
         TipoAutomovil costo = new TipoAutomovil();
         Automovil auto = new Automovil();
 
         try {
-            Placa placas = placaDao
+            Placa placas = placaDao.consultar(serie);
+            if (automovilDao.existe(serie)) {
+                buscarAuto(serie);
+            } else {
+                int op = JOptionPane.showOptionDialog(null, "Número de serie inexistente",
+                        "Error inesperado", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
+                        null, new Object[]{"Registrar auto", "No"}, null);
+
+                if (op == JOptionPane.YES_OPTION) {
+                    FrmAutoNuevo frm = new FrmAutoNuevo(rfc);
+                    frm.setVisible(true);
+                    this.dispose();
+                } else if (op == JOptionPane.NO_OPTION) {
+                    FrmPrincipal frm = new FrmPrincipal();
+                    frm.setVisible(true);
+                    this.dispose();
+                }
+            }
+        } catch (PersistenceException ex) {
+            Logger.getLogger(FrmPruebaPlacas.class.getName()).log(Level.SEVERE, null, ex);
+
         }
     }//GEN-LAST:event_btnBuscarSerieActionPerformed
 

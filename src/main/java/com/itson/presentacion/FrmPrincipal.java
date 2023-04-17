@@ -123,7 +123,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPlacasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlacasActionPerformed
-        FrmConsultaPersona frm = new FrmConsultaPersona();
+       FrmPruebaPlacas frm = new FrmPruebaPlacas() ;
         frm.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnPlacasActionPerformed
