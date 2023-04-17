@@ -37,17 +37,6 @@ public class FrmAutoNuevo extends javax.swing.JFrame {
         initComponents();
     }
 
-//    /**
-//     * Constructor que inicializa la variable de rfc
-//     *
-//     * @param rfc RFC de la persona
-//     */
-//    public FrmAutoNuevo(String rfc) {
-//        this.rfc = rfc;
-//        txtRfc.setText(rfc);
-//        initComponents();
-//    }
-
     /**
      * Busca una persona por su rfc
      *
@@ -56,7 +45,6 @@ public class FrmAutoNuevo extends javax.swing.JFrame {
     public void buscarRfc(String rfc) {
         Persona persona = new Persona();
         persona = personaDao.consultar(rfc);
-        this.txtNombre.setText(persona.getNombres() + "" + persona.getAp_paterno());
     }
 
     /**
@@ -113,14 +101,12 @@ public class FrmAutoNuevo extends javax.swing.JFrame {
         lblColor = new javax.swing.JLabel();
         lblLinea = new javax.swing.JLabel();
         txtModelo = new javax.swing.JTextField();
-        txtNombre = new javax.swing.JTextField();
         txtMarca = new javax.swing.JTextField();
         txtColor = new javax.swing.JTextField();
         txtLinea = new javax.swing.JTextField();
         lblAutoNuevo = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        lblSerie = new javax.swing.JLabel();
         lblDatosAuto = new javax.swing.JLabel();
         btnSalir1 = new javax.swing.JButton();
         lblSerie1 = new javax.swing.JLabel();
@@ -161,10 +147,6 @@ public class FrmAutoNuevo extends javax.swing.JFrame {
         txtModelo.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         getContentPane().add(txtModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 450, 170, -1));
 
-        txtNombre.setEditable(false);
-        txtNombre.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
-        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 200, 210, -1));
-
         txtMarca.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         getContentPane().add(txtMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 300, 170, -1));
 
@@ -188,19 +170,15 @@ public class FrmAutoNuevo extends javax.swing.JFrame {
                 btnGuardarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 550, -1, -1));
+        getContentPane().add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 570, -1, -1));
 
         jPanel1.setBackground(new java.awt.Color(255, 143, 143));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 90));
-
-        lblSerie.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
-        lblSerie.setText("Nombre: ");
-        getContentPane().add(lblSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 200, -1, -1));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 560, 90));
 
         lblDatosAuto.setFont(new java.awt.Font("Century Gothic", 3, 24)); // NOI18N
         lblDatosAuto.setText("DATOS AUTOMOVIL");
-        getContentPane().add(lblDatosAuto, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 120, -1, -1));
+        getContentPane().add(lblDatosAuto, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, -1, -1));
 
         btnSalir1.setBackground(new java.awt.Color(255, 90, 130));
         btnSalir1.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -211,7 +189,7 @@ public class FrmAutoNuevo extends javax.swing.JFrame {
                 btnSalir1ActionPerformed(evt);
             }
         });
-        getContentPane().add(btnSalir1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 660, -1, -1));
+        getContentPane().add(btnSalir1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 650, -1, -1));
 
         lblSerie1.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         lblSerie1.setText("Núm. de serie:");
@@ -298,14 +276,12 @@ public class FrmAutoNuevo extends javax.swing.JFrame {
     private javax.swing.JLabel lblLinea;
     private javax.swing.JLabel lblMarca;
     private javax.swing.JLabel lblModelo;
-    private javax.swing.JLabel lblSerie;
     private javax.swing.JLabel lblSerie1;
     private javax.swing.JLabel lblSerie2;
     private javax.swing.JTextField txtColor;
     private javax.swing.JTextField txtLinea;
     private javax.swing.JTextField txtMarca;
     private javax.swing.JTextField txtModelo;
-    private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtRfc;
     private javax.swing.JTextField txtSerie;
     // End of variables declaration//GEN-END:variables

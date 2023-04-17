@@ -8,6 +8,7 @@ import com.itson.dominio.Persona;
 import com.itson.dominio.Placa;
 import com.itson.dominio.Vehiculo;
 import com.itson.interfaces.IPlacasDAO;
+import com.itson.utils.GeneracionPlacas;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -58,17 +59,15 @@ public class PlacasDAO implements IPlacasDAO {
      */
     @Override
     public void insertar1(Vehiculo vehiculo, Persona persona, float costo) throws PersistenceException {
-        String num = RandomStringUtils.randomNumeric(3);
-        String letras = RandomStringUtils.randomAlphabetic(3).toUpperCase();
-        String random = num + "-" + letras;
+        GeneracionPlacas generacionPlacas = new GeneracionPlacas();
 
         try {
-            List<Placa> placas = em.createQuery("SELECT p FROM Placa p WHERE p.num_alfanumerico = :num_serie", Placa.class).setParameter("numeroPlaca", random).getResultList();
+            List<Placa> placas = em.createQuery("SELECT p FROM Placa p WHERE p.num_alfanumerico = :num_serie", Placa.class).setParameter("num_serie", vehiculo.getNum_serie()).getResultList();
             Date fecha2 = fecha.parse(formatoFecha);
             //Validación
             if (placas.isEmpty()) {
                 em.getTransaction().begin();
-                Placa placa = new Placa(num, fecha2, true, vehiculo, fecha2, costo, persona);
+                Placa placa = new Placa(generacionPlacas.generarPlaca(), fecha2, true, vehiculo, fecha2, costo, persona);
                 em.persist(placa);
                 em.getTransaction().commit();
                 JOptionPane.showMessageDialog(null, "Se insertó la placa");
