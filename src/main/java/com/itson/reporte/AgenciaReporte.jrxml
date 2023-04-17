@@ -1,29 +1,176 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD JasperReport//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
-
-<jasperReport name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-    <background>
-        <band/>
-    </background>
-    <title>
-        <band height="79"/>
-    </title>
-    <pageHeader>
-        <band height="35"/>
-    </pageHeader>
-    <columnHeader>
-        <band height="61"/>
-    </columnHeader>
-    <detail>
-        <band height="125"/>
-    </detail>
-    <columnFooter>
-        <band height="45"/>
-    </columnFooter>
-    <pageFooter>
-        <band height="54"/>
-    </pageFooter>
-    <summary>
-        <band height="42"/>
-    </summary>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="edae8b5b-2569-46e0-8cfe-4398cc0ee580">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     tramites.`DTYPE` AS tramites_DTYPE,
+     tramites.`costo` AS tramites_costo,
+     tramites.`fecha_emision` AS tramites_fecha_emision,
+     personas.`RFC` AS personas_RFC,
+     personas.`nombres` AS personas_nombres
+FROM
+     `personas` personas INNER JOIN `tramites` tramites ON personas.`RFC` = tramites.`rfc_personas`]]>
+	</queryString>
+	<field name="tramites_DTYPE" class="java.lang.String"/>
+	<field name="tramites_costo" class="java.lang.Float"/>
+	<field name="tramites_fecha_emision" class="java.time.LocalDateTime"/>
+	<field name="personas_RFC" class="java.lang.String"/>
+	<field name="personas_nombres" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="79" forecolor="#FFFFFF" backcolor="#FF8F8F" uuid="0dfb542e-aaa8-4815-b1f7-1d018c3f6f76"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="127" y="15" width="323" height="50" forecolor="#FFFFFF" uuid="5ed6c2cf-e795-4173-98e3-59df068ea73d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Century Gothic" size="36" isBold="true"/>
+				</textElement>
+				<text><![CDATA[AGENCIA FISCAL]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="72" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="15" width="202" height="35" forecolor="#FF8F8F" uuid="13b53d7d-1ec8-490d-ba1c-46c680779d08"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Century Gothic" size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte de trámites:]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="389" y="30" width="165" height="20" uuid="cc218177-d73b-4c13-a965-597eace80c01"/>
+				<textElement>
+					<font fontName="Century Gothic" size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="37" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="183" height="37" forecolor="#FF8F8F" uuid="f86ed0a2-b4b9-41ab-8a15-e2835acb9230"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="183" y="0" width="126" height="37" forecolor="#FF8F8F" uuid="46a21b57-e1b5-4b29-82e5-b26e7699fb0b"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="309" y="0" width="110" height="37" forecolor="#FF8F8F" uuid="0430cf1b-878e-4b3d-9cc8-5a43bf58f499"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Opaque" x="419" y="0" width="135" height="37" forecolor="#FF8F8F" uuid="6d3613e1-4974-4118-b85c-77f28a32bcc4"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="183" y="2" width="126" height="35" forecolor="#FF8F8F" uuid="ba53b78f-74fd-4dd2-9534-c6f7b4ecb62c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Century Gothic" size="19" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="2" width="182" height="35" forecolor="#FF8F8F" uuid="d86bb2ad-25f5-4bf3-8973-cc03bab88976"/>
+				<textElement textAlignment="Center">
+					<font size="19" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="309" y="2" width="111" height="35" forecolor="#FF8F8F" uuid="0fa782c1-5bfa-46a5-8093-e2beaca5c1f1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Century Gothic" size="19" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Costo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="419" y="2" width="135" height="35" forecolor="#FF8F8F" uuid="e4734b4e-8bc7-49de-8360-49b85bd08314"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Century Gothic" size="19" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="60" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="183" height="59" forecolor="#FF8F8F" uuid="5eac3f16-e760-4cf7-a235-f9a6ebc53837"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="183" y="0" width="126" height="59" forecolor="#FF8F8F" uuid="3e056fd2-ee77-47b7-8594-561a500cc6c2"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="309" y="0" width="110" height="59" forecolor="#FF8F8F" uuid="f7864d80-d4d8-400f-881c-a4f0e98df82b"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="419" y="0" width="136" height="59" forecolor="#FF8F8F" uuid="274cf104-03f5-4423-bbfc-da3dac86bff4"/>
+			</rectangle>
+			<textField>
+				<reportElement x="183" y="0" width="126" height="59" uuid="d99dd25e-cc67-42f5-a845-7f755cb44baa"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Century Gothic"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tramites_DTYPE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="183" height="59" uuid="a31d27b4-6f3e-4625-871b-16b6d0e85aaa"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Century Gothic"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{personas_nombres}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="309" y="0" width="111" height="59" uuid="ba1440ac-5144-47c0-a90a-03166e89dafd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Century Gothic"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tramites_costo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="420" y="0" width="134" height="59" uuid="1a4624cc-4fe3-4809-b9c1-21b47b2e6da1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{tramites_fecha_emision}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement x="151" y="14" width="280" height="20" uuid="7ce36332-f29d-42ed-8b0a-2f45eefa2413"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Century Gothic" size="14"/>
+				</textElement>
+				<text><![CDATA[Realizado por Alexa Soto y Rosalía Pérez]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="22" width="100" height="20" uuid="5605480c-4edc-4db2-9d04-c46a17c5d3c2"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
 </jasperReport>
